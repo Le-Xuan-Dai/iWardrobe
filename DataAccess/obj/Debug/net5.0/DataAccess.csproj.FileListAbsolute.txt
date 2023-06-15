@@ -1,0 +1,12 @@
+D:\Personal\Project\iWardrobe\DataAccess\bin\Debug\net5.0\DataAccess.deps.json
+D:\Personal\Project\iWardrobe\DataAccess\bin\Debug\net5.0\DataAccess.dll
+D:\Personal\Project\iWardrobe\DataAccess\bin\Debug\net5.0\DataAccess.pdb
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.csproj.AssemblyReference.cache
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfoInputs.cache
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfo.cs
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CoreCompileInputs.cache
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.dll
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\refint\DataAccess.dll
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.pdb
+D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\ref\DataAccess.dll
