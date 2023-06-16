@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class Cart
+    public class Category
     {
         [Key]
-        public int CartId { get; set; }
+        public int CategoryId { get; set; }  
+        public string CategoryName { get; set; }
         [ForeignKey("User")]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public virtual User? User { get; set; }
-        public virtual List<CartDetail>? CartDetails { get; set; }
+        public virtual List<Product>? Products { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }
