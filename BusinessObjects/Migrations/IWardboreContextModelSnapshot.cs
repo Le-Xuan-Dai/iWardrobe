@@ -119,6 +119,31 @@ namespace BusinessObjects.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("BusinessObjects.Favorite", b =>
+                {
+                    b.Property<int>("FavoriteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FavoriteId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("BusinessObjects.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -366,6 +391,25 @@ namespace BusinessObjects.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BusinessObjects.Favorite", b =>
+                {
+                    b.HasOne("BusinessObjects.Product", "Product")
+                        .WithMany("Favorites")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessObjects.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BusinessObjects.Order", b =>
                 {
                     b.HasOne("BusinessObjects.Product", "Product")
@@ -448,6 +492,8 @@ namespace BusinessObjects.Migrations
 
                     b.Navigation("Commnents");
 
+                    b.Navigation("Favorites");
+
                     b.Navigation("Orders");
                 });
 
@@ -463,6 +509,8 @@ namespace BusinessObjects.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Favorites");
 
                     b.Navigation("Orders");
 

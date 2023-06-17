@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dyan\\.nuget\\packages\\": {}
+    "C:\\Users\\daik0\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Personal\\Project\\iWardrobe\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "D:\\Personal\\Project\\iWardrobe\\DataAccess\\DataAccess.csproj",
-      "packagesPath": "C:\\Users\\Dyan\\.nuget\\packages\\",
-      "outputPath": "D:\\Personal\\Project\\iWardrobe\\DataAccess\\obj\\",
+      "projectPath": "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\DataAccess\\DataAccess.csproj",
+      "packagesPath": "C:\\Users\\daik0\\.nuget\\packages\\",
+      "outputPath": "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dyan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\daik0\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

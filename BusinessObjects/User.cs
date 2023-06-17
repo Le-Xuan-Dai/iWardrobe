@@ -33,6 +33,7 @@ namespace BusinessObjects
         public virtual List<Voucher>? Vouchers { get; set; }
         public virtual List<Category>? Categories { get; set; }
         public virtual List<Commnent>? Comments { get; set; }
+        public virtual List<Favorite>? Favorites { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }

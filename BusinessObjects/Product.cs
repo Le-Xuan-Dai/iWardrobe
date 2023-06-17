@@ -25,6 +25,7 @@ namespace BusinessObjects
         public virtual Category? Category { get; set; }
         public virtual User? User { get; set; }
         public virtual List<Commnent>? Commnents { get; set; }
+        public virtual List<Favorite>? Favorites { get; set; }
         public virtual List<Order>? Orders { get; set; }
         public virtual List<CartDetail>? CartDetails { get; set; }
         public bool IsDeleted { get; set; } = false;

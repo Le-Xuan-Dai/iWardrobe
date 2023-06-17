@@ -10,3 +10,15 @@ D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.dll
 D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\refint\DataAccess.dll
 D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.pdb
 D:\Personal\Project\iWardrobe\DataAccess\obj\Debug\net5.0\ref\DataAccess.dll
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\bin\Debug\net5.0\DataAccess.deps.json
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\bin\Debug\net5.0\DataAccess.dll
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\bin\Debug\net5.0\DataAccess.pdb
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.csproj.AssemblyReference.cache
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfoInputs.cache
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.AssemblyInfo.cs
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.csproj.CoreCompileInputs.cache
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.dll
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\refint\DataAccess.dll
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\DataAccess.pdb
+D:\FPTU_Learning\Summer_2023\PRN221\iWardrobe\DataAccess\obj\Debug\net5.0\ref\DataAccess.dll
