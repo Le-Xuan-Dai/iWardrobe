@@ -1,8 +1,9 @@
 # iWardrobe
 ## How to create database ?
-1. Build project
-2. Config start project to "BusinessObjects"
-3. Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
+1. Đổi mật khẩu sa sql server: 123456
+2. Build project
+3. Config start project to "BusinessObjects"
+4. Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
 ## How to run project ?
 1. Config start project to "WebApplication"
 2. Ctrl + F5
