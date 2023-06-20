@@ -15,7 +15,7 @@
 - Microsoft.EntityFrameworkCore.Tools (5.0.9)
 - Microsoft.Extensions.Configuration (5.0.0)
 - Microsoft.Extensions.Configuration.Json (5.0.0)
-  ## Lưu ý khi làm t task
+## Lưu ý khi làm t task
 - Kéo task của mình từ "To Do" -> "In Progress"
 - Click vào task -> task details mở lên -> Điền vào mục "Start date" -> Chọn "Create branch" -> copy script
 - Visual Studio Code -> Terminal -> checkout master -> git pull -> paste script vừa copy
