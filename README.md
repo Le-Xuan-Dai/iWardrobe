@@ -4,6 +4,7 @@
 2. Build project
 3. Config start project to "BusinessObjects"
 4. Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
+5. Run script : "Add-Migration SeedData" then run script : "Update-Database"
 ## How to run project ?
 1. Config start project to "WebApplication"
 2. Ctrl + F5
