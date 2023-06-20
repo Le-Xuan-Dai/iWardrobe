@@ -13,21 +13,40 @@ namespace BusinessObjects
     {
         [Key]
         public int ProductId { get; set; }
+
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
+
         [ForeignKey("User")]
         public int UserId { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string ProductName { get; set; }
+
         public string Description { get; set; }
+
         public string ImageUrl { get; set; }
+
+        [Required]
         public double Price { get; set; }
-        public string CreationDate { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime CreationDate { get; set; }
+
         public virtual Category? Category { get; set; }
+        
         public virtual User? User { get; set; }
+        
         public virtual List<Commnent>? Commnents { get; set; }
+        
         public virtual List<Favorite>? Favorites { get; set; }
+
         public virtual List<Order>? Orders { get; set; }
+        
         public virtual List<CartDetail>? CartDetails { get; set; }
+        
         public bool IsDeleted { get; set; } = false;
     }
 }

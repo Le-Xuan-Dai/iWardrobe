@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj": {}
+    "D:\\Personal\\SWD392\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj": {}
   },
   "projects": {
-    "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj": {
+    "D:\\Personal\\SWD392\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "D:\\Personal\\SWD392\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj",
-        "packagesPath": "C:\\Users\\daik0\\.nuget\\packages\\",
-        "outputPath": "D:\\FPTU_Learning\\Summer_2023\\PRN221\\iWardrobe\\BusinessObjects\\obj\\",
+        "projectPath": "D:\\Personal\\SWD392\\iWardrobe\\BusinessObjects\\BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\Dyan\\.nuget\\packages\\",
+        "outputPath": "D:\\Personal\\SWD392\\iWardrobe\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\daik0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dyan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

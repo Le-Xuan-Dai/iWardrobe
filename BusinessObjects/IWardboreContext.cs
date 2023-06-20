@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,11 @@ namespace BusinessObjects
 {
     public class IWardboreContext : DbContext
     {
-        public DbSet<Cart> Carts { get; set; }
+//        public IWardboreContext(DbContextOptions<IWardboreContext> options)
+//          : base(options)
+//        {
+//        }
+
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Commnent> Comments { get; set; }
@@ -24,13 +29,12 @@ namespace BusinessObjects
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server =(local); database = IWardrobeDB;uid=sa;pwd=123456;");
-
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().HasOne(c => c.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.ClientSetNull);
-            modelBuilder.Entity<Product>().HasOne(c => c.Category).WithMany().HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.ClientSetNull);
+    //        modelBuilder.Entity<Product>().HasOne(c => c.User).WithMany().OnDelete(DeleteBehavior.NoAction);
+    //        modelBuilder.Entity<Product>().HasOne(c => c.Category).WithMany().OnDelete(DeleteBehavior.NoAction);
 
         }
     }

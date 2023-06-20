@@ -12,13 +12,20 @@ namespace BusinessObjects
     {
         [Key]
         public int CartDetailId { get; set; }
-        [ForeignKey("Cart")]
-        public int CartId { get; set; }
+
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+
         [ForeignKey("Product")]
         public int ProductId { get; set; }
+
+        [Required]
         public int Quantity { get; set; }
-        public virtual Cart? Cart { get; set; }
+
+        public virtual User? User { get; set; }
+
         public virtual Product? Product { get; set; }
+
         public bool IsDeleted { get; set; } = false;
     }
 }

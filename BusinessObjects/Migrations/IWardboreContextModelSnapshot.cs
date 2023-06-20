@@ -19,36 +19,12 @@ namespace BusinessObjects.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BusinessObjects.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartId");
-
-                    b.HasIndex("UserID")
-                        .IsUnique();
-
-                    b.ToTable("Carts");
-                });
-
             modelBuilder.Entity("BusinessObjects.CartDetail", b =>
                 {
                     b.Property<int>("CartDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -59,11 +35,14 @@ namespace BusinessObjects.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("CartDetailId");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CartDetails");
                 });
@@ -76,7 +55,9 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -102,7 +83,9 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -163,8 +146,8 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderStatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentDetais")
                         .HasColumnType("nvarchar(max)");
@@ -197,11 +180,8 @@ namespace BusinessObjects.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryId1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -216,23 +196,18 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CategoryId1");
-
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Products");
                 });
@@ -248,7 +223,9 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("RoleId");
 
@@ -263,9 +240,11 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(320)
                         .HasColumnType("nvarchar(320)");
 
@@ -273,13 +252,17 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
@@ -300,14 +283,15 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
+                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("CreationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("ExpirationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -318,11 +302,13 @@ namespace BusinessObjects.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
 
                     b.Property<string>("VoucherName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("VoucherId");
 
@@ -331,34 +317,23 @@ namespace BusinessObjects.Migrations
                     b.ToTable("Vouchers");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Cart", b =>
-                {
-                    b.HasOne("BusinessObjects.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("BusinessObjects.Cart", "UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BusinessObjects.CartDetail", b =>
                 {
-                    b.HasOne("BusinessObjects.Cart", "Cart")
-                        .WithMany("CartDetails")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BusinessObjects.Product", "Product")
                         .WithMany("CartDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cart");
+                    b.HasOne("BusinessObjects.User", "User")
+                        .WithMany("CartDetails")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BusinessObjects.Category", b =>
@@ -432,22 +407,16 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Product", b =>
                 {
                     b.HasOne("BusinessObjects.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .IsRequired();
-
-                    b.HasOne("BusinessObjects.Category", null)
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId1");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BusinessObjects.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .IsRequired();
-
-                    b.HasOne("BusinessObjects.User", null)
                         .WithMany("Products")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
@@ -476,11 +445,6 @@ namespace BusinessObjects.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Cart", b =>
-                {
-                    b.Navigation("CartDetails");
-                });
-
             modelBuilder.Entity("BusinessObjects.Category", b =>
                 {
                     b.Navigation("Products");
@@ -504,7 +468,7 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.User", b =>
                 {
-                    b.Navigation("Cart");
+                    b.Navigation("CartDetails");
 
                     b.Navigation("Categories");
 

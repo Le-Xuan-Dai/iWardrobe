@@ -12,12 +12,17 @@ namespace BusinessObjects
     {
         [Key]
         public int FavoriteId { get; set; }
+
         [ForeignKey("Product")]
         public int ProductId { get; set; }
+
         [ForeignKey("User")]
         public int UserId { get; set; }
+
         public virtual User? User { get; set; }
+
         public virtual Product? Product { get; set; }
+
         public bool IsDeleted { get; set; } = false;
     }
 }

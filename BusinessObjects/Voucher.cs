@@ -12,16 +12,34 @@ namespace BusinessObjects
     {
         [Key]
         public int VoucherId { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string VoucherName { get; set;}
+
+        [Required]
         [StringLength(8, MinimumLength = 8)]
         public string Code { get; set;}
-        public string Value { get; set;}
-        public string CreationDate { get; set;}
-        public string ExpirationDate { get; set;}
+
+        [Required]
+        public int Value { get; set;}
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime CreationDate { get; set;}
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime ExpirationDate { get; set;}
+
+        [Required]
         public int Quantity { get; set;}
+
         [ForeignKey("User")]
         public int UserId { get; set;}
+
         public virtual User? User { get; set;}
+
         public bool IsDeleted { get; set; } = false;
     }
 }

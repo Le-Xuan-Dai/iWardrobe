@@ -11,12 +11,19 @@ namespace BusinessObjects
     public class Category
     {
         [Key]
-        public int CategoryId { get; set; }  
+        public int CategoryId { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string CategoryName { get; set; }
+
         [ForeignKey("User")]
         public int UserId { get; set; }
+        
         public virtual User? User { get; set; }
+        
         public virtual List<Product>? Products { get; set; }
+        
         public bool IsDeleted { get; set; } = false;
     }
 }
