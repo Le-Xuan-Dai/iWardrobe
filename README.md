@@ -11,10 +11,11 @@
 ## Dependences
 - .NET 5
 - Microsoft Sql Server (> 2014)
-- Microsoft.EntityFrameworkCore.SqlServer (5.0.9)
-- Microsoft.EntityFrameworkCore.Tools (5.0.9)
-- Microsoft.Extensions.Configuration (5.0.0)
-- Microsoft.Extensions.Configuration.Json (5.0.0)
+- MMicrosoft.EntityFrameworkCore.Design (5.0.17)
+- Microsoft.EntityFrameworkCore.SqlServer (5.0.17)
+- Microsoft.EntityFrameworkCore.Tools (5.0.17)
+- Microsoft.VisualStudio.Web.CodeGeneration.Design (5.0.2)
+
 ## Lưu ý khi làm t task
 - Kéo task của mình từ "To Do" -> "In Progress"
 - Click vào task -> task details mở lên -> Điền vào mục "Start date" -> Chọn "Create branch" -> copy script
