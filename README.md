@@ -1,13 +1,15 @@
 # iWardrobe
 ## How to create database ?
-1. Đổi mật khẩu sa sql server: 123456
-2. Build project
-3. Config start project to "BusinessObjects"
-4. Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
-5. Run script : "Add-Migration SeedData" then run script : "Update-Database"
+- Đổi mật khẩu sa sql server: 123456
+- Clone code
+- Build project (click chuột phải 'iWardrobe' solution -> Build)
+- Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
+- Mở SQL server -> check đã có 'IWardrobeDB' chưa
+  
 ## How to run project ?
-1. Config start project to "WebApplication"
-2. Ctrl + F5
+- Config start project to "WebApplication"
+- Ctrl + F5
+  
 ## Dependences
 - .NET 5
 - Microsoft Sql Server (> 2014)
