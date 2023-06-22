@@ -1,9 +1,12 @@
+using BusinessObjects;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +31,13 @@ namespace WebApplication
             {
                 routeOptions.LowercaseQueryStrings = true;
             });
+            services.AddDbContext<IWardrobeContext>(options =>
+            {
+                string connectString = Configuration.GetConnectionString("IWardrobeConnection");
+                options.UseSqlServer(connectString);
+            });
+            services.AddScoped<ProductServices>();
+            services.AddScoped<RoleServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

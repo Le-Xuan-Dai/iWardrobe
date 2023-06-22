@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class IWardboreContext : DbContext
+    public class IWardrobeContext : DbContext
     {
-//        public IWardboreContext(DbContextOptions<IWardboreContext> options)
-//          : base(options)
-//        {
-//        }
+        public IWardrobeContext()
+        {
+        }
+
+        public IWardrobeContext(DbContextOptions<IWardrobeContext> options)
+          : base(options)
+        {
+        }
 
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -30,12 +34,10 @@ namespace BusinessObjects
         {
             optionsBuilder.UseSqlServer("server =(local); database = IWardrobeDB;uid=sa;pwd=123456;");
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-    //        modelBuilder.Entity<Product>().HasOne(c => c.User).WithMany().OnDelete(DeleteBehavior.NoAction);
-    //        modelBuilder.Entity<Product>().HasOne(c => c.Category).WithMany().OnDelete(DeleteBehavior.NoAction);
-
+            
         }
     }
 }
