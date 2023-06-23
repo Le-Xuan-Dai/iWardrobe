@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApplication.Pages.Auth
+namespace WebApplication.Pages
 {
-    public class LoginModel : PageModel
+    public class UserProfileModel : PageModel
     {
         public void OnGet()
         {
