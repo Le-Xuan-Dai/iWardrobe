@@ -89,6 +89,16 @@ namespace WebApplication
                 options.LogoutPath = "/logout";
                 options.AccessDeniedPath = "/not-found";
             });
+
+            // Config login with google
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection configGoogle = Configuration.GetSection("Authentication:Google");
+                    options.ClientId = configGoogle["ClientId"];
+                    options.ClientSecret = configGoogle["ClientSecret"];
+                    options.CallbackPath = "/login-google";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,8 +111,10 @@ namespace WebApplication
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

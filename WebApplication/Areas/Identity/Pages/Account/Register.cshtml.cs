@@ -76,6 +76,11 @@ namespace WebApplication.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            foreach (var externalLogin in ExternalLogins)
+            {
+                _logger.LogInformation(externalLogin.Name);
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
