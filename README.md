@@ -1,15 +1,27 @@
 # iWardrobe
 ## How to create database ?
-1. Build project
-2. Config start project to "BusinessObjects"
-3. Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
+- Đổi mật khẩu sa sql server: 123456
+- Clone code
+- Build project (click chuột phải 'iWardrobe' solution -> Build)
+- Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
+- Mở SQL server -> check đã có 'IWardrobeDB' chưa
+  
 ## How to run project ?
-1. Config start project to "WebApplication"
-2. Ctrl + F5
+- Config start project to "WebApplication"
+- Ctrl + F5
+  
 ## Dependences
 - .NET 5
 - Microsoft Sql Server (> 2014)
-- Microsoft.EntityFrameworkCore.SqlServer (5.0.9)
-- Microsoft.EntityFrameworkCore.Tools (5.0.9)
-- Microsoft.Extensions.Configuration (5.0.0)
-- Microsoft.Extensions.Configuration.Json (5.0.0)
+- MMicrosoft.EntityFrameworkCore.Design (5.0.17)
+- Microsoft.EntityFrameworkCore.SqlServer (5.0.17)
+- Microsoft.EntityFrameworkCore.Tools (5.0.17)
+- Microsoft.VisualStudio.Web.CodeGeneration.Design (5.0.2)
+
+## Lưu ý khi làm t task
+- Kéo task của mình từ "To Do" -> "In Progress"
+- Click vào task -> task details mở lên -> Điền vào mục "Start date" -> Chọn "Create branch" -> copy script
+- Visual Studio Code -> Terminal -> checkout master -> git pull -> paste script vừa copy
+- Code, commit và push code lên
+- Xong thì tạo pull request
+  
