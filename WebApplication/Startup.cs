@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Services;
 
 namespace WebApplication
 {
@@ -38,13 +40,15 @@ namespace WebApplication
                 options.UseSqlServer(connectString);
             });
             services.AddScoped<ProductServices>();
-            //            services.AddIdentity<User, IdentityRole>()
-            //                .AddEntityFrameworkStores<IWardrobeContext>()
-            //                .AddDefaultTokenProviders();
+            services.AddScoped<UserServices>();
 
-                        services.AddDefaultIdentity<User>()
-                            .AddEntityFrameworkStores<IWardrobeContext>()
-                            .AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IWardrobeContext>()
+                .AddDefaultTokenProviders();
+
+            //                        services.AddDefaultIdentity<User>()
+            //                           .AddEntityFrameworkStores<IWardrobeContext>()
+            //                            .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -72,6 +76,19 @@ namespace WebApplication
 
             });
 
+            // Config send mail
+            services.AddOptions();
+            var mailSetting = Configuration.GetSection("MailSettings");
+            services.Configure<MailSettings>(mailSetting);
+            services.AddSingleton<IEmailSender, SendMailService>();
+
+            // Config auth
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/login";
+                options.LogoutPath = "/logout";
+                options.AccessDeniedPath = "/not-found";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
