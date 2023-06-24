@@ -29,6 +29,7 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
@@ -62,6 +63,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<int>("UserId")
@@ -82,6 +84,7 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<string>("Message")
@@ -112,6 +115,7 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
@@ -143,6 +147,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<string>("Note")
@@ -183,6 +188,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
+                        .HasDefaultValueSql("GETDATE()")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -192,6 +198,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<double>("Price")
@@ -222,6 +229,7 @@ namespace BusinessObjects.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -251,6 +259,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("nvarchar(320)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -290,12 +299,14 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("nvarchar(8)");
 
                     b.Property<DateTime>("CreationDate")
+                        .HasDefaultValueSql("GETDATE()")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
                         .HasColumnType("bit");
 
                     b.Property<int>("Quantity")

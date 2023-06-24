@@ -44,7 +44,7 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
             OtherLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync())
                 .Where(auth => CurrentLogins.All(ul => auth.Name != ul.LoginProvider))
                 .ToList();
-            ShowRemoveButton = user.PasswordHash != null || CurrentLogins.Count > 1;
+            ShowRemoveButton = user.Password != null || CurrentLogins.Count > 1;
             return Page();
         }
 
@@ -87,10 +87,10 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID 'user.Id'.");
             }
 
-            var info = await _signInManager.GetExternalLoginInfoAsync(user.Id);
+            var info = await _signInManager.GetExternalLoginInfoAsync(user.UserId.ToString());
             if (info == null)
             {
-                throw new InvalidOperationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
+                throw new InvalidOperationException($"Unexpected error occurred loading external login info for user with ID '{user.UserId}'.");
             }
 
             var result = await _userManager.AddLoginAsync(user, info);

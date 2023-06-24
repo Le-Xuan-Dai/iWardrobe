@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class ProductServices : RepositoryBase<Product>
+    public class UserServices : RepositoryBase<User>
     {
         private readonly IWardrobeContext _dbContext;
-        private readonly DbSet<Product> _dbSet;
-        public ProductServices(IWardrobeContext dBContext) : base(dBContext)
+        private readonly DbSet<User> _dbSet;
+        public UserServices(IWardrobeContext dBContext) : base(dBContext)
         {
-           _dbContext = dBContext;
-           _dbSet = _dbContext.Set<Product>();
+            _dbContext = dBContext;
+            _dbSet = _dbContext.Set<User>();
         }
     }
 }
