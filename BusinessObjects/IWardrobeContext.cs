@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class IWardrobeContext : IdentityDbContext<User>
+    public class IWardrobeContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<User>
     {
         public IWardrobeContext()
         {
