@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,29 +9,16 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class User
+    public class User: IdentityUser
     {
-        [Key]
-        public int UserId { get; set; }
+        [StringLength(50)]
+        public string Fullname { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
+        [StringLength(50)]
+        public string BrandName { get; set; }
 
-        [Required]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 8)]
         public string Password { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [StringLength(320, MinimumLength = 6)]
-        public string Email { get; set; }
-
-        [Required]
         public string Address { get; set; }
         
         [ForeignKey("Role")]
@@ -42,8 +30,6 @@ namespace BusinessObjects
         
         public virtual List<CartDetail>? CartDetails { get; set; }
 
-        public virtual Role? Role { get; set; }
-        
         public virtual List<Voucher>? Vouchers { get; set; }
         
         public virtual List<Category>? Categories { get; set; }
