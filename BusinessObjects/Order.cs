@@ -14,7 +14,7 @@ namespace BusinessObjects
         public int OrderId { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }
