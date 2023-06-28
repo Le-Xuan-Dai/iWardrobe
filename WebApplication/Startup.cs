@@ -98,7 +98,14 @@ namespace WebApplication
                     options.ClientId = configGoogle["ClientId"];
                     options.ClientSecret = configGoogle["ClientSecret"];
                     options.CallbackPath = "/login-google";
-                });
+                })
+                .AddFacebook(options =>
+                 {
+                     IConfigurationSection configFacebook = Configuration.GetSection("Authentication:Facebook");
+                     options.AppId = configFacebook["AppId"];
+                     options.AppSecret = configFacebook["AppSecret"];
+                     options.CallbackPath = "/auth/handler";
+                 });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
