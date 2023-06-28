@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
+using Services;
 
 namespace WebApplication.Pages.Categories
 {
     public class EditModel : PageModel
     {
-        private readonly BusinessObjects.IWardrobeContext _context;
+        private readonly CategoryServices _categoryServices;
+        private readonly UserServices _userServices;
 
-        public EditModel(BusinessObjects.IWardrobeContext context)
+        public EditModel(CategoryServices categoryServices, UserServices userServices)
         {
-            _context = context;
+            _categoryServices = categoryServices;
+            _userServices = userServices;
         }
 
         [BindProperty]
@@ -29,14 +32,13 @@ namespace WebApplication.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Categories
-                .Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
+            Category = await _categoryServices.GetAll().Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
 
             if (Category == null)
             {
                 return NotFound();
             }
-           ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+           ViewData["UserId"] = new SelectList(await _userServices.GetAll().ToListAsync(), "Id", "Fullname");
             return Page();
         }
 
@@ -49,11 +51,11 @@ namespace WebApplication.Pages.Categories
                 return Page();
             }
 
-            _context.Attach(Category).State = EntityState.Modified;
+           
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _categoryServices.Update(Category);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +74,7 @@ namespace WebApplication.Pages.Categories
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _categoryServices.GetById(id) != null;    
         }
     }
 }

@@ -5,74 +5,205 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    .searchInput:focus {
+        box-shadow: none;
+    }
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].IsDeleted)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Product) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    .btnPagination {
+        color: #152534;
+    }
+
+        .btnPagination:hover {
+            color: #152534;
+            background-color: #C0E862;
+        }
+
+    .iconAction {
+        width: 2rem;
+        height: 2rem;
+    }
+</style>
+
+<div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h2 style="text-align: center;">
+            Product Management
+        </h2>
+        <div class="form-group">
+            <a asp-page="Create" class="btn btn-sm" style="background-color:#C0E862; margin-left: 8px;">
+                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
+                Create New Product
+            </a>
+        </div>
+    </div>
+
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <div class="mx-auto mb-4 " style="width: 500px;">
+                <div class="input-group border rounded-3">
+                    <input class="form-control searchInput" style="border: none;" type="search" placeholder="Seach product..." name="SearchString" value="@Model.CurrentFilter">
+                    <span class="input-group-append" style="margin-left: unset;">
+                        <button class="btn" style="background-color:#C0E862;" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <table class="table" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="background-color: #C0E862;">
+                    @Html.DisplayNameFor(model => model.Products[0].ImageUrls)
+                </th>
+                <th style="background-color: #C0E862;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a style="text-decoration: none; color:#152534;" asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Products[0].ProductName)
+                        </a>
+                        <div class="fa fa-sort position-relative" style="color: #A1A1A1;" aria-hidden="true">
+                            @{
+                                string iconName;
+                                if (Model.NameSort.Equals("name_desc")) iconName = "fa-sort-asc";
+                                else iconName = "fa-sort-desc";
+                                <i class="fa @iconName position-absolute"
+                                   style="color:#152534; left: 0;"
+                                   aria-hidden="true">
+                                </i>
+                            }
+                        </div>
+                    </div>
+
+                </th>
+                <th style="background-color: #C0E862;">
+                    @Html.DisplayNameFor(model => model.Products[0].Description)
+                </th>
+                <th style="background-color: #C0E862;">
+                    @Html.DisplayNameFor(model => model.Products[0].SellPrice)
+                </th>
+                <th style="background-color: #C0E862;">
+                    @Html.DisplayNameFor(model => model.Products[0].RentPrice)
+                </th>
+                <th style="background-color: #C0E862;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a style="text-decoration: none; color:#152534;" asp-page="./Index" asp-route-sortOrder="@Model.DateSort" asp-route-currentFilter="@Model.CurrentFilter">
+                            Date
+                        </a>
+                        <div class="fa fa-sort position-relative" style="color: #A1A1A1;" aria-hidden="true">
+                            @{
+                                string iconDate;
+                                if (Model.DateSort.Equals("date_desc")) iconDate = "fa-sort-asc";
+                                else iconDate = "fa-sort-desc";
+                                <i class="fa @iconDate position-absolute"
+                                   style="color:#152534; left: 0;"
+                                   aria-hidden="true">
+                                </i>
+                            }
+                        </div>
+                    </div>
+
+                </th>
+                <th style="background-color: #C0E862;">
+                    @Html.DisplayNameFor(model => model.Products[0].Category)
+                </th>
+                <th style="background-color: #C0E862;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Products.Count() > 0)
+            {
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            <img src=@item.ImageUrls[0]
+                                 class="d-block" style="width: 100px; min-height: 100px;" alt="...">
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SellPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreationDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        </td>
+                        <td>
+                            <div class="h-100 d-flex align-items-center justify-content-center">
+                                <a class="btn btn-sm btn-success rounded-circle mx-1 iconAction" asp-page="./Edit" asp-route-id="@item.ProductId">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <a class="btn btn-sm btn-warning rounded-circle mx-1 iconAction" asp-page="./Details" asp-route-id="@item.ProductId">
+                                    <i class="fa fa-info " aria-hidden="true"></i>
+                                </a>
+                                <button class="btn btn-sm btn-danger rounded-circle mx-1 iconAction"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal+@item.ProductId">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                                <div class="modal fade" id="exampleModal+@item.ProductId" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete product</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>To ensure the accuracy of this action and prevent accidental deletions, we kindly ask you to confirm your intent to delete this product.</p>
+                                            </div>
+                                            <form method="post" asp-page="./Delete" class="modal-footer d-flex">
+                                                <input type="hidden" name="id" value="@item.ProductId" />
+                                                <button style="background-color:#C0E862;" type="submit" class="btn w-100"
+                                                        data-bs-dismiss="modal">
+                                                    Confirm
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+    @{
+        var prevDisabled = !Model.Products.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.Products.HasNextPage ? "disabled" : "";
+    }
+    <div class="d-flex align-items-center justify-content-end">
+        <a asp-page="./Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Products.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btnPagination btn btn-outline-secondary btn-sm @prevDisabled"
+           style="width: 100px;border: none;">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            &nbsp;Previous
+        </a>
+        <a asp-page="./Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Products.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btnPagination btn btn-outline-secondary btn-sm @nextDisabled"
+           style="width: 100px;border: none;">
+            Next&nbsp;
+            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>

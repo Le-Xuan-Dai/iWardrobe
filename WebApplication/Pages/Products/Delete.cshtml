@@ -25,16 +25,22 @@
             @Html.DisplayFor(model => model.Product.Description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageUrl)
+            @Html.DisplayNameFor(model => model.Product.ImageUrls)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ImageUrl)
+            @Html.DisplayFor(model => model.Product.ImageUrls)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
+            @Html.DisplayNameFor(model => model.Product.SellPrice)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
+            @Html.DisplayFor(model => model.Product.SellPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.RentPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.RentPrice)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Product.CreationDate)
