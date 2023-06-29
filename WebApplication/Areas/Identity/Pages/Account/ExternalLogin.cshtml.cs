@@ -122,6 +122,39 @@ namespace WebApplication.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+
+                //Input.Email 
+                var registeredUser = await _userManager.FindByEmailAsync(Input.Email);
+                string externalEmail = null;
+                User externalEmailUser = null;
+                //Claim ~ Đặc tính mô tả một đối tượng
+                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
+                {
+                    externalEmail = info.Principal.FindFirstValue(ClaimTypes.Email);
+                }
+
+                if(externalEmail != null)
+                {
+                    externalEmailUser = await _userManager.FindByEmailAsync(externalEmail);
+                }
+
+                if((registeredUser != null) && (externalEmailUser != null))
+                {
+                    //externalEmail == Input.email 
+                    if(registeredUser.Id == externalEmailUser.Id)
+                    {
+                       var resultLink = await _userManager.AddLoginAsync(registeredUser,info);
+                        if (resultLink.Succeeded)
+                        {
+                            await _signInManager.SignInAsync(registeredUser, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Cannot connect accounts");
+                    }
+                }
                 var user = new User { UserName = Input.Email, Email = Input.Email };
 
                 var result = await _userManager.CreateAsync(user);
