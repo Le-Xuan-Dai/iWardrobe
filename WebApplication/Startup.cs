@@ -97,7 +97,7 @@ namespace WebApplication
                     IConfigurationSection configGoogle = Configuration.GetSection("Authentication:Google");
                     options.ClientId = configGoogle["ClientId"];
                     options.ClientSecret = configGoogle["ClientSecret"];
-                    options.CallbackPath = "/login-google";
+                    options.CallbackPath = "/login_google";
                 })
                 .AddFacebook(options =>
                  {
