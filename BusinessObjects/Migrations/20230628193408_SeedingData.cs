@@ -49,7 +49,7 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] {"CategoryId", "UserId", "ProductName", "Description", " ImageUrl", "Price", "CreationDate", "IsDeleted" },
+                columns: new[] {"CategoryId", "UserId", "ProductName", "Description", "ImageUrl", "Price", "CreationDate", "IsDeleted" },
                 values: new object[,]
                 {
                     {43,"US001","Short Pan" ,"Short Pan from Dirty Coins" ,"https://bizweb.dktcdn.net/100/369/010/products/1-e95372e6-c524-4715-a07d-791c91ebe7ea.jpg?v=1656325763640",300000,"2023-06-30",false },
@@ -66,10 +66,10 @@ namespace BusinessObjects.Migrations
                 columns: new[] {"ProductId", "UserId", "Message", "IsDeleted" },
                 values: new object[,]
                 {
-                    {2 , "US005" , "Shoes still pretty new and fix with my foots",false },
-                    {2 , "US001" , "The pant is quite small for me ,  but still ok",false },
-                    {5 , "US002" , "Jacket look so nice , very new than the imagine",false },
-                    {4 , "US004", "Shoes still pretty new and fix with my foots",false },
+                    {14 , "US005" , "Shoes still pretty new and fix with my foots",false },
+                    {15, "US001" , "The pant is quite small for me ,  but still ok",false },
+                    {13 , "US002" , "Jacket look so nice , very new than the imagine",false },
+                    {16 , "US004", "Shoes still pretty new and fix with my foots",false },
                 }
                 );
 
@@ -78,15 +78,15 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "ProductId", "UserId", "IsDeleted" },
                 values: new object[,]
                 {
-                    {2,"US001",false },
-                    {2,"US003",false },
-                    {2,"US005",false },
-                    {3,"US002",false },
-                    {4,"US002",false },
-                    {5,"US002",false },
-                    {1,"US003",false },
-                    {1,"US004",false },
-                    {3,"US001",false }
+                    {14,"US001",false },
+                    {13,"US003",false },
+                    {13,"US005",false },
+                    {13,"US002",false },
+                    {14,"US002",false },
+                    {15,"US002",false },
+                    {13,"US003",false },
+                    {16,"US004",false },
+                    {17,"US001",false }
                 }
                 );
             migrationBuilder.InsertData(
@@ -94,8 +94,8 @@ namespace BusinessObjects.Migrations
               columns: new[] { "UserId", "ProductId", "DeliverMethod", "DeliverDetais", "PaymentMethod", "PaymentDetais", "OrderStatus", "Note", "IsDeleted" },
               values: new object[,]
               {
-                    {"US001",2,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ," On the way " ,"Nothing",false },
-                    {"US002",3,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing",false },
+                    {"US001",13,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ," On the way " ,"Nothing",false },
+                    {"US002",14,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing",false },
               }
               );
         }
