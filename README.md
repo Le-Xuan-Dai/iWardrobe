@@ -4,7 +4,7 @@
 - Clone code
 - Build project (click chuột phải 'iWardrobe' solution -> Build)
 - Tools -> NuGet Package Manger -> Package Manger Console
-- Run script: "update-database initDatabase" "update-database seedingData"
+- Run script: "update-database initDatabase"; "update-database seedingData"
 - Mở SQL server -> check đã có 'IWardrobeDB' chưa
   
 ## How to run project ?
@@ -27,10 +27,10 @@
 - Xong thì tạo pull request
 
 ## Tài khoản
-Google:
-  mail: iwardrobefasion@gmail.com
-  pass: exe123456
-Facebook:
-  mail: iwardrobefasion@gmail.com
-  pass: exe123456
+- Google:
+  - mail: iwardrobefasion@gmail.com
+  - pass: exe123456
+- Facebook:
+  - mail: iwardrobefasion@gmail.com
+  - pass: exe123456
   
