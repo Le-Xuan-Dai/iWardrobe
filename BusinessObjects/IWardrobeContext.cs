@@ -40,6 +40,24 @@ namespace BusinessObjects
         {
             base.OnModelCreating(modelBuilder);
 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>()
+                .Property(b => b.CreationDate)
+                .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Product>()
+           .Property(e => e.ImageUrls)
+           .HasConversion(
+               v => string.Join(',', v),
+               v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
+            modelBuilder.Entity<Product>()
+                   .Property(b => b.IsDeleted)
+                   .HasDefaultValue(false);
+
+            modelBuilder.Entity<Category>()
+                   .Property(b => b.IsDeleted);
+
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 var tableName = entityType.GetTableName();

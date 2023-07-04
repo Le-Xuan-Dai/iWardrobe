@@ -33,8 +33,7 @@ namespace Services
         }
         public async Task Update(T item)
         {
-            var tracker = _dbContext.Attach(item);
-            tracker.State = EntityState.Modified;
+            _dbContext.Attach(item).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
         public async Task Delete(T item)
