@@ -39,8 +39,11 @@ namespace WebApplication
                 string connectString = Configuration.GetConnectionString("IWardrobeConnection");
                 options.UseSqlServer(connectString);
             });
+
+            // Đăng kí services
             services.AddScoped<ProductServices>();
             services.AddScoped<UserServices>();
+            services.AddScoped<CategoryServices>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IWardrobeContext>()

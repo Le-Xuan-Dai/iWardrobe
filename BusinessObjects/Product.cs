@@ -26,12 +26,13 @@ namespace BusinessObjects
 
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string[] ImageUrls { get; set; }
 
         [Required]
-        public double Price { get; set; }
-
+        public double SellPrice { get; set; }
         [Required]
+        public double RentPrice { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
 

@@ -40,6 +40,17 @@ namespace BusinessObjects
         {
             base.OnModelCreating(modelBuilder);
 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>()
+                .Property(b => b.CreationDate)
+                .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<Product>()
+           .Property(e => e.ImageUrls)
+           .HasConversion(
+               v => string.Join(',', v),
+               v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 var tableName = entityType.GetTableName();
@@ -48,6 +59,22 @@ namespace BusinessObjects
                     entityType.SetTableName(tableName.Substring(6));
                 }
             }
+
+            modelBuilder.Entity<CartDetail>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Category>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Commnent>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Order>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Product>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<User>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Voucher>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Favorite>().Property(b => b.IsDeleted).HasDefaultValue(false);
         }
     }
 }
