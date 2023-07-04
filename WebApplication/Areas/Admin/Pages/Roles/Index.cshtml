@@ -1,0 +1,37 @@
+﻿@page
+@model WebApplication.Areas.Admin.Roles.IndexModel
+@{
+}
+
+<h2>Role Management</h2>
+<partial name="_StatusMessage" model="@Model.StatusMessage" />
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Role Name
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model.Roles)
+        {
+            <tr>
+                <td>
+                    @role.Name
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@role.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@role.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@role.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
