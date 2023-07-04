@@ -236,6 +236,10 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasDefaultValue(false)
+                        .HasColumnType("bit");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -331,6 +335,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("nvarchar(8)");
 
                     b.Property<DateTime>("CreationDate")
+                        .HasDefaultValueSql("GETDATE()")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ExpirationDate")

@@ -55,7 +55,6 @@ namespace WebApplication.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
             [DataType(DataType.PhoneNumber)]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
