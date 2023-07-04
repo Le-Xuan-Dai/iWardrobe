@@ -14,8 +14,8 @@ namespace Services
         private readonly DbSet<Product> _dbSet;
         public ProductServices(IWardrobeContext dBContext) : base(dBContext)
         {
-            _dbContext = dBContext;
-            _dbSet = _dbContext.Set<Product>();
+           _dbContext = dBContext;
+           _dbSet = _dbContext.Set<Product>();
         }
     }
 }

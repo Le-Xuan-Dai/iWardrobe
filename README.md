@@ -3,7 +3,8 @@
 - Đổi mật khẩu sa sql server: 123456
 - Clone code
 - Build project (click chuột phải 'iWardrobe' solution -> Build)
-- Tools -> NuGet Package Manger -> Package Manger Console -> Run script: "update-database –verbose"
+- Tools -> NuGet Package Manger -> Package Manger Console
+- Run script: "update-database initDatabase"; "update-database seedingData"
 - Mở SQL server -> check đã có 'IWardrobeDB' chưa
   
 ## How to run project ?
@@ -18,10 +19,18 @@
 - Microsoft.EntityFrameworkCore.Tools (5.0.17)
 - Microsoft.VisualStudio.Web.CodeGeneration.Design (5.0.2)
 
-## Lưu ý khi làm t task
+## Lưu ý khi làm task
 - Kéo task của mình từ "To Do" -> "In Progress"
 - Click vào task -> task details mở lên -> Điền vào mục "Start date" -> Chọn "Create branch" -> copy script
 - Visual Studio Code -> Terminal -> checkout master -> git pull -> paste script vừa copy
 - Code, commit và push code lên
 - Xong thì tạo pull request
+
+## Tài khoản
+- Google:
+  - mail: iwardrobefasion@gmail.com
+  - pass: exe123456
+- Facebook:
+  - mail: iwardrobefasion@gmail.com
+  - pass: exe123456
   
