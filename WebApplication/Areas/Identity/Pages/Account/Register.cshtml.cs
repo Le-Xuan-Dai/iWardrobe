@@ -55,7 +55,6 @@ namespace WebApplication.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
             [DataType(DataType.PhoneNumber)]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -89,7 +88,7 @@ namespace WebApplication.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new User { Fullname = Input.Fullname, Email = Input.Email, PhoneNumber = Input.PhoneNumber};
+                var user = new User { Fullname = Input.Fullname, Email = Input.Email, PhoneNumber = Input.PhoneNumber, UserName = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

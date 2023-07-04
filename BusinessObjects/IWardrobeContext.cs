@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class IWardrobeContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<User>
+    public class IWardrobeContext : IdentityDbContext<User>
     {
         public IWardrobeContext()
         {
