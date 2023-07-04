@@ -91,7 +91,7 @@ namespace WebApplication.Areas.Identity.Pages.Account
                 {
                     var user = _userService.FirstOrDefault(u => u.PhoneNumber == Input.EmailOrPhoneNumber);
                     if (user != null) {
-                        result = await _signInManager.PasswordSignInAsync(user.Fullname, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                        result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                     }
                 }
 
