@@ -49,14 +49,14 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] {"CategoryId", "UserId", "ProductName", "Description", "ImageUrl", "Price", "CreationDate", "IsDeleted" },
+                columns: new[] { "CategoryId", "UserId", "ProductName", "Description", "ImageUrl", "Price", "CreationDate", "IsDeleted" },
                 values: new object[,]
                 {
-                    {43,"US001","Short Pan" ,"Short Pan from Dirty Coins" ,"https://bizweb.dktcdn.net/100/369/010/products/1-e95372e6-c524-4715-a07d-791c91ebe7ea.jpg?v=1656325763640",300000,"2023-06-30",false },
-                    {43,"US002","Nike AF1 Mid" ,"Short Pan from Dirty Coins" ,"https://cdn.vortexs.io/api/images/372b5357-2d66-4d6d-8b89-9bed5ea69bca/1920/w/50-giay-nike-air-force-1-mid-all-white-o-314195-113.jpeg",1600000,"2023-06-30",false },
-                    {43,"US004","Short TeeLab" ,"Short Local Band Unisex Special" ,"https://bizweb.dktcdn.net/thumb/large/100/415/697/products/ta9216-11k7zwk1-1-7fw9-hinh-mat-sau-0-e7d37221-9eeb-4978-868f-9193908bee74.jpg?v=1685936039000",190000,"2023-06-30",false },
-                    {43,"US003","Adidas Ultra Boots" ,"Adidas Ultra Boots Black-White" ,"https://giayxshop.vn/wp-content/uploads/2019/01/z3651678985400_f5c2a3afb17825c7244e3a4698bb798c-scaled.jpg",2500000,"2023-06-30",false },
-                    {43,"US005","Adidas Jacket" ,"" ,"https://cdn.vortexs.io/api/images/a69812de-f2c5-4243-abe0-72cf736ab4d7/1920/w/ao-khoac-jacket-adidas-firebird-track-red-hot-gf0211.jpeg",300000,"2023-06-30",false },
+                    {1,"US001","Short Pan" ,"Short Pan from Dirty Coins" ,"https://bizweb.dktcdn.net/100/369/010/products/1-e95372e6-c524-4715-a07d-791c91ebe7ea.jpg?v=1656325763640",300000,"2023-06-30",false },
+                    {1,"US002","Nike AF1 Mid" ,"Short Pan from Dirty Coins" ,"https://cdn.vortexs.io/api/images/372b5357-2d66-4d6d-8b89-9bed5ea69bca/1920/w/50-giay-nike-air-force-1-mid-all-white-o-314195-113.jpeg",1600000,"2023-06-30",false },
+                    {1,"US004","Short TeeLab" ,"Short Local Band Unisex Special" ,"https://bizweb.dktcdn.net/thumb/large/100/415/697/products/ta9216-11k7zwk1-1-7fw9-hinh-mat-sau-0-e7d37221-9eeb-4978-868f-9193908bee74.jpg?v=1685936039000",190000,"2023-06-30",false },
+                    {1,"US003","Adidas Ultra Boots" ,"Adidas Ultra Boots Black-White" ,"https://giayxshop.vn/wp-content/uploads/2019/01/z3651678985400_f5c2a3afb17825c7244e3a4698bb798c-scaled.jpg",2500000,"2023-06-30",false },
+                    {1,"US005","Adidas Jacket" ,"" ,"https://cdn.vortexs.io/api/images/a69812de-f2c5-4243-abe0-72cf736ab4d7/1920/w/ao-khoac-jacket-adidas-firebird-track-red-hot-gf0211.jpeg",300000,"2023-06-30",false },
 
                 }
                 );
@@ -66,10 +66,10 @@ namespace BusinessObjects.Migrations
                 columns: new[] {"ProductId", "UserId", "Message", "IsDeleted" },
                 values: new object[,]
                 {
-                    {14 , "US005" , "Shoes still pretty new and fix with my foots",false },
-                    {15, "US001" , "The pant is quite small for me ,  but still ok",false },
-                    {13 , "US002" , "Jacket look so nice , very new than the imagine",false },
-                    {16 , "US004", "Shoes still pretty new and fix with my foots",false },
+                    {1 , "US005" , "Shoes still pretty new and fix with my foots",false },
+                    {2, "US001" , "The pant is quite small for me ,  but still ok",false },
+                    {3 , "US002" , "Jacket look so nice , very new than the imagine",false },
+                    {4 , "US004", "Shoes still pretty new and fix with my foots",false },
                 }
                 );
 
@@ -78,15 +78,15 @@ namespace BusinessObjects.Migrations
                 columns: new[] { "ProductId", "UserId", "IsDeleted" },
                 values: new object[,]
                 {
-                    {14,"US001",false },
-                    {13,"US003",false },
-                    {13,"US005",false },
-                    {13,"US002",false },
-                    {14,"US002",false },
-                    {15,"US002",false },
-                    {13,"US003",false },
-                    {16,"US004",false },
-                    {17,"US001",false }
+                    {1,"US001",false },
+                    {2,"US003",false },
+                    {3,"US005",false },
+                    {4,"US002",false },
+                    {5,"US002",false },
+                    {1,"US002",false },
+                    {2,"US003",false },
+                    {3,"US004",false },
+                    {3,"US001",false }
                 }
                 );
             migrationBuilder.InsertData(
@@ -94,8 +94,8 @@ namespace BusinessObjects.Migrations
               columns: new[] { "UserId", "ProductId", "DeliverMethod", "DeliverDetais", "PaymentMethod", "PaymentDetais", "OrderStatus", "Note", "IsDeleted" },
               values: new object[,]
               {
-                    {"US001",13,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ," On the way " ,"Nothing",false },
-                    {"US002",14,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing",false },
+                    {"US001",1,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ," On the way " ,"Nothing",false },
+                    {"US002",2,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing",false },
               }
               );
         }
