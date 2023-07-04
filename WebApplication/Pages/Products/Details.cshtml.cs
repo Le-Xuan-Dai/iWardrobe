@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
+using Services;
 
 namespace WebApplication.Pages.Products
 {
     public class DetailsModel : PageModel
     {
-        private readonly BusinessObjects.IWardrobeContext _context;
+        private readonly ProductServices _productServices;
 
-        public DetailsModel(BusinessObjects.IWardrobeContext context)
+        public DetailsModel(ProductServices productServices)
         {
-            _context = context;
+            _productServices = productServices;
         }
 
         public Product Product { get; set; }
@@ -27,9 +28,7 @@ namespace WebApplication.Pages.Products
                 return NotFound();
             }
 
-            Product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.User).FirstOrDefaultAsync(m => m.ProductId == id);
+            Product = await _productServices.GetAll().Include(p => p.Category).FirstOrDefaultAsync(m => m.ProductId == id);
 
             if (Product == null)
             {

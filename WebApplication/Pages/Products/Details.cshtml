@@ -5,63 +5,206 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<style>
+    .btnPagination {
+        color: #152534;
+    }
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ImageUrl)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.CreationDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.CreationDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Category.CategoryName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.User.Id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.IsDeleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.IsDeleted)
-        </dd>
-    </dl>
+        .btnPagination:hover {
+            color: #152534;
+            background-color: #C0E862;
+        }
+
+</style>
+
+<div class="container-fluid mb-4">
+    <a asp-page="./Index"
+       class="btnPagination btn btn-outline-secondary btn-sm"
+       style="border: none;">
+        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+        &nbsp;Back to list
+    </a>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Product.ProductId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="container-fluid d-lg-flex row mx-0">
+    <div class="col-lg-3" style="min-height: 480px;">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner w-100">
+                @for (int i = 0; i < Model.Product.ImageUrls.Length; i++)
+                {
+                    string className = "";
+                    if (i == 0) { className = "active"; };
+                    <div class="carousel-item @className">
+                        <img src=@Model.Product.ImageUrls[i]
+                             class="d-block w-100" alt="...">
+                    </div>
+                }
+            </div>
+            <div style="bottom: -50px;" class="carousel-indicators">
+                @for (int i = 0; i < Model.Product.ImageUrls.Length; i++)
+                {
+                    string className = "";
+                    if (i == 0) { className = "active"; };
+                    <button style="width: 100px;" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide-to=@i class=@className aria-current="true" aria-label="Slide @i">
+                        <img src=@Model.Product.ImageUrls[i]
+                             class="d-block w-100" alt="...">
+                    </button>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
+    <div class=" col-lg-6 px-lg-5">
+        <span style="color: #A1A1A1; font-weight: bold;">#lxdfasion</span>
+        <h2 style="font-weight: bold;">
+            @Model.Product.ProductName
+        </h2>
+        <div class="d-flex" style="color: #A1A1A1; font-weight: 500;">
+            <span>
+                <i class="fa fa-heart" style="color: #dc3545;" aria-hidden="true"></i>
+                &nbsp;48
+            </span>
+            <div class="vr mx-2"></div>
+            <span>121 Views</span>
+            &nbsp; &nbsp;
+            <p class="badge text-bg-light">-20%</p>
+        </div>
+        <div class="d-flex justify-content-between w-100">
+            <p>
+                <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
+                Buy: <span style="font-size: x-large; font-weight: bold; color: #C0E862;">(đ)@Model.Product.SellPrice</span>
+            </p>
+            <p>
+                <i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;
+                Rent: <span style="font-size: x-large; font-weight: bold; color: #C0E862;">(đ)@Model.Product.RentPrice</span>
+            </p>
+        </div>
+        <button style="background-color:#C0E862;" type="button" class="btn w-100" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+            <i class="fa fa-cart-arrow-down"
+               aria-hidden="true"></i>&nbsp;Deal the Price
+        </button>
+        <hr />
+        <div>
+            <p style="font-weight: bold;">Details</p>
+            <div>
+                <p class="badge text-bg-light">Category: T-Shirt</p>
+                <p class="badge text-bg-light">Size: L</p>
+                <p class="badge text-bg-light">Color: Mix color</p>
+                <p class="badge text-bg-light">Weight: 50g</p>
+            </div>
+        </div>
+        <div>
+            <p style="font-weight: bold;">About product</p>
+            <span>
+                @Model.Product.Description
+            </span>
+        </div>
+        <hr />
+        <div>
+            <p style="font-weight: bold;">Seller's policy</p>
+            <div class="d-flex justify-content-between">
+                <p>Cash on Delivery</p>
+                <p style="color: #A1A1A1; font-style: italic;">Accepted</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p>Accept Returns</p>
+                <p style="color: #A1A1A1; font-style: italic;">3 days</p>
+            </div>
+        </div>
+    </div>
+    <div class=" col-lg-3">
+        <div class="rounded-2 p-4" style="font-size: small; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+            <h5>Order summary</h5>
+            <hr />
+            <div>
+                <span style="font-weight: bold;">Sent From</span>
+                <p style="color: #A1A1A1; font-style: italic;">07 Tân Trào, Quận 7</p>
+            </div>
+            <div>
+                <span style="font-weight: bold;">Sent To</span>
+                <p style="color: #A1A1A1; font-style: italic;">18 Minh Lập, Chơn Thành, Bình Phước</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p style="font-weight: bold;">Quantity</p>
+                <p style="color: #A1A1A1; font-style: italic;">1</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p style="font-weight: bold;">Size</p>
+                <p style="color: #A1A1A1; font-style: italic;">L</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p style="font-weight: bold;">Color</p>
+                <p style="color: #A1A1A1; font-style: italic;">Mix color</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p style="font-weight: bold;">Weight</p>
+                <p style="color: #A1A1A1; font-style: italic;">50(g)</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <p style="font-weight: bold;">Delivery</p>
+                <p style="color: #A1A1A1; font-style: italic;">(đ)21.000</p>
+            </div>
+            <button style="background-color:#C0E862;" type="button" class="btn w-100">Order Now</button>
+            <div class="text-center w-100">
+                <span><b>or</b></span>
+            </div>
+            <button type="button" class="btn btn-outline-dark w-100">Add to Cart</button>
+
+        </div>
+    </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Deal the Price</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>How much do you want to deal?</p>
+                <div class="d-flex justify-content-around">
+                    <button class="rounded-2 p-2 btn btn-outline-dark">
+                        <i style=" font-size: 48px;" class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                        <p class="my-1">(đ)90.000</p>
+                        <span>Reduce 5%</span>
+                    </button>
+                    <button class="rounded-2 p-2 btn btn-outline-dark">
+                        <i style=" font-size: 48px;" class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                        <p class="my-1">(đ)90.000</p>
+                        <span>Reduce 10%</span>
+                    </button>
+                    <button class="rounded-2 p-2 btn btn-outline-dark">
+                        <i style=" font-size: 48px;" class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                        <p class="my-1">(đ)90.000</p>
+                        <span>Reduce 15%</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+                <div style="flex: 1;">
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                           placeholder="Enter a price you want to deal...">
+                </div>
+                <button style="background-color:#C0E862;" type="button" class="btn"
+                        data-bs-dismiss="modal">
+                    <i class="fa fa-paper-plane-o"
+                       aria-hidden="true"></i>&nbsp;Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
