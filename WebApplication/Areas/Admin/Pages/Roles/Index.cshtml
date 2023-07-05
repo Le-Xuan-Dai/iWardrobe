@@ -3,18 +3,25 @@
 @{
 }
 
+<style>
+    .iconAction {
+        width: 2rem;
+        height: 2rem;
+    }
+</style>
+
 <h2>Role Management</h2>
 <partial name="_StatusMessage" model="@Model.StatusMessage" />
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
+            <th style="background-color: #C0E862;">
                 Role Name
             </th>
-            <th>
+            <th style="background-color: #C0E862;">
                 Actions
             </th>
         </tr>
@@ -27,9 +34,21 @@
                     @role.Name
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@role.Id">Edit</a> |
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <a class="btn btn-sm btn-success rounded-circle mx-1 iconAction" asp-page="./Edit" asp-route-id="@role.Id">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-sm btn-warning rounded-circle mx-1 iconAction" asp-page="./Details" asp-route-id="@role.Id">
+                            <i class="fa fa-info " aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger rounded-circle mx-1 iconAction"
+                               type="submit" asp-page="./Delete" asp-route-id="@role.Id">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                   @* <a asp-page="./Edit" asp-route-id="@role.Id">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@role.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@role.Id">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@role.Id">Delete</a>*@
                 </td>
             </tr>
         }

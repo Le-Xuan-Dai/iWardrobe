@@ -92,6 +92,7 @@ namespace WebApplication.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    var resultRole = await _userManager.AddToRolesAsync(user, new string[] { "Customer" });
                     _logger.LogInformation("User created a new account with password.");
 
                     // Tạo token để gửi confirm mail, và gọi phương thức sent mail

@@ -50,8 +50,4 @@
     <PackageReference Include="MimeKit" Version="4.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Users\" />
-  </ItemGroup>
-
 </Project>
