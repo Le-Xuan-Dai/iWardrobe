@@ -137,6 +137,7 @@ namespace WebApplication.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    var resultRole = await _userManager.AddToRolesAsync(user, new string[] { "Customer" });
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {

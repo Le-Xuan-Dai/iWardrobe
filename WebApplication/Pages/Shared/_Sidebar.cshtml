@@ -1,0 +1,44 @@
+﻿<nav class="my_navbar close">
+    <div class="logo-name">
+        <div class="logo-image">
+            <img src="~/img/logo-vertical.png" alt="">
+        </div>
+
+        <span class="logo_name">iWardrobe</span>
+    </div>
+
+    <div class="menu-items">
+        <ul class="nav-links p-0">
+            <li>
+                <a asp-area="" asp-page="/Index">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="link-name">Home</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-page="/Products/Index">
+                    <i class="fa-solid fa-store"></i>
+                    <span class="link-name">Your store</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-page="/Categories/Index">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span class="link-name">Categories</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-page="/Roles/Index">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span class="link-name">Role Management</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-page="/Users/Index">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span class="link-name">User Management</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
