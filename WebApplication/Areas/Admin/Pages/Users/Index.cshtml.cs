@@ -49,7 +49,8 @@ namespace WebApplication.Areas.Admin.Pages.Users
                               Id = u.Id,
                               UserName = u.UserName,
                               Fullname = u.Fullname,
-                              BrandName = u.BrandName
+                              BrandName = u.BrandName,
+                              Avatar = u.Avatar,
                           });
 
 

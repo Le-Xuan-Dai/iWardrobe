@@ -9,28 +9,27 @@ namespace BusinessObjects.Migrations
             //Seed data to database
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Fullname", "BrandName", "UserName", "Password", "Address", "RoleId", "Email", "IsDeleted" , "EmailConfirmed", "PhoneNumberConfirmed", "" +
-                "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
+                columns: new[] { "Id", "Fullname", "BrandName", "UserName", "Address", "Email" , "EmailConfirmed", "PhoneNumberConfirmed","TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
                 values: new object[,]
                 {
-                    {"US001","doviethoang","dirtycoin","hoangdv6","abc","District 9, Ho Chi Minh",1,"hoangdv6@gmail.com",false,true,false,false,false,0},
-                    {"US002","lexuandai","nike","hoangdv6","dailx","Nha Be , Ho Chi Minh",2,"dailx@gmail.com",false,true,false,false,false,0 },
-                    {"US003","huuvinh","adidas","vinhn","vinh","Binh Thanh District, Ho Chi Minh",2,"vinhhn@gmail.com",false,true,false,false,false,0 },
-                    {"US004","thinhphu","TeeLab","thinh","thinhp","District 9, Ho Chi Minh",2,"hoangdv6@gmail.com",false,false,false,false,false,0 },
-                    {"US005","oanhvtk","Adidas","oanhvtk","oanh","Tan Binh, Ho Chi Minh",2,"oanhvtk@gmail.com",false,true,false,false,false,0 },
+                    {"US001","doviethoang","dirtycoin","hoangdv6","District 9, Ho Chi Minh","hoangdv6@gmail.com",false,false,false,true,0},
+                    {"US002","lexuandai","nike","hoangdv6","Nha Be , Ho Chi Minh","dailx@gmail.com",false,false,false,true, 0 },
+                    {"US003","huuvinh","adidas","vinhn","Binh Thanh District, Ho Chi Minh","vinhhn@gmail.com",false,false,false,true, 0 },
+                    {"US004","thinhphu","TeeLab","thinh","District 9, Ho Chi Minh","hoangdv6@gmail.com",false,false,false,true, 0 },
+                    {"US005","oanhvtk","Adidas","oanhvtk","Tan Binh, Ho Chi Minh","oanhvtk@gmail.com",false,false,false,true, 0 },
 
                 }
                 );
 
             migrationBuilder.InsertData(
             table: "Users",
-            columns: new[] { "Id", "Fullname", "RoleId", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
+            columns: new[] { "Id", "Fullname", "Avatar", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
             values: new object[,]
             {
                 {
                     "600206da-3607-4b5a-af5b-a793c69e1be2",
                     "Admin",
-                    0,
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-9ilfMbF6KQupB03VPoG-gN8CEgYvgv2wgw&usqp=CAU",
                     "iwardrobefasion@gmail.com",
                     "IWARDROBEFASION@GMAIL.COM",
                     "iwardrobefasion@gmail.com",

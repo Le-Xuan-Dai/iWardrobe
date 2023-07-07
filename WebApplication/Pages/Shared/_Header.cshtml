@@ -1,4 +1,106 @@
-﻿<header class="header navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+﻿<style>
+    .title__background-color {
+        color: #fff;
+    }
+
+    .block__background--color {
+        background: #152534;
+    }
+
+    .img__margin {
+        margin-right: 1rem;
+    }
+
+    .sidebar-toggle {
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        transform: translateY(-50%);
+    }
+
+</style>
+
+<header class="header navbar navbar-expand-md fixed-top box-shadow"
+     style="background: #152534">
+    <div class="container d-flex">
+        <i class="fa-solid fa-bars sidebar-toggle"></i>
+        <div>
+            <a class="navbar-brand" href="#">
+                <img src="~/img/logo-horizontal.png"
+                     title="logo"
+                     width="150"
+                     height="50" />
+            </a>
+        </div>
+        <div class="collapse navbar-collapse justify-content-md-center">
+            <form class="d-flex w-50 align-items-center justify-content-center">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search product here..." />
+                    <div class="input-group-append">
+                        <button class="btn align-items-center"
+                                type="button"
+                                style="
+                                        background: #c0e862;
+                                        border-radius: 0 0.25rem 0.25rem 0;
+                                    ">
+                            <img src="../assets/fontawesome/svgs/regular/magnifying-glass-solid.svg"
+                                 title="logo"
+                                 width="20"
+                                 height="20" />
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex justify-content-center align-items-center text-center">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/fontawesome/svgs/regular/bag-shopping-solid.svg"
+                     title="logo"
+                     width="30"
+                     height="30"
+                     class="img__margin" />
+            </a>
+            <a class="navbar-brand" href="#">
+                <img src="../assets/fontawesome/svgs/regular/bell.svg"
+                     title="logo"
+                     width="30"
+                     height="30"
+                     class="img__margin" />
+            </a>
+            <div class="dropdown dropleft">
+                <a href="#"
+                   id="dropdownUser3"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    <img src="/assets/img/avatar.png"
+                         alt="img"
+                         width="35"
+                         height="35"
+                         class="rounded-circle" />
+                </a>
+                <ul class="dropdown-menu text-small shadow dropdown-menu-lg-end">
+                    <li>
+                        <a class="dropdown-item" href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Profile</a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                        <a class="dropdown-item" href="#">Sign out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+@*<header class="header navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
     <div class="container">
         <i class="fa-solid fa-bars sidebar-toggle"></i>
         <a class="navbar-brand" style="margin-left: 28px;" asp-area="" asp-page="/Index"><b>iWardrobe</b></a>
@@ -14,4 +116,4 @@
             <partial name="_LoginPartial" />
         </div>
     </div>
-</header>
+</header>*@
