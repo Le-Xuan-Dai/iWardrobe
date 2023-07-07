@@ -23,6 +23,31 @@ namespace BusinessObjects.Migrations
                 );
 
             migrationBuilder.InsertData(
+            table: "Users",
+            columns: new[] { "Id", "Fullname", "RoleId", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
+            values: new object[,]
+            {
+                {
+                    "600206da-3607-4b5a-af5b-a793c69e1be2",
+                    "Admin",
+                    0,
+                    "iwardrobefasion@gmail.com",
+                    "IWARDROBEFASION@GMAIL.COM",
+                    "iwardrobefasion@gmail.com",
+                    "IWARDROBEFASION@GMAIL.COM",
+                    false,
+                    "AQAAAAEAACcQAAAAEE0wXL8eJM6N9InsdebFtyqQQQ01zOkTEwShWpiWT8cSzSYSbM82eIHnA1HzfTQE4Q==",
+                    "RCFCMR2ON6W5JBXFQBA6IWTIKW5DLIT2",
+                    "5dd62dc2-6572-4db8-ab25-c1a1ecbddded",
+                    false,
+                    false,
+                    true,
+                    0
+                },
+            }
+            );
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "CategoryName", "UserId", "IsDeleted" },
                 values: new object[,]
@@ -108,21 +133,6 @@ namespace BusinessObjects.Migrations
             }
             });
 
-
-            /*            migrationBuilder.InsertData(
-                            table: "Products",
-                            columns: new[] { "CategoryId", "UserId", "ProductName", "Description", "ImageUrl", "Price", "CreationDate", "IsDeleted" },
-                            values: new object[,]
-                            {
-                                {1,"US001","Short Pan" ,"Short Pan from Dirty Coins" ,"https://bizweb.dktcdn.net/100/369/010/products/1-e95372e6-c524-4715-a07d-791c91ebe7ea.jpg?v=1656325763640",300000,"2023-06-30",false },
-                                {1,"US002","Nike AF1 Mid" ,"Short Pan from Dirty Coins" ,"https://cdn.vortexs.io/api/images/372b5357-2d66-4d6d-8b89-9bed5ea69bca/1920/w/50-giay-nike-air-force-1-mid-all-white-o-314195-113.jpeg",1600000,"2023-06-30",false },
-                                {1,"US004","Short TeeLab" ,"Short Local Band Unisex Special" ,"https://bizweb.dktcdn.net/thumb/large/100/415/697/products/ta9216-11k7zwk1-1-7fw9-hinh-mat-sau-0-e7d37221-9eeb-4978-868f-9193908bee74.jpg?v=1685936039000",190000,"2023-06-30",false },
-                                {1,"US003","Adidas Ultra Boots" ,"Adidas Ultra Boots Black-White" ,"https://giayxshop.vn/wp-content/uploads/2019/01/z3651678985400_f5c2a3afb17825c7244e3a4698bb798c-scaled.jpg",2500000,"2023-06-30",false },
-                                {1,"US005","Adidas Jacket" ,"" ,"https://cdn.vortexs.io/api/images/a69812de-f2c5-4243-abe0-72cf736ab4d7/1920/w/ao-khoac-jacket-adidas-firebird-track-red-hot-gf0211.jpeg",300000,"2023-06-30",false },
-
-                            }
-                            );*/
-
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "ProductId", "UserId", "Message", "IsDeleted" },
@@ -160,6 +170,35 @@ namespace BusinessObjects.Migrations
                     {"US002",2,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing",false },
               }
               );
+
+            migrationBuilder.InsertData(
+             table: "Roles",
+             columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
+             values: new object[,]
+             {
+                    {"b4f710f2-66d1-4661-8a5d-598d38733828","Supplier","SUPPLIER","1713a208-ff3b-4970-897f-8ef439d29fe0"  },
+                    {"be5ee07d-dd57-4421-95ad-c6b3bfaa686f","Admin","ADMIN","5dd62dc2-6572-4db8-ab25-c1a1ecbddded" },
+                    {"ce2e3464-4714-4f78-b2d7-8d861ec365c3","Customer","CUSTOMER","26caa190-0f4a-434c-a2e5-70d795eacaf2" },
+             }
+             );
+
+            migrationBuilder.InsertData(
+            table: "UserRoles",
+            columns: new[] { "UserId", "RoleId" },
+            values: new object[,]
+            {
+                {"600206da-3607-4b5a-af5b-a793c69e1be2","be5ee07d-dd57-4421-95ad-c6b3bfaa686f"  },
+            }
+            );
+
+            migrationBuilder.InsertData(
+           table: "UserLogins",
+           columns: new[] { "LoginProvider", "ProviderKey", "ProviderDisplayName", "UserId" },
+           values: new object[,]
+           {
+                {"Google","110471733882667666100", "Google", "600206da-3607-4b5a-af5b-a793c69e1be2" },
+           }
+           );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
