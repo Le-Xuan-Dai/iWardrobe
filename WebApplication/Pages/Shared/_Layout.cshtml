@@ -13,82 +13,15 @@
     <link rel="stylesheet" href="~/css/normalize.css" />
 </head>
 <body>
-    <nav class="close">
-        <div class="logo-name">
-            <div class="logo-image">
-                <img src="~/img/logo-vertical.png" alt="">
-            </div>
-
-            <span class="logo_name">iWardrobe</span>
-        </div>
-
-        <div class="menu-items">
-            <ul class="nav-links p-0">
-                <li class="nav-link-active">
-                    <a asp-area="" asp-page="/Index">
-                        <i class="fa-solid fa-house"></i>
-                        <span class="link-name">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-page="/Products/Index">
-                        <i class="fa-solid fa-store"></i>
-                        <span class="link-name">Your store</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-page="/Index">
-                        <i class="fa-solid fa-shapes"></i>
-                        <span class="link-name">Categories</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="Admin" asp-page="/Roles/Index">
-                        <i class="fa-solid fa-shapes"></i>
-                        <span class="link-name">Roles</span>
-                    </a>
-                </li>
-            </ul>
-
-            @*            <ul class="logout-mode p-0">
-            <li>
-            <a href="#">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span class="link-name">Logout</span>
-            </a>
-            </li>
-            </ul>*@
-        </div>
-    </nav>
-
+    <partial name="_Sidebar" />
     <section class="main">
-        <header class="header navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-            <div class="container">
-                <i class="fa-solid fa-bars sidebar-toggle"></i>
-                <a class="navbar-brand" style="margin-left: 28px;" asp-area="" asp-page="/Index"><b>iWardrobe</b></a>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Index">Categories</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </header>
+        <partial name="_Header" />
 
         <main class="body py-4">
             @RenderBody()
         </main>
 
-        <footer class="border-top footer">
-            <div class="container">
-                &copy; 2023 - WebApplication - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-        </footer>
+        <partial name="_Footer" />
     </section>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
