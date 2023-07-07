@@ -9,7 +9,6 @@
     }
 
     .img__margin {
-        margin-right: 1rem;
     }
 
     .footer {
@@ -17,94 +16,81 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        white-space: nowrap;
-        height: 170px;
+        height: 200px;
     }
 </style>
 
-<div class="block__background--color footer">
-    <div class="row">
-        <div class="col-sm-3">
-            <h3 class="title__background-color">About us</h3>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Blog</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">B2B Digital</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-sm-3">
-            <h3 class="title__background-color">Buy and Sell</h3>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Bill & Top up</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">COD</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Seller Education</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Offical Store List</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-sm-3">
-            <h3 class="title__background-color">Our Policies</h3>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Privacy Policy</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Term of Use</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Term of Order</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="mx-auto">
-                <img src="assets/img/logo.svg"
-                     title="logo"
-                     width="150"
-                     height="50" />
+<footer class="block__background--color footer pt-4">
+    <div class="container">
+        <div class="row w-100">
+            <div class="col-sm-3">
+                <h3 class="title__background-color">About us</h3>
+                <ul class="nav flex-column" style="font-size: 14px;">
+                    <li class=" mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Blog</a>
+                    </li>
+                    <li class=" mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">B2B Digital</a>
+                    </li>
+                </ul>
             </div>
-            <p class="title__background-color">
-                Curious about new developments and updates? Follow
-                our social media.
-            </p>
-            <div>
-                <img src="assets/fontawesome/svgs/brands/facebook.svg"
-                     title="logo"
-                     width="35"
-                     height="35"
-                     class="img__margin" />
-                <img src="assets/fontawesome/svgs/brands/instagram.svg"
-                     title="logo"
-                     width="35"
-                     height="35"
-                     class="img__margin" />
-                <img src="assets/fontawesome/svgs/brands/linkedin.svg"
-                     title="logo"
-                     width="35"
-                     height="35"
-                     class="img__margin" />
-                <img src="assets/fontawesome/svgs/brands/twitter.svg"
-                     title="logo"
-                     width="35"
-                     height="35"
-                     class="img__margin" />
+
+            <div class="col-sm-3">
+                <h3 class="title__background-color">Buy and Sell</h3>
+                <ul class="nav flex-column" style="font-size: 14px;">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Bill & Top up</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">COD</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Seller Education</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Offical Store List</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-3">
+                <h3 class="title__background-color">Our Policies</h3>
+                <ul class="nav flex-column" style="font-size: 14px;">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Privacy Policy</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Term of Use</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0" style="color: #A1A1A1;">Term of Order</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="mx-auto">
+                    <a class="navbar-brand" href="#">
+                        <img src="~/img/logo-horizontal.png"
+                             title="logo"
+                             width="150"
+                             height="50" />
+                    </a>
+                </div>
+                <p style="color: #A1A1A1; font-size: 14px;">
+                    Curious about new developments and updates? Follow our social media.
+                </p>
+                <div class="d-flex">
+                    <i style="font-size: 24px;" class="fa-brands fa-facebook mx-2"></i>
+                    <i style="font-size: 24px;" class="fa-brands fa-instagram mx-2"></i>
+                    <i style="font-size: 24px;" class="fa-brands fa-linkedin mx-2"></i>
+                    <i style="font-size: 24px;" class="fa-brands fa-twitter mx-2"></i>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+</footer>
 
 @*<footer class="border-top footer">
     <div class="container">
