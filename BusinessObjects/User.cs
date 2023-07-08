@@ -21,6 +21,11 @@ namespace BusinessObjects
 
         public string Avatar { get; set; }
 
+        [StringLength(12, MinimumLength = 12)]
+        public string IdentificationCode { get; set; }
+
+        public string[] IdentificationCardImgs { get; set; }
+
         public virtual List<Product>? Products { get; set; }
 
         public virtual List<Order>? Orders { get; set; }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(IWardrobeContext))]
-    [Migration("20230707092519_seedingData")]
+    [Migration("20230708164155_seedingData")]
     partial class seedingData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -263,6 +263,13 @@ namespace BusinessObjects.Migrations
                     b.Property<string>("Fullname")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("IdentificationCardImgs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentificationCode")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()

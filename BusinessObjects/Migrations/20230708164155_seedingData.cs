@@ -9,7 +9,7 @@ namespace BusinessObjects.Migrations
             //Seed data to database
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Fullname", "BrandName", "UserName", "Address", "Email" , "EmailConfirmed", "PhoneNumberConfirmed","TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
+                columns: new[] { "Id", "Fullname", "BrandName", "UserName", "Address", "Email", "EmailConfirmed", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
                 values: new object[,]
                 {
                     {"US001","doviethoang","dirtycoin","hoangdv6","District 9, Ho Chi Minh","hoangdv6@gmail.com",false,false,false,true,0},
