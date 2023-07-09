@@ -2,14 +2,119 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
- @*   @if (hasExternalLogins)
-    {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+
+<style>
+    .menu-items li {
+        list-style: none;
+        border-radius: 5px;
+        margin-bottom: 8px;
     }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>*@
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
-</ul>
+
+        .menu-items li a {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            text-decoration: none;
+            position: relative;
+        }
+
+            .menu-items li a i {
+                font-size: 20px;
+                min-width: 45px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #A1A1A1;
+            }
+
+            .menu-items li a .link-name {
+                font-size: 16px;
+                color: #A1A1A1;
+                transition: all 0.5s ease;
+            }
+
+        .menu-items li:hover {
+            background-color: #C0E862;
+            transition: all 0.5s ease;
+        }
+
+    .nav-link-active {
+        background-color: #C0E862;
+    }
+
+        .nav-link-active > a > i,
+        .nav-link-active > a > .link-name {
+            color: #152534 !important;
+        }
+
+    .nav-links li a:hover i,
+    .nav-links li a:hover .link-name {
+        color: #152534;
+    }
+</style>
+<div class="menu-items">
+    <ul class="nav-links p-0">
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+                <span class="link-name">Profile</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">
+                <span class="link-name">Email</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+                <span class="link-name">Password</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+                <span class="link-name">Personal data</span>
+            </a>
+        </li>
+        @*   @if (hasExternalLogins)
+        {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        }
+        <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>*@
+
+    </ul>
+</div>
+
+
+
+@*<ul class="nav-links p-0">
+    <li>
+        <a asp-area="" asp-page="/Index">
+            <i class="fa-solid fa-house"></i>
+            <span class="link-name">Home</span>
+        </a>
+    </li>
+    <li>
+        <a asp-area="" asp-page="/Products/Index">
+            <i class="fa-solid fa-store"></i>
+            <span class="link-name">Your store</span>
+        </a>
+    </li>
+    <li>
+        <a asp-area="" asp-page="/Categories/Index">
+            <i class="fa-solid fa-shapes"></i>
+            <span class="link-name">Categories</span>
+        </a>
+    </li>
+    <li>
+        <a asp-area="Admin" asp-page="/Roles/Index">
+            <i class="fa-solid fa-shapes"></i>
+            <span class="link-name">Role Management</span>
+        </a>
+    </li>
+    <li>
+        <a asp-area="Admin" asp-page="/Users/Index">
+            <i class="fa-solid fa-shapes"></i>
+            <span class="link-name">User Management</span>
+        </a>
+    </li>
+</ul>*@
