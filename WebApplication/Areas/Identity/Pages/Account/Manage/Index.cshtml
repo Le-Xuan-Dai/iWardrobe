@@ -38,22 +38,14 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-lg-3">
-                        <label class="mb-lg-1" for="brandName">Full name</label>
-                        <input class="form-control w-100"
-                               type="text"
-                               name="brandName"
-                               placeholder="Enter Value"
-                               value=""
-                               required />
+                        <label class="mb-lg-1">Full name</label>
+                        <input asp-for="Input.Fullname" class="form-control w-100" />
+                        <span asp-validation-for="Input.Fullname" class="text-danger"></span>
                     </div>
                     <div class="mb-lg-3">
                         <label class="mb-lg-1" for="brandName">Brand name</label>
-                        <input class="form-control w-100"
-                               type="text"
-                               name="brandName"
-                               placeholder="Enter Value"
-                               value=""
-                               required />
+                        <input asp-for="Input.BrandName" class="form-control w-100" />
+                        <span asp-validation-for="Input.BrandName" class="text-danger"></span>
                     </div>
                     @* <div class="mb-lg-3">
                     <label class="mb-lg-1" for="dob">Date of birth</label>
@@ -66,32 +58,20 @@
                     </div>*@
                     <div class="mb-lg-3">
                         <label class="mb-lg-1" for="idCode">Identification Code</label>
-                        <input class="form-control w-100"
-                               type="number"
-                               name="idCode"
-                               placeholder="Enter Value"
-                               value=""
-                               required />
+                        <input asp-for="Input.IdentificationCode" class="form-control w-100" />
+                        <span asp-validation-for="Input.IdentificationCode" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col">
                     <div class="mb-lg-3">
                         <label class="mb-lg-1" for="phone">Phone number</label>
-                        <input class="form-control w-100"
-                               type="text"
-                               name="phone"
-                               placeholder="Enter Value"
-                               value=""
-                               required />
+                        <input asp-for="Input.PhoneNumber" class="form-control w-100" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                     </div>
                     <div class="mb-lg-3">
                         <label class="mb-lg-1" for="address">Address</label>
-                        <input class="form-control w-100"
-                               type="text"
-                               name="address"
-                               placeholder="Enter Value"
-                               value=""
-                               required />
+                        <input asp-for="Input.Address" class="form-control w-100" />
+                        <span asp-validation-for="Input.Address" class="text-danger"></span>
                     </div>
 
                 </div>

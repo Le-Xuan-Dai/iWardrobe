@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Services;
 
 namespace WebApplication.Areas.Identity.Pages.Account.Manage
 {
@@ -16,13 +17,15 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly UserServices _userServices;
 
         public IndexModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager, UserServices userServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userServices = userServices;
         }
 
         public string Username { get; set; }
@@ -35,21 +38,42 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [StringLength(255)]
+            public string Fullname { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Your wardrobe'brand")]
+            [StringLength(255, MinimumLength = 3, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
+            public string BrandName { get; set; }
+
+            [Display(Name = "Identification code")]
+            [RegularExpression("^[0-9]+$", ErrorMessage = "Only numeric characters are allowed.")]
+            [StringLength(12, MinimumLength = 12, ErrorMessage = "The must be at 12 characters long.")]
+            public string IdentificationCode { get; set; }
+
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            public string Avatar { get; set; }
         }
 
-        private async Task LoadAsync(User user)
+        private void LoadAsync(User user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var data = _userServices.FirstOrDefault(u => u.UserName == user.UserName);
 
-            Username = userName;
+            Username = data.UserName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Fullname = data.Fullname,
+                PhoneNumber = data.PhoneNumber,
+                BrandName = data.BrandName,
+                Address = data.Address,
+                IdentificationCode = data.IdentificationCode,
+                Avatar = data.Avatar,
             };
         }
 
@@ -61,7 +85,7 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            await LoadAsync(user);
+            LoadAsync(user);
             return Page();
         }
 
@@ -75,7 +99,7 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
-                await LoadAsync(user);
+                LoadAsync(user);
                 return Page();
             }
 
