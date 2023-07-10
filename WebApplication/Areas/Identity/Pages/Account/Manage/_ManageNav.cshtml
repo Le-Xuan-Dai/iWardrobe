@@ -8,6 +8,7 @@
         list-style: none;
         border-radius: 5px;
         margin-bottom: 8px;
+        padding: 0px 12px;
     }
 
         .menu-items li a {
@@ -68,6 +69,11 @@
         <li class="nav-item">
             <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
                 <span class="link-name">Password</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./ChoosePlan">
+                <span class="link-name">Choose Plan</span>
             </a>
         </li>
         <li class="nav-item">

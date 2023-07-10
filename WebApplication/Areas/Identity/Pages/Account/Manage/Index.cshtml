@@ -1,4 +1,4 @@
-@page
+@page "/profile"
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
@@ -55,14 +55,14 @@
                                value=""
                                required />
                     </div>
-                   @* <div class="mb-lg-3">
-                        <label class="mb-lg-1" for="dob">Date of birth</label>
-                        <input class="form-control w-100"
-                               type="date"
-                               name="dob"
-                               value=""
-                               placeholder="Enter Value"
-                               required />
+                    @* <div class="mb-lg-3">
+                    <label class="mb-lg-1" for="dob">Date of birth</label>
+                    <input class="form-control w-100"
+                    type="date"
+                    name="dob"
+                    value=""
+                    placeholder="Enter Value"
+                    required />
                     </div>*@
                     <div class="mb-lg-3">
                         <label class="mb-lg-1" for="idCode">Identification Code</label>
@@ -96,8 +96,11 @@
 
                 </div>
             </div>
-            <div>
-                <button class="btn btn-outline-success" type="submit">Submit form</button>
+            <div class="text-right">
+                <button type="submit" class="btn" style="background-color:#C0E862;">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+                    Submit
+                </button>
             </div>
         </form>
     </div>
