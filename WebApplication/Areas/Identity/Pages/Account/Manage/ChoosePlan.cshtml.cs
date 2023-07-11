@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApplication.Pages
+namespace WebApplication.Areas.Identity.Pages.Account.Manage
 {
-    public class IndexModel : PageModel
+    public class ChoosePlanModel : PageModel
     {
         public void OnGet()
         {

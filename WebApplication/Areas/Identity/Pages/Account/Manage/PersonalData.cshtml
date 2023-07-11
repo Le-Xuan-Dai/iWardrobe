@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/settings/personal-data"
 @model PersonalDataModel
 @{
     ViewData["Title"] = "Personal Data";
@@ -13,12 +13,20 @@
         <p>
             <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
         </p>
-        <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
-            <button class="btn btn-primary" type="submit">Download</button>
-        </form>
-        <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-secondary">Delete</a>
-        </p>
+        <div class="d-flex align-items-center justify-content-around">
+            <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
+                <button type="submit" class="btn" style="background-color:#C0E862;">
+                    <i class="fa-regular fa-circle-down"></i>&nbsp;
+                   Download
+                </button>
+            </form>
+            <p>
+                <a id="delete" asp-page="DeletePersonalData" class="btn btn-outline-danger">
+                    <i class="fa-solid fa-trash-can"></i>&nbsp; Delete
+                </a>
+            </p>
+        </div>
+       
     </div>
 </div>
 
