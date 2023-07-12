@@ -1,6 +1,6 @@
 ﻿const listOfItems = document.querySelectorAll(".item");
 const config = { childList: true, subtree: true };
-var quantity = document.querySelector('.quantity');
+var cartId = document.querySelector('.cartId');
 var price = document.querySelector('.price');
 
 listOfItems.forEach((item) => {
@@ -38,13 +38,13 @@ function hideOtherCheckbox(currentCheckbox, quantity, totalPrice, quantityHtml, 
 
     listOfCheckbox.forEach(checkbox => {
         if (currentCheckbox.checked) {
-            quantityHtml.value = quantity;
-            console.log(quantityHtml.value);
+            cartId.value = quantity;
+            console.log(cartId.value);
             if (checkbox !== currentCheckbox) {
                 checkbox.style.visibility = 'hidden';
             }
         } else {
-            quantityHtml.value = 0;
+            cartId.value = 0;
             priceHtml.value = 0;
             console.log(quantityHtml.value);
 

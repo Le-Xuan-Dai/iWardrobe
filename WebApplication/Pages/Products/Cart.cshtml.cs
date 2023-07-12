@@ -34,7 +34,7 @@ namespace WebApplication.Pages.Products
         public List<Product> listCartProduct { get; set; }
         public List<CartDetail> CartDetail { get; set; }
         [BindProperty]
-        public int quantityUpdate { get; set; }
+        public string quantityUpdateAction { get; set; }
         [BindProperty]
         public int cartDetailId { get; set; }
         [BindProperty]
@@ -82,7 +82,18 @@ namespace WebApplication.Pages.Products
         {
             CartDetail cartDetail = new CartDetail();
             cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartDetailId).FirstOrDefaultAsync();
-            cartDetail.Quantity = quantityUpdate; 
+            if (quantityUpdateAction.Equals("Increase"))
+            {
+                cartDetail.Quantity++;
+            }
+            else
+            {
+                cartDetail.Quantity--;
+                if (cartDetail.Quantity == 0)
+                {
+                    await _cartDetailServices.Delete(cartDetail);
+                }
+            }
 
             await _cartDetailServices.Update(cartDetail);
             return Page();
