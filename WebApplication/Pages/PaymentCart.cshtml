@@ -1,0 +1,271 @@
+﻿@page
+@model WebApplication.Pages.PaymentCartModel
+@{
+    ViewData["Title"] = "PaymentandCart";
+}
+<style>
+    .item-wrapper {
+        height: 250px;
+        overflow-y: scroll;
+    }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .item-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+    .voucher-wrapper {
+        z-index: 5;
+        border-radius: 10px;
+        background-color: rgb(121, 230, 31);
+        border-radius: 10px;
+        border: 2px solid #333;
+        box-shadow: 1px 1px 6px 7px rgba(0, 13, 0, 0.4);
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+        text-align: center;
+        position: fixed;
+        /* Stay in place */
+        padding: 50px;
+        overflow-y: scroll;
+    }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .voucher-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+    .voucher-item__image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .btn-close {
+        background-color: rgb(121, 230, 31);
+    }
+
+    .voucher-item {
+        display: flex;
+        background-color: #fff;
+        border: 2px solid black;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+    .voucher-list {
+        padding: 0 50px 0 50px;
+    }
+
+    .payment-list {
+        width: 50%;
+        height: auto;
+        border: 2px solid black;
+        padding: 20px;
+        position: relative;
+    }
+
+        .payment-list::before {
+            content: "Payment Method";
+            position: absolute;
+            background-color: #fff;
+            bottom: 80px;
+        }
+
+    .payment-item__method {
+        width: 50px;
+        height: 50px;
+        padding: 2px;
+        cursor: pointer;
+    }
+
+    .note-item {
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+
+    .chosen-payment {
+        border: 2px solid blue;
+        border-radius: 10px;
+    }
+</style>
+
+    <section class="h-100 h-custom" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <h5 class="mb-3">
+                                        <a href="#!" class="text-body">
+                                            <i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping
+                                        </a>
+                                    </h5>
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div>
+                                            <p class="mb-1">Shopping cart</p>
+                                            <p class="mb-0">You have 4 items in your cart</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="item-wrapper">
+                                        @foreach (var cart in @Model.CartDetail)
+                                        {
+                                            <div class="card mb-3 item">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <div>
+                                                                <img src="@Html.DisplayFor(modal => cart.Product.ImageUrls)"
+                                                                 class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                            </div>
+                                                            <div class="ms-3">
+                                                                <h5>@Html.DisplayFor(modal => cart.Product.ProductName)</h5>
+                                                                <p class="small mb-0">@Html.DisplayFor(modal => cart.Product.Description)</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <div style="width: 50px;">
+                                                                <h5 class="fw-normal mb-0">@Html.DisplayFor(modal => cart.Quantity)</h5>
+                                                            </div>
+                                                            <div style="width: 80px;">
+                                                                <h5 class="mb-0 price">$900</h5>
+                                                            </div>
+                                                            <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                            <form action="">
+                                                                <input type="checkbox" name="" id="" class="buy-checking">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="btn-voucher__wrapper d-flex align-item-center mt-3">
+                                        <button class="btn btn-success mb-3 btn-choose-voucher ">Choose voucher</button>
+                                        <span style="margin-left:50px;">Your voucher ...... have been applied successfully</span>
+                                    </div>
+                                    <div class="payment-wrapper w-100 d-flex justify-content-center ">
+                                        <div class="payment-list d-flex justify-content-around">
+                                            <img src="data:image/png;base64,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"
+                                                 alt="" class="payment-item__method chosen-payment">
+                                            <img src="data:image/png;base64,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"
+                                                 alt="" class="payment-item__method">
+                                            <img src="data:image/png;base64,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"
+                                                 alt="" class="payment-item__method">
+                                        </div>
+                                    </div>
+                                    <div class="note-wrapper mt-4">
+                                        <textarea id="user_note" name="user_note" rows="3" cols="40" class="w-100 p-4 note-item"
+                                                  placeholder="Note ....."></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="card text-white rounded-3" style=" background-color: rgb(121, 230, 31);">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <h5 class="mb-0">Invoice details</h5>
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" class="img-fluid rounded-3"
+                                                     style="width: 45px;" alt="Avatar">
+                                            </div>
+                                            <form class="mt-4">
+                                                <div class="form-outline form-white mb-2">
+                                                    <label class="form-label" for="typeName">Invoice's Owner Name</label>
+                                                    <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                                                           placeholder="Cardholder's Name" />
+
+                                                </div>
+
+                                                <div class="form-outline form-white mb-2">
+                                                    <label class="form-label" for="typeText">Phone Number</label>
+                                                    <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                                                           placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                                                </div>
+                                                <div class="form-outline form-white mb-4">
+                                                    <label class="form-label" for="typeText">Delivery Address</label>
+                                                    <input type="text" id="typeText" class="form-control form-control-lg" size="5"
+                                                           placeholder="Your address ...." minlength="19" maxlength="19" />
+                                                </div>
+                                                <!-- <div class="row mb-4">
+                                                  <div class="col-md-6">
+                                                    <div class="form-outline form-white">
+                                                      <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
+                                                        size="7" id="exp" minlength="7" maxlength="7" />
+                                                      <label class="form-label" for="typeExp">Expiration</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <div class="form-outline form-white">
+                                                      <input type="password" id="typeText" class="form-control form-control-lg"
+                                                        placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                                      <label class="form-label" for="typeText">Cvv</label>
+                                                    </div>
+                                                  </div>
+                                                </div> -->
+
+                                            </form>
+
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-2">Discount from voucher</p>
+                                                <p class="mb-2 discount">$4798.00</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-2">Shipping</p>
+                                                <p class="mb-2 shipping"></p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <p class="mb-2">Total(Incl. taxes)</p>
+                                                <p class="mb-2 total">$4818.00</p>
+                                            </div>
+
+                                            <button type="button" class="btn btn-primary btn-block btn-lg  text-white">
+                                                <div class="d-flex justify-content-between">
+                                                    <form class="hidden-form">
+                                                        <input type="hidden" name="owner_name">
+                                                        <input type="hidden" name="phone_number">
+                                                        <input type="hidden" name="address">
+                                                        <input type="hidden" name="total">
+                                                        <span>Checkout<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                    </form>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center h-100 position-relative d-none vouchers">
+                <div class="voucher-wrapper ">
+                    <div class="modal-header">
+                        <h5 class=" voucher-title modal-title" id="exampleModalLabel">Apply your voucher</h5>
+                        <span aria-hidden="true" style="font-size:1.5rem; cursor:pointer;" class="btn-close"></span>
+                    <div class="voucher-list d-flex justify-content-between flex-wrap">
+                        </div>
+                        @foreach (var voucher in Model.Voucher)
+                        {
+                            <div class="voucher-item col-5 d-flex justify-content-around align-items-center ">
+                                <img src="https://product.hstatic.net/1000008082/product/gift-voucher-200k_839a834d702545529312398fd61f76d7_grande.png"
+                                 class="img-fluid img-thumbnail voucher-item__image" alt="voucher" />
+                                <div class="voucher-item__info ">
+                                    <p class="voucher-item__info-title text-left">@Html.DisplayFor(modal => voucher.VoucherName)</p>
+                                    <p class="voucher-item__info-title text-left">Discount @Html.DisplayFor(modal => voucher.Value)%</p>
+                                </div>
+                                <button class="btn btn-primary">Apply</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
