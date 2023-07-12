@@ -20,20 +20,18 @@ namespace WebApplication.Pages.Products
         private readonly CartDetailServices _cartDetailServices;
         private readonly UserManager<User> _userManager;
 
-        [BindProperty]
-        public CartDetail cartDetail { get; set; }
-
-        public List<CartDetail> listUserCart { get; set; }
+        
         public DetailsModel(ProductServices productServices, CartDetailServices cartDetailServices, UserManager<User> userManager)
         {
             _productServices = productServices;
             _cartDetailServices = cartDetailServices;
             _userManager = userManager;
         }
+        public List<CartDetail> listUserCart { get; set; }
 
-        public Product Product { get; set; }
         [BindProperty]
-         public CartDetail CartDetail { get; set; }
+        public CartDetail cartDetail { get; set; }
+        public Product Product { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             var user = _userManager.GetUserAsync(this.User);
@@ -52,27 +50,30 @@ namespace WebApplication.Pages.Products
             return Page();
         }
 
-       public async Task<IActionResult> OnPostAddToCartAsync()
+        public async Task<IActionResult> OnPostAddToCartAsync()
         {
-            CartDetail cartCheck = new CartDetail();
-            //CartDetail cartDetail = new CartDetail();
             var user = await _userManager.GetUserAsync(this.User);
-            listUserCart = await _cartDetailServices.GetAll().Where(c => c.UserId == user.Id).ToListAsync();
-          //  cartCheck =  listUserCart.Where(c => c.ProductId == cartDetail.ProductId).FirstOrDefault();
-
-          //  if(cartCheck != null)
-          //  {
-          //      cartCheck.Quantity++;
-           //     await _cartDetailServices.Update(cartCheck);
-//
-           // }
-//else
-          //  {
+            try
+            {
+                listUserCart = await _cartDetailServices.GetAll().Where(c => c.UserId == user.Id).ToListAsync();
+                if (listUserCart != null)
+                {
+                    var pro = listUserCart.Where(u => u.ProductId == cartDetail.ProductId).FirstOrDefault();
+                    if (pro != null)
+                    {
+                        pro.Quantity++;
+                        await _cartDetailServices.Update(pro);
+                        return Page();
+                    }
+                }
                 cartDetail.UserId = user.Id;
                 cartDetail.Quantity = 1;
                 await _cartDetailServices.Create(cartDetail);
-           // }
+            }
+            catch (Exception e)
+            {
 
+            }
             return RedirectToPage("./Cart");
         }
     }

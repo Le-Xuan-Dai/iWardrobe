@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace WebApplication.Pages.Products
         private readonly UserServices _userServices;
         private readonly UserManager<User> _userManager ;
         private readonly ProductServices _productServices;
+
         public CartModel(CartDetailServices cartDetailServices, UserServices userServices, UserManager<User> userManager, ProductServices productServices)
         {
             _cartDetailServices = cartDetailServices;
@@ -24,6 +26,10 @@ namespace WebApplication.Pages.Products
             _userManager = userManager;
             _productServices = productServices;
         }
+
+        [BindProperty]
+        public CartDetail cartDetail { get; set; }
+
         public List<Product> RandomProduct { get; set; }
         public List<Product> listCartProduct { get; set; }
         public List<CartDetail> CartDetail { get; set; }
@@ -60,13 +66,7 @@ namespace WebApplication.Pages.Products
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
-        {
-            TempData["Product_Payment"] = DetailCart;
-
-            return Page();
-
-        }
+        
 
         public List<Product> GetListProductInCart(List<CartDetail> listCart)
         {
@@ -86,11 +86,6 @@ namespace WebApplication.Pages.Products
 
             await _cartDetailServices.Update(cartDetail);
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostPaymentAsync()
-        {
-            return RedirectToPage("/Payment",DetailCart);
         }
     }
 }

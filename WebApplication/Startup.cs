@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Org.BouncyCastle.Pqc.Crypto.Lms;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace WebApplication
             {
                 routeOptions.LowercaseQueryStrings = true;
             });
+            services.AddDbContext<IWardrobeContext>(ServiceLifetime.Transient);
             services.AddDbContext<IWardrobeContext>(options =>
             {
                 string connectString = Configuration.GetConnectionString("IWardrobeConnection");
