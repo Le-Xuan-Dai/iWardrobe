@@ -68,7 +68,7 @@
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                       <p class="mb-1">Shopping cart</p>
-                      <!--<p class="mb-0">You have  items in your cart</p>-->
+                                        <p class="mb-0">You have items @Model.CartDetail.Count() in your cart</p>
                     </div>
                   </div>
                   <div class="item-wrapper">
@@ -83,7 +83,7 @@
                                                     <div class="d-flex justify-content-between">
                                                         <div class="d-flex flex-row align-items-center">
                                                             <div>
-                                                                <img src="@Html.DisplayFor(model => cart.Product.ImageUrls)"
+                                                                <img src="https://5sfashion.vn/storage/upload/images/products/aapk25ecXeAwl0Oy2zPoCmpnG5SccYxMW6YEBCvT.jpg"
                                                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                             </div>
                                                             <div class="ms-3">
@@ -96,7 +96,7 @@
                                                                 <form method="post">
                                                                     <input type="hidden" asp-for="@Model.cartDetailId"  value="@cart.CartDetailId"/>
                                                                     <input type="hidden" asp-for="@Model.quantityUpdateAction" value="Decrease" class="quantity" />
-                                                                    <button class="decrease-btn btn btn-adjustment" asp-page-handler="UpdateQuantity" >+</button>
+                                                                    <button class="decrease-btn btn btn-adjustment" asp-page-handler="UpdateQuantity" >-</button>
                                                                 </form>
                                                                 <h5 class="fw-normal mb-0 amount">@Html.DisplayFor(model => cart.Quantity)</h5>
                                                                 <form method="post">
@@ -107,10 +107,11 @@
                                                             </div>
                                                             <div style="width: 100px;">
                                                                 <span class="original-price" style="display:none;">@Html.DisplayFor(model => cart.Product.SellPrice)</span>
-                                                                <h5 class="mb-0 price" style="margin-right:10px;">(đ) @Html.DisplayFor(model => cart.Product.SellPrice)</h5>
+
+                                                                <h5 class="mb-0 price" style="margin-right:10px;"> @Html.DisplayFor(model => cart.Product.SellPrice)</h5>
                                                             </div>
                                                             <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
-                                                            <span style="display:none" class="cartId">@Html.DisplayFor(model => cart.CartDetailId)</span>
+                                                            <span style="display:none" class="cartIdhidden">@Html.DisplayFor(model => cart.CartDetailId)</span>
                                                             <form action="">
                                                                 <input type="checkbox" name="" id="" class="buy-checking">
                                                             </form>
@@ -123,8 +124,8 @@
                   </div>
                   <div class="d-flex justify-content-center">
                     <form method="post" >
-                         <input type="hidden" name="cartId" class="cartId">
-                        <button type="submit" class="btn " style="width:200px;background-color:rgb(154 205 50);font-weight:bold;" asp-page-handler="/Payment">Payment</button>
+                         <input type="hidden" class="cartId" asp-for="@Model.paymentCart">
+                        <button type="submit" class="btn " style="width:200px;background-color:rgb(154 205 50);font-weight:bold;" asp-page-handler="Payment">Payment</button>
                     </form>
                   </div>
                   <div class="d-flex justify-content-center mt-4 mb-5 " style="font-size:1.7rem; font-weight:bold;">

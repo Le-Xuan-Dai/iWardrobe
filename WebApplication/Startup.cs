@@ -47,6 +47,7 @@ namespace WebApplication
             services.AddScoped<UserServices>();
             services.AddScoped<CategoryServices>();
             services.AddScoped<CartDetailServices>();
+            services.AddScoped<OrderServices>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IWardrobeContext>()

@@ -63,6 +63,8 @@ namespace WebApplication.Pages.Products
                     {
                         pro.Quantity++;
                         await _cartDetailServices.Update(pro);
+                        //Reload data from database 
+                        
                         return Page();
                     }
                 }

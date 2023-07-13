@@ -18,13 +18,14 @@ namespace WebApplication.Pages.Products
         private readonly UserServices _userServices;
         private readonly UserManager<User> _userManager ;
         private readonly ProductServices _productServices;
-
-        public CartModel(CartDetailServices cartDetailServices, UserServices userServices, UserManager<User> userManager, ProductServices productServices)
+        private readonly OrderServices _orderServices;
+        public CartModel(CartDetailServices cartDetailServices, UserServices userServices, UserManager<User> userManager, ProductServices productServices, OrderServices orderServices)
         {
             _cartDetailServices = cartDetailServices;
             _userServices = userServices;
             _userManager = userManager;
             _productServices = productServices;
+            _orderServices = orderServices;
         }
 
         [BindProperty]
@@ -42,6 +43,8 @@ namespace WebApplication.Pages.Products
 
         public List<Voucher> Voucher { get; set; }
 
+        [BindProperty]
+        public int paymentCart { get; set; }
         public async Task<IActionResult> OnGet()
         {
             var userClaim = await _userManager.GetUserAsync(this.User);
@@ -80,8 +83,10 @@ namespace WebApplication.Pages.Products
         
         public async Task<IActionResult> OnPostUpdateQuantityAsync() 
         {
-            CartDetail cartDetail = new CartDetail();
-            cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartDetailId).FirstOrDefaultAsync();
+            var userClaim = await _userManager.GetUserAsync(this.User);
+            User user = _userServices.FirstOrDefault(u => u.Id == userClaim.Id);
+
+            CartDetail cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartDetailId).FirstOrDefaultAsync();
             if (quantityUpdateAction.Equals("Increase"))
             {
                 cartDetail.Quantity++;
@@ -92,11 +97,49 @@ namespace WebApplication.Pages.Products
                 if (cartDetail.Quantity == 0)
                 {
                     await _cartDetailServices.Delete(cartDetail);
+                    CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == userClaim.Id).ToListAsync();
+                    listCartProduct = GetListProductInCart(CartDetail);
+                    RandomProduct = await _productServices.GetAll().ToListAsync();
+                    return Page();
+
                 }
             }
 
             await _cartDetailServices.Update(cartDetail);
+            CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == userClaim.Id).ToListAsync();
+            listCartProduct = GetListProductInCart(CartDetail);
+            RandomProduct = await _productServices.GetAll().ToListAsync();
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostPayment()
+        {
+            var cartData = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == paymentCart).FirstOrDefaultAsync();
+            if(paymentCart != null)
+            {
+                Order order = new Order();
+                order.UserId = cartData.UserId;
+                order.ProductId = cartData.ProductId;
+                order.DeliverMethod = "Self-transport";
+                order.DeliverDetais = "Nothing";
+                order.PaymentMethod = "Pay directly";
+                order.PaymentDetais = "Nothing";
+                order.OrderStatus = "Preparing";
+
+                await _orderServices.Create(order);
+
+                return RedirectToPage("./Index");
+            }
+            return Page();
+        }
+
+        public async void loadDataToPage()
+        {
+            var userClaim = await _userManager.GetUserAsync(this.User);
+            CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == userClaim.Id).ToListAsync();
+            User user = _userServices.FirstOrDefault(u => u.Id == userClaim.Id);
+            listCartProduct = GetListProductInCart(CartDetail);
+            RandomProduct = await _productServices.GetAll().ToListAsync();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿const listOfItems = document.querySelectorAll(".item");
 const config = { childList: true, subtree: true };
-var cartId = document.querySelector('.cartId');
 var price = document.querySelector('.price');
 
 listOfItems.forEach((item) => {
@@ -9,7 +8,7 @@ listOfItems.forEach((item) => {
     const pricePerItem = item.querySelector(".original-price").innerHTML;
     var currentAmount = item.querySelector(".amount").innerHTML;
     var checkboxIsChecked = item.querySelector(".buy-checking");
-
+    var cartIdhidden = item.querySelector(".cartIdhidden").innerHTML;
 
 
     increaseBtn.addEventListener("click", () => {
@@ -27,26 +26,28 @@ listOfItems.forEach((item) => {
 
     });
     checkboxIsChecked.addEventListener("change", (e) => {
-        hideOtherCheckbox(checkboxIsChecked, currentAmount, pricePerItem * currentAmount, quantity, price);
+        hideOtherCheckbox(checkboxIsChecked, cartIdhidden, pricePerItem * currentAmount, document.querySelector('.cartId'), price);
     })
 
 });
 
 
-function hideOtherCheckbox(currentCheckbox, quantity, totalPrice, quantityHtml, priceHtml) {
+function hideOtherCheckbox(currentCheckbox, cartIdhidden, totalPrice, cartId, priceHtml) {
     const listOfCheckbox = document.querySelectorAll('.buy-checking');
+    var cartId = document.querySelector('.cartId');
 
     listOfCheckbox.forEach(checkbox => {
         if (currentCheckbox.checked) {
-            cartId.value = quantity;
+
+            cartId.value = cartIdhidden;
+            priceHtml.value = totalPrice;
             console.log(cartId.value);
             if (checkbox !== currentCheckbox) {
                 checkbox.style.visibility = 'hidden';
             }
         } else {
             cartId.value = 0;
-            priceHtml.value = 0;
-            console.log(quantityHtml.value);
+            console.log(cartId.value);
 
             checkbox.style.visibility = 'visible';
         }
