@@ -16,10 +16,12 @@ namespace WebApplication.Pages
     {
         protected readonly UserManager<User> _userManager;
         protected readonly UserServices _userServices;
-        public RegisterSellerModel(UserManager<User> userManager, UserServices userServices)
+        private readonly SignInManager<User> _signInManager;
+        public RegisterSellerModel(UserManager<User> userManager, UserServices userServices, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _userServices = userServices;
+            _signInManager = signInManager;
         }
 
         public class InputModel
@@ -70,8 +72,9 @@ namespace WebApplication.Pages
                     if (!roles.Contains("Supplier"))
                     {
                         await _userManager.AddToRoleAsync(user, "Supplier");
+                        await _signInManager.SignInAsync(user, isPersistent: false);
                     }
-                    return RedirectToPage("./Index");
+                    return RedirectToPage("./Home");
                 }
                 catch
                 {

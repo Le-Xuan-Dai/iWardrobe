@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebApplication.Pages.Products
 {
+    [Authorize(Roles = "Supplier")]
     public class DeleteModel : PageModel
     {
         private readonly BusinessObjects.IWardrobeContext _context;
