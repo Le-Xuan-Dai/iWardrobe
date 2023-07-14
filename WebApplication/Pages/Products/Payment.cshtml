@@ -113,19 +113,19 @@
                 <div class="item-infor">
                     <div class="item-infor--wrapper m-2 d-flex">
                     <span class="item-label fw-bold" style="min-width:100px;">Name :</span>
-                        <span class="item-name">@Html.DisplayFor(model => model.cartDetail.Product.ProductName)</span>
+                        <span class="item-name">@Html.DisplayFor(model => model.paymentCart.Product.ProductName)</span>
                     </div>
                     <div class="item-infor--wrapper m-2 d-flex">
                         <span class="item-label fw-bold" style="min-width:100px">Price :</span>
-                    <span class="item-name">(đ) @Html.DisplayFor(model => (model.cartDetail.Product.SellPrice) * (model.cartDetail.Quantity))</span>
+                    <span class="item-name">(đ) @Html.DisplayFor(model => model.paymentCart.Product.SellPrice )</span>
                     </div>
                     <div class="item-infor--wrapper m-2 d-flex">
                         <span class="item-label fw-bold" style="min-width:100px">Category :</span>
-                        <span class="item-name"> @Html.DisplayFor(model => (model.cartDetail.Product.Category.CategoryName))</span>
+                        <span class="item-name"> @Html.DisplayFor(model => (model.paymentCart.Product.Category.CategoryName))</span>
                     </div>
                     <div class="item-infor--wrapper m-2 d-flex">
                         <span class="item-label fw-bold" style="min-width:100px">Quantity :</span>
-                        <span class="item-name">@Html.DisplayFor(model => model.cartDetail.Quantity)</span>
+                    <span class="item-name">@Html.DisplayFor(model => model.paymentCart.Quantity)</span>
                     </div>
                 </div>
             </div>
@@ -159,20 +159,26 @@
                                     <span aria-hidden="true" style="font-size:1.5rem; cursor:pointer; background-color:rgb(164, 165, 165); padding:10px;" class="btn-close"></span>
                                 </div>
                                 <div class="voucher-list d-flex justify-content-between flex-wrap mt-5">
-                                    @foreach(var item in Model.Voucher){
+                                    @if(Model.Voucher == null){
+                                        <h5>You haven't any voucher'</h5>
+                                    }else{
+                                    @foreach (var item in Model.Voucher)
+                                    {
                                         <div class="voucher-item col-5 d-flex justify-content-around align-items-center ">
-                                        <img src="https://product.hstatic.net/1000008082/product/gift-voucher-200k_839a834d702545529312398fd61f76d7_grande.png"
-                                             class="img-rounded rounded-3 voucher-item__image" alt="voucher" style="width:100px" />
-                                        <div class="voucher-item__info w-200">
-                                            <p class="voucher-item__info-title text-left">@Html.DisplayFor(model => model.voucher.VoucherName)</p>
-                                            <p class="voucher-item__info-title text-left">Discount @Html.DisplayFor(model => model.voucher.Value)%</p>
+                                            <img src="https://product.hstatic.net/1000008082/product/gift-voucher-200k_839a834d702545529312398fd61f76d7_grande.png"
+                                         class="img-rounded rounded-3 voucher-item__image" alt="voucher" style="width:100px" />
+                                            <div class="voucher-item__info w-200">
+                                                <p class="voucher-item__info-title text-left">@Html.DisplayFor(model => model.voucher.VoucherName)</p>
+                                                <p class="voucher-item__info-title text-left">Discount @Html.DisplayFor(model => model.voucher.Value)%</p>
+                                            </div>
+                                            <form method="post">
+                                                <input type="hidden" name="voucherId" value="@item.VoucherId" />
+                                                <button type="submit" class="btn btn-primary">Apply</button>
+                                            </form>
                                         </div>
-                                        <form method="post">
-                                            <input type="hidden" name="voucherId" value="@item.VoucherId"/>
-                                            <button type="submit" class="btn btn-primary">Apply</button>
-                                        </form>
-                                    </div>
                                     }
+                                    }
+                                    
                                 </div>
                             </div>
                         </div>
@@ -193,7 +199,7 @@
                         <button  class="btn btn-primary ">
                             <a href="../Pages/Products/Index" style="color:white;text-decoration:none;">Back to shopping</a>
                         </button>
-                    <button type="submit" class="btn btn-primary " asp-page-handler="Payment">Continue purcharse</button>
+                    <button type="submit" class="btn btn-primary " asp-page-handler="PurchaseItem">Continue purcharse</button>
                     </div>
                 </form>
             <div class="modal fade" id="ignismyModal" role="dialog">

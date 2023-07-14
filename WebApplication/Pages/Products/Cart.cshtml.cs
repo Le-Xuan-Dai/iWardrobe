@@ -112,25 +112,26 @@ namespace WebApplication.Pages.Products
             return Page();
         }
 
-        public async Task<IActionResult> OnPostPayment()
+        public async Task<IActionResult> OnPostPaymentAsync()
         {
-            var cartData = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == paymentCart).FirstOrDefaultAsync();
-            if(paymentCart != null)
-            {
-                Order order = new Order();
-                order.UserId = cartData.UserId;
-                order.ProductId = cartData.ProductId;
-                order.DeliverMethod = "Self-transport";
-                order.DeliverDetais = "Nothing";
-                order.PaymentMethod = "Pay directly";
-                order.PaymentDetais = "Nothing";
-                order.OrderStatus = "Preparing";
+            /* var cartData = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == paymentCart).FirstOrDefaultAsync();
+             if(paymentCart != null)
+             {
+                 Order order = new Order();
+                 order.UserId = cartData.UserId;
+                 order.ProductId = cartData.ProductId;
+                 order.DeliverMethod = "Self-transport";
+                 order.DeliverDetais = "Nothing";
+                 order.PaymentMethod = "Pay directly";
+                 order.PaymentDetais = "Nothing";
+                 order.OrderStatus = "Preparing";
 
-                await _orderServices.Create(order);
+                 await _orderServices.Create(order);
 
-                return RedirectToPage("./Index");
-            }
-            return Page();
+                 return RedirectToPage("./Index");
+             }*/
+            TempData["paymentCartId"] = paymentCart;
+            return RedirectToPage("./Payment");
         }
 
         public async void loadDataToPage()

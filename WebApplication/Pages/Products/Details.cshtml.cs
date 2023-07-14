@@ -65,7 +65,7 @@ namespace WebApplication.Pages.Products
                         await _cartDetailServices.Update(pro);
                         //Reload data from database 
                         
-                        return Page();
+                        return RedirectToPage("./Index");
                     }
                 }
                 cartDetail.UserId = user.Id;
