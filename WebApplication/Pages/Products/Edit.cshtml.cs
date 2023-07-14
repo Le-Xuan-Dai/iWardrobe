@@ -9,9 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
 using Microsoft.Extensions.Logging;
 using Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebApplication.Pages.Products
 {
+    [Authorize(Roles = "Supplier")]
     public class EditModel : PageModel
     {
         private readonly ProductServices _productServices;

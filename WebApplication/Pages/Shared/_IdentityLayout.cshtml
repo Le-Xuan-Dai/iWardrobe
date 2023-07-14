@@ -11,6 +11,22 @@
     <link href="~/lib/fontawesome/css/solid.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/normalize.css" />
 </head>
+
+<style>
+    .auth__container {
+        position: relative;
+        top: 50%;
+        width: 80%;
+        height: 80%;
+        background-color: #FFF;
+        /*  box-shadow: rgba(21, 37, 52, 0.3) 0px 10px 50px;*/ /*  box-shadow: rgba(21, 37, 52, 0.3) 0px 10px 50px;*/
+        border-radius: 13px;
+        overflow: hidden;
+        margin: 0 auto;
+        transform: translate(0%, -50%);
+    }
+</style>
+
 <body>
     <main class="container-fluid row vh-100">
         <div class="col-0 col-lg-6 h-100 position-relative" style="padding-left: 0;">
@@ -20,7 +36,9 @@
             </div>
         </div>
         <div class="col-12 col-lg-6">
-            @RenderBody()
+            <div class="auth__container p-4">
+                @RenderBody()
+            </div>
         </div>
     </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

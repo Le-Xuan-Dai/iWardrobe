@@ -83,8 +83,15 @@ namespace WebApplication.Pages
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
         public string ReturnUrl { get; set; }
 
-        public async Task OnGetAsync(string type, string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string type, string returnUrl = null)
+
         {
+            returnUrl ??= Url.Content("~/home");
+            if (_signInManager.IsSignedIn(User))
+            {
+                return LocalRedirect(returnUrl);
+            }
+
             if (!string.IsNullOrEmpty(ErrorSignIn))
             {
                 ModelState.AddModelError(string.Empty, ErrorSignIn);
@@ -97,13 +104,14 @@ namespace WebApplication.Pages
                 {
                     IsSignUp = true;
                 }
-            } 
+            }
 
             returnUrl ??= Url.Content("~/home");
 
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ReturnUrl = returnUrl;
+            return Page();
         }
 
         public async Task<IActionResult> OnPostSignInAsync(string returnUrl = null)

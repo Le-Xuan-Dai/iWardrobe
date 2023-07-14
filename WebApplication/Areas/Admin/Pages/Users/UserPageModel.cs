@@ -1,10 +1,13 @@
 ﻿using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using System.Data;
 
 namespace WebApplication.Areas.Admin.Pages.Users
 {
+    [Authorize(Roles = "Admin")]
     public class UserPageModel: PageModel
     {
         protected const int USER_PER_PAGE = 10;

@@ -56,6 +56,7 @@ namespace BusinessObjects.Migrations
                     {"Short","US003",false },
                     {"Shirt","US003" , true},
                     {"Jacket","US002",true},
+                    {"Jacket","US002",true},
                     {"Long pan" , "US001" , false }
                 }
                 );
@@ -78,7 +79,7 @@ namespace BusinessObjects.Migrations
             {
                 {
                     3,
-                    "US002",
+                    "600206da-3607-4b5a-af5b-a793c69e1be2",
                     "Short Sleeve Tee shirt - \"Black No Sugar No Cream\"",
                     "Let them know how you like your coffee with this Short Sleeve Tee shirt - Black No Sugar No Cream.",
                     "https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f1.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f2.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f3.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f4.jpg?raw=true",
@@ -87,7 +88,7 @@ namespace BusinessObjects.Migrations
                 },
                 {
                     3,
-                    "US002",
+                    "600206da-3607-4b5a-af5b-a793c69e1be2",
                     "Low Waist Comfortable Underwear",
                     "﻿Low Waist Comfortable  Underwear will have you feeling effortlessly elegant with its body shaping style.",
                     "https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f5.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f6.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/f8.jpg?raw=true]",
@@ -96,7 +97,7 @@ namespace BusinessObjects.Migrations
                 },
                 {
                     3,
-                    "US003",
+                    "600206da-3607-4b5a-af5b-a793c69e1be2",
                     "A House Is Not a Home Without Paw Prints- Dog - Hoodie",
                     "Got a dog? Here is the perfect unisex hoodie for all the dog-lover! A house is not a home without paw prints..",
                     "https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n1.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n2.jpg?raw=true",
@@ -105,7 +106,7 @@ namespace BusinessObjects.Migrations
                 },
                 {
                   1,
-                  "US003",
+                  "600206da-3607-4b5a-af5b-a793c69e1be2",
                   "Sleeveless Thicken Waistcoat Jacket",
                   "This Sleeveless Thicken Waistcoat Jacket will keep you warm and make you feel cosy, and its high collar will help you keep out of any autumn chills without compromising on aesthetics. ",
                   "https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n3.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n4.jpg?raw=true",
@@ -114,7 +115,7 @@ namespace BusinessObjects.Migrations
                 },
                  {
                  1,
-                 "US002",
+                 "600206da-3607-4b5a-af5b-a793c69e1be2",
                  "Skeleton Oversized Jeans",
                  "Whether you love Halloween or simply like to show off your rough side - do it in our unisex oversized jeans with a skeleton print!",
                  "https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n5.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n6.jpg?raw=true,https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n7.jpg?raw=true",
@@ -123,7 +124,7 @@ namespace BusinessObjects.Migrations
              },
                  {
                 2,
-                "US002",
+                "600206da-3607-4b5a-af5b-a793c69e1be2",
                 "Charcoal Sweat Pant",
                 "Want to lounge in style?Then try our signature, soft, warm and classic fit fleece Charcoal Sweat Pant",
                 "https://github.com/tech2etc/Build-and-Deploy-Ecommerce-Website/blob/main/img/products/n8.jpg?raw=true",
@@ -186,7 +187,9 @@ namespace BusinessObjects.Migrations
             columns: new[] { "UserId", "RoleId" },
             values: new object[,]
             {
+                {"600206da-3607-4b5a-af5b-a793c69e1be2","b4f710f2-66d1-4661-8a5d-598d38733828"  },
                 {"600206da-3607-4b5a-af5b-a793c69e1be2","be5ee07d-dd57-4421-95ad-c6b3bfaa686f"  },
+                {"600206da-3607-4b5a-af5b-a793c69e1be2","ce2e3464-4714-4f78-b2d7-8d861ec365c3"  },
             }
             );
 
