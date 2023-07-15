@@ -56,25 +56,25 @@ namespace WebApplication.Pages.Products
             try
             {
                 listUserCart = await _cartDetailServices.GetAll().Where(c => c.UserId == user.Id).ToListAsync();
-                if (listUserCart != null)
-                {
-                    var pro = listUserCart.Where(u => u.ProductId == cartDetail.ProductId).FirstOrDefault();
-                    if (pro != null)
+                    if (listUserCart != null)
                     {
-                        pro.Quantity++;
-                        await _cartDetailServices.Update(pro);
-                        //Reload data from database 
-                        
-                        return RedirectToPage("./Index");
+                        var pro = listUserCart.Where(u => u.ProductId == cartDetail.ProductId).FirstOrDefault();
+                        if (pro != null)
+                        {
+                            pro.Quantity++;
+                            await _cartDetailServices.Update(pro);
+                            //Reload data from database 
+
+                            return RedirectToPage("./Index");
+                        }
                     }
-                }
-                cartDetail.UserId = user.Id;
-                cartDetail.Quantity = 1;
-                await _cartDetailServices.Create(cartDetail);
+                    cartDetail.UserId = user.Id;
+                    cartDetail.Quantity = 1;
+                    await _cartDetailServices.Create(cartDetail);
             }
             catch (Exception e)
             {
-
+                return Redirect("https://localhost:5001/login");
             }
             return RedirectToPage("./Cart");
         }
