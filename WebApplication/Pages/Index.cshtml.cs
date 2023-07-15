@@ -1,57 +1,167 @@
-﻿using BusinessObjects;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WebApplication.Data;
+using System;
+using BusinessObjects;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace WebApplication.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-        private readonly ProductServices _productServices;
-        private readonly IConfiguration Configuration;
+        private readonly UserServices _userServices;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
-        public IndexModel(ILogger<IndexModel> logger, ProductServices productServices, IConfiguration configuration)
+        public IndexModel(UserServices userServices, SignInManager<User> signInManager, UserManager<User> userManager)
         {
-            _logger = logger;
-            _productServices = productServices;
-            Configuration = configuration;
+            _userServices = userServices;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
-        public PaginatedList<Product> Products { get; set; }
-        public string CurrentFilter { get; set; }
 
-        public async Task OnGetAsync(string searchString, string currentFilter, int? pageIndex)
+        public class InputSignInModel
         {
-            if (searchString != null)
+            [Display(Name = "Email/Phone number")]
+            public string EmailOrPhoneNumber { get; set; }
+
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
+
+            [Display(Name = "Remember me?")]
+            public bool RememberMe { get; set; }
+        }
+
+        public class InputSignUpModel
+        {
+            [Required(ErrorMessage = "Fullname is required.")]
+            [DataType("nvarchar")]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
+            [Display(Name = "Fullname")]
+            public string Fullname { get; set; }
+
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+            [DataType(DataType.PhoneNumber)]
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
+
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+        }
+
+        [BindProperty]
+        public InputSignInModel SignInUser { get; set; }
+
+        [BindProperty]
+        public InputSignUpModel SignUpUser { get; set; }
+
+        [BindProperty]
+        public string ErrorSignIn { get; set; }
+
+        [BindProperty]
+        public string ErrorSignUp { get; set; }
+
+        public bool IsSignUp { get; set; }
+
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public string ReturnUrl { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(string type, string returnUrl = null)
+
+        {
+            returnUrl ??= Url.Content("~/home");
+            if (_signInManager.IsSignedIn(User))
             {
-                pageIndex = 1;
+                return LocalRedirect(returnUrl);
+            }
+
+            if (!string.IsNullOrEmpty(ErrorSignIn))
+            {
+                ModelState.AddModelError(string.Empty, ErrorSignIn);
+            }
+            IsSignUp = false;
+
+            if (type != null)
+            {
+                if (type.ToLower().Equals("signup"))
+                {
+                    IsSignUp = true;
+                }
+            }
+
+            returnUrl ??= Url.Content("~/home");
+
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            ReturnUrl = returnUrl;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostSignInAsync(string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/home");
+
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            var result = await _signInManager.PasswordSignInAsync(SignInUser.EmailOrPhoneNumber, SignInUser.Password, SignInUser.RememberMe, lockoutOnFailure: false);
+
+            if (!result.Succeeded)
+            {
+                var user = _userServices.FirstOrDefault(u => u.PhoneNumber == SignInUser.EmailOrPhoneNumber);
+                if (user != null)
+                {
+                    result = await _signInManager.PasswordSignInAsync(user.UserName, SignInUser.Password, SignInUser.RememberMe, lockoutOnFailure: false);
+                }
+            }
+
+            if (result.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
             }
             else
             {
-                searchString = currentFilter;
+                ErrorSignIn = "Invalid sign in attempt.";
+                IsSignUp = false;
+                return Page();
             }
+        }
 
-            CurrentFilter = searchString;
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/home");
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            IQueryable<Product> productsIQ = _productServices.GetAll();
-
-            if (!String.IsNullOrEmpty(searchString))
+            var user = new User { Fullname = SignUpUser.Fullname, Email = SignUpUser.Email, PhoneNumber = SignUpUser.PhoneNumber, UserName = SignUpUser.Email };
+            var result = await _userManager.CreateAsync(user, SignUpUser.Password);
+            if (result.Succeeded)
             {
-                productsIQ = productsIQ.Where(s => s.ProductName.Contains(searchString));
+                var resultRole = await _userManager.AddToRolesAsync(user, new string[] { "Customer" });
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return LocalRedirect(returnUrl);
             }
 
-            var pageSize = Configuration.GetValue("PageSize", 1);
-            Products = await PaginatedList<Product>.CreateAsync(
-                productsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
+            ErrorSignUp = "Invalid sign up attempt.";
+            IsSignUp = true;
+            return Page();
         }
     }
 }
+
+

@@ -2,9 +2,17 @@
 @model AccessDeniedModel
 @{
     ViewData["Title"] = "Access denied";
+    Layout = "/Pages/Shared/_Layout.cshtml";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<div class="container text-center">
+    <img src="~/img/403.png" alt="403 error" />
+    <div class="text-center">
+        <a asp-page="/Home"
+           class="btnPagination btn btn-outline-secondary"
+           style="border: none;">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            &nbsp;Back to Home
+        </a>
+    </div>
+</div>

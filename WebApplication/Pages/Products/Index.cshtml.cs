@@ -9,18 +9,23 @@ using BusinessObjects;
 using Microsoft.Extensions.Configuration;
 using Services;
 using WebApplication.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication.Pages.Products
 {
+    [Authorize(Roles = "Supplier")]
     public class IndexModel : PageModel
     {
         private readonly ProductServices _productServices;
         private readonly IConfiguration Configuration;
+        protected readonly UserManager<User> _userManager;
 
-        public IndexModel(ProductServices productServices, IConfiguration configuration)
+        public IndexModel(ProductServices productServices, IConfiguration configuration, UserManager<User> userManager)
         {
             _productServices = productServices;
             Configuration = configuration;
+            _userManager = userManager;
         }
 
         public string NameSort { get; set; }
@@ -46,7 +51,8 @@ namespace WebApplication.Pages.Products
 
             CurrentFilter = searchString;
 
-            IQueryable<Product> productsIQ = _productServices.GetAll();
+            string currentUserId = _userManager.GetUserId(User);
+            IQueryable<Product> productsIQ = _productServices.GetAll().Where(p => p.UserId.Equals(currentUserId));
 
             if (!String.IsNullOrEmpty(searchString))
             {

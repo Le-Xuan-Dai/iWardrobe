@@ -37,7 +37,7 @@ namespace WebApplication.Areas.Identity.Pages.Account
             }
             else
             {
-                returnUrl = Url.Content("~/Products");
+                returnUrl = Url.Content("~/Home");
                 return LocalRedirect(returnUrl);
             }
         }
