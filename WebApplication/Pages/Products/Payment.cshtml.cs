@@ -37,10 +37,17 @@ namespace WebApplication.Pages.Cart_Payment
 
         public async Task<IActionResult> OnGet()
         {
-            var paymentCartId = TempData["paymentCartId"] as int?;
-            userLoggedin = await _userManager.GetUserAsync(this.User);
-            paymentCart = await _cartDetailServices.GetAll().Include(p => p.Product).FirstOrDefaultAsync(c => c.CartDetailId == paymentCartId);
-            TempData["paymentCart"] = paymentCart.CartDetailId;
+            try
+            {
+                var paymentCartId = TempData["paymentCartId"] as int?;
+                userLoggedin = await _userManager.GetUserAsync(this.User);
+                paymentCart = await _cartDetailServices.GetAll().Include(p => p.Product).FirstOrDefaultAsync(c => c.CartDetailId == paymentCartId);
+                TempData["paymentCart"] = paymentCart.CartDetailId;
+            }
+            catch(Exception e)
+            {
+                return RedirectToPage("./Index");
+            }
             
             return Page();
         }
@@ -66,7 +73,6 @@ namespace WebApplication.Pages.Cart_Payment
                     order.DeliverMethod = "Self-transport";
                     order.DeliverDetais = "Nothing";
                     order.PaymentDetais = "Nothing";
-
                 }
                 order.PaymentMethod = DIRECT_PAYMENT;
                 order.OrderStatus = DEEFAULT_STATUS;
