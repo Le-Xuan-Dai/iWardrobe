@@ -8,20 +8,6 @@ namespace BusinessObjects.Migrations
         {
             //Seed data to database
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Fullname", "BrandName", "UserName", "Address", "Email", "EmailConfirmed", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
-                values: new object[,]
-                {
-                    {"US001","doviethoang","dirtycoin","hoangdv6","District 9, Ho Chi Minh","hoangdv6@gmail.com",false,false,false,true,0},
-                    {"US002","lexuandai","nike","hoangdv6","Nha Be , Ho Chi Minh","dailx@gmail.com",false,false,false,true, 0 },
-                    {"US003","huuvinh","adidas","vinhn","Binh Thanh District, Ho Chi Minh","vinhhn@gmail.com",false,false,false,true, 0 },
-                    {"US004","thinhphu","TeeLab","thinh","District 9, Ho Chi Minh","hoangdv6@gmail.com",false,false,false,true, 0 },
-                    {"US005","oanhvtk","Adidas","oanhvtk","Tan Binh, Ho Chi Minh","oanhvtk@gmail.com",false,false,false,true, 0 },
-
-                }
-                );
-
-            migrationBuilder.InsertData(
             table: "Users",
             columns: new[] { "Id", "Fullname", "Avatar", "UserName", "NormalizedUserName", "Email", "NormalizedEmail", "EmailConfirmed", "PasswordHash", "SecurityStamp", "ConcurrencyStamp", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount" },
             values: new object[,]
@@ -48,27 +34,27 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "CategoryName", "UserId", "IsDeleted" },
+                columns: new[] { "CategoryName", "UserId" },
                 values: new object[,]
                 {
-                    {"Short Pan" ,"US001" , false},
-                    {"Shoes" ,"US002",false},
-                    {"Short","US003",false },
-                    {"Shirt","US003" , true},
-                    {"Jacket","US002",true},
-                    {"Jacket","US002",true},
-                    {"Long pan" , "US001" , false }
+                    {"Short Pan" ,"600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"Shoes" ,"600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"Short","600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {"Shirt","600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"Jacket","600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"Jacket","600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"Long pan" , "600206da-3607-4b5a-af5b-a793c69e1be2" }
                 }
                 );
             migrationBuilder.InsertData(
                 table: "Vouchers",
-                columns: new[] { "VoucherName", "Code", "Value", "CreationDate", "ExpirationDate", "Quantity", "UserId", "IsDeleted" },
+                columns: new[] { "VoucherName", "Code", "Value", "CreationDate", "ExpirationDate", "Quantity", "UserId" },
                 values: new object[,]
                 {
-                    {"BacktoSchool","BTS001",30,"2023-09-30","2023-09-30",10,"US002",false},
-                    {"BlackFriday","BF001",60,"2023-11-24","2023-11-24",2,"US004",false},
-                    {"BigSale","BS001",35,"2023-06-30","2023-08-20",3,"US003",false},
-                    {"WomanDay","WD001",25,"2023-06-30","2023-03-09",2,"US005",false},
+                    {"BacktoSchool","BTS001",30,"2023-09-30","2023-09-30",10,"600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"BlackFriday","BF001",60,"2023-11-24","2023-11-24",2,"600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"BigSale","BS001",35,"2023-06-30","2023-08-20",3,"600206da-3607-4b5a-af5b-a793c69e1be2"},
+                    {"WomanDay","WD001",25,"2023-06-30","2023-03-09",2,"600206da-3607-4b5a-af5b-a793c69e1be2"},
                 }
                 );
 
@@ -135,39 +121,39 @@ namespace BusinessObjects.Migrations
 
             migrationBuilder.InsertData(
                 table: "Comments",
-                columns: new[] { "ProductId", "UserId", "Message", "IsDeleted" },
+                columns: new[] { "ProductId", "UserId", "Message" },
                 values: new object[,]
                 {
-                    {1 , "US005" , "Shoes still pretty new and fix with my foots",false },
-                    {2, "US001" , "The pant is quite small for me ,  but still ok",false },
-                    {3 , "US002" , "Jacket look so nice , very new than the imagine",false },
-                    {4 , "US004", "Shoes still pretty new and fix with my foots",false },
+                    {1 , "600206da-3607-4b5a-af5b-a793c69e1be2" , "Shoes still pretty new and fix with my foots" },
+                    {2, "600206da-3607-4b5a-af5b-a793c69e1be2" , "The pant is quite small for me ,  but still ok" },
+                    {3 , "600206da-3607-4b5a-af5b-a793c69e1be2" , "Jacket look so nice , very new than the imagine" },
+                    {4 , "600206da-3607-4b5a-af5b-a793c69e1be2", "Shoes still pretty new and fix with my foots" },
                 }
                 );
 
             migrationBuilder.InsertData(
                 table: "Favorites",
-                columns: new[] { "ProductId", "UserId", "IsDeleted" },
+                columns: new[] { "ProductId", "UserId" },
                 values: new object[,]
                 {
-                    {1,"US001",false },
-                    {2,"US003",false },
-                    {3,"US005",false },
-                    {4,"US002",false },
-                    {5,"US002",false },
-                    {1,"US002",false },
-                    {2,"US003",false },
-                    {3,"US004",false },
-                    {3,"US001",false }
+                    {1,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {2,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {3,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {4,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {5,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {1,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {2,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {3,"600206da-3607-4b5a-af5b-a793c69e1be2" },
+                    {3,"600206da-3607-4b5a-af5b-a793c69e1be2" }
                 }
                 );
             migrationBuilder.InsertData(
               table: "Orders",
-              columns: new[] { "UserId", "ProductId", "DeliverMethod", "DeliverDetais", "PaymentMethod", "PaymentDetais", "OrderStatus", "Note", "IsDeleted" },
+              columns: new[] { "UserId", "ProductId", "DeliverMethod", "DeliverDetais", "PaymentMethod", "PaymentDetais", "OrderStatus", "Note" },
               values: new object[,]
               {
-                    {"US001",1,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ," On the way " ,"Nothing",false },
-                    {"US002",2,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing",false },
+                    {"600206da-3607-4b5a-af5b-a793c69e1be2",1,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ," On the way " ,"Nothing" },
+                    {"600206da-3607-4b5a-af5b-a793c69e1be2",2,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"Preparing" ,"Nothing" },
               }
               );
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class Product
+    public class Product : ISoftDelete
     {
         [Key]
         public int ProductId { get; set; }

@@ -38,6 +38,7 @@ namespace WebApplication
             {
                 string connectString = Configuration.GetConnectionString("IWardrobeConnection");
                 options.UseSqlServer(connectString);
+                options.AddInterceptors(new SoftDeleteInterceptor());
             });
 
             // Đăng kí services

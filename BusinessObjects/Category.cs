@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class Category
+    public class Category : ISoftDelete
     {
         [Key]
         public int CategoryId { get; set; }

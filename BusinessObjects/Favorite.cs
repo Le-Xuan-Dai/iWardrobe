@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class Favorite
+    public class Favorite : ISoftDelete
     {
         [Key]
         public int FavoriteId { get; set; }
