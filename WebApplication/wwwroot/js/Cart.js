@@ -10,21 +10,7 @@ listOfItems.forEach((item) => {
     var checkboxIsChecked = item.querySelector(".buy-checking");
     var cartIdhidden = item.querySelector(".cartIdhidden").innerHTML;
 
-
-    increaseBtn.addEventListener("click", () => {
-        currentAmount++;
-
-        item.querySelector(".amount").innerHTML = currentAmount;
-        item.querySelector(".price").innerHTML = pricePerItem * currentAmount;
-
-    });
-
-    decreaseBtn.addEventListener("click", () => {
-        if (currentAmount <= 1) return;
-        currentAmount--;
-        item.querySelector(".amount").innerHTML = currentAmount;
-
-    });
+   
     checkboxIsChecked.addEventListener("change", (e) => {
         hideOtherCheckbox(checkboxIsChecked, cartIdhidden, pricePerItem * currentAmount, document.querySelector('.cartId'), price);
     })
