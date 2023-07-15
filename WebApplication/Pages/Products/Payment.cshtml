@@ -108,16 +108,19 @@
         <div class="row mt-5 d-flex align-items-center flex-wrap">
             <div class="w-25 item-wrapper">
                 <div class="row">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/T-shirt.jpg/1200px-T-shirt.jpg" alt="" class="d-block img-rounded rounded-3">
+                <img src="@Html.DisplayFor(model => model.paymentCart.Product.ImageUrls)" alt="" class="d-block img-rounded rounded-3">
                 </div>
-                <div class="item-infor">
+                <div class="item-infor ">
                     <div class="item-infor--wrapper m-2 d-flex">
                     <span class="item-label fw-bold" style="min-width:100px;">Name :</span>
-                        <span class="item-name">@Html.DisplayFor(model => model.paymentCart.Product.ProductName)</span>
+                    <span class="item-name" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">@Html.DisplayFor(model => model.paymentCart.Product.ProductName)</span>
                     </div>
                     <div class="item-infor--wrapper m-2 d-flex">
                         <span class="item-label fw-bold" style="min-width:100px">Price :</span>
-                    <span class="item-name">(đ) @Html.DisplayFor(model => model.paymentCart.Product.SellPrice )</span>
+                        @{
+                            var paymentPrice = Model.paymentCart.Product.SellPrice * Model.paymentCart.Quantity ;
+                        }
+                    <span class="item-name">(đ) @Html.DisplayFor(model => paymentPrice )</span>
                     </div>
                     <div class="item-infor--wrapper m-2 d-flex">
                         <span class="item-label fw-bold" style="min-width:100px">Category :</span>
@@ -135,15 +138,19 @@
                    
                     <div class="form-infor--wrapper d-flex mb-4">
                         <label for="owner_name" style="min-width:150px;">Delivery address: </label>
-                        <input type="text" name="owner_name" placeholder="Your address .... " class="flex-grow-1 form-input" style="max-width:400px;">
+                        <input type="text" asp-for="@Model.Order.DeliverDetais" placeholder="Your address .... " class="flex-grow-1 form-input" style="max-width:400px;">
                     </div>
                     <div class="form-infor--wrapper d-flex mb-4">
                         <label for="owner_name" style="min-width:150px;">Delivery method: </label>
-                        <input type="text" name="owner_name" placeholder="Grab ... " class="flex-grow-1 form-input" style="max-width:400px;" asp-for="@Model.Order.DeliverMethod">
+                        <input type="text" placeholder="Grab ... " class="flex-grow-1 form-input" style="max-width:400px;" asp-for="@Model.Order.DeliverMethod">
                     </div>
                     <div class="form-infor--wrapper d-flex  mb-4">
                         <label for="owner_name" style="min-width:150px;">Your name: </label>
-                        <input type="text" name="owner_name" placeholder="Your name .... " class="flex-grow-1 form-input" style="max-width:400px;">
+                        @if(Model.userLoggedin == null){
+                            <input type="text" name="owner_name" placeholder="Your name ...." class="flex-grow-1 form-input" style="max-width:400px;">
+                        }else{
+                            <input type="text" name="owner_name" value="@Model.userLoggedin.Fullname" disabled class="flex-grow-1 form-input" style="max-width:400px;">
+                        }
                     </div>
                     <div class="form-infor--wrapper">
                         <button type="button" class="btn-voucher mb-4 ">Apply voucher</button>

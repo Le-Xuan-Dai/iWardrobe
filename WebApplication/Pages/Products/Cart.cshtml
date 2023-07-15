@@ -78,12 +78,13 @@
                       }else{
                                         @foreach (var cart in Model.CartDetail)
                                         {
+                                            
                                             <div class="card mb-3 item">
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="d-flex flex-row align-items-center">
                                                             <div>
-                                                                <img src="https://5sfashion.vn/storage/upload/images/products/aapk25ecXeAwl0Oy2zPoCmpnG5SccYxMW6YEBCvT.jpg"
+                                                                <img src="@Html.DisplayFor(model => cart.Product.ImageUrls)"
                                                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                             </div>
                                                             <div class="ms-3">
@@ -107,10 +108,12 @@
                                                             </div>
                                                             <div style="width: 100px;">
                                                                 <span class="original-price" style="display:none;">@Html.DisplayFor(model => cart.Product.SellPrice)</span>
-
-                                                                <h5 class="mb-0 price" style="margin-right:10px;"> @Html.DisplayFor(model => cart.Product.SellPrice)</h5>
+                                                                @{
+                                                                        var totalPrice = cart.Quantity * cart.Product.SellPrice;
+                                                                 }
+                                                                <h5 class="mb-0 price" style="margin-right:10px;"> @Html.DisplayFor(model => totalPrice)</h5>
                                                             </div>
-                                                            <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                          <!--  <a asp-page-handler="RemoveItem" asp-page="./Cart" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>-->
                                                             <span style="display:none" class="cartIdhidden">@Html.DisplayFor(model => cart.CartDetailId)</span>
                                                             <form action="">
                                                                 <input type="checkbox" name="" id="" class="buy-checking">
