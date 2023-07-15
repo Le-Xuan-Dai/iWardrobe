@@ -20,15 +20,11 @@ namespace WebApplication.Pages.Cart_Payment
 
 
         private readonly CartDetailServices _cartDetailServices;
-        private readonly UserServices _userServices;
-        private readonly ProductServices _productServices;
         private readonly OrderServices _orderServices;
         private readonly UserManager<User> _userManager; 
-        public PaymentModel (CartDetailServices cartDetailServices, UserManager<User> userManager, UserServices userServices, ProductServices productServices, OrderServices orderServices)
+        public PaymentModel (CartDetailServices cartDetailServices, UserManager<User> userManager, OrderServices orderServices)
         {
             _cartDetailServices = cartDetailServices;
-            _userServices = userServices;
-            _productServices = productServices;
             _orderServices = orderServices;
             _userManager = userManager;
         }
@@ -39,9 +35,6 @@ namespace WebApplication.Pages.Cart_Payment
         public User userLoggedin { get; set; }
         public List<Voucher> Voucher { get; set; }
 
-        public Product productPayment { get; set; }
-
-        public Voucher voucher { get; set; }
         public async Task<IActionResult> OnGet()
         {
             var paymentCartId = TempData["paymentCartId"] as int?;
