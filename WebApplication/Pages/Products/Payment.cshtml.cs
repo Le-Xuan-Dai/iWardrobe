@@ -32,6 +32,7 @@ namespace WebApplication.Pages.Cart_Payment
             _orderServices = orderServices;
             _userManager = userManager;
         }
+
         [BindProperty]
         public Order Order { get; set; }
         public CartDetail paymentCart { get; set; }
