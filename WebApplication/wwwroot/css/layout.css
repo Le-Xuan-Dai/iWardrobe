@@ -77,7 +77,6 @@ html {
     height: calc(100% - 120px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .menu-items li {
