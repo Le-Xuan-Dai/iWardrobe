@@ -4,227 +4,232 @@
     ViewData["Title"] = "Payment";
 }
 <style>
+    .data-item,
     .item-wrapper {
-        display: block;
+        display: flex;
+        font-size: 1.2rem;
     }
 
-    .item-infor {
-        border: 2px solid black;
-        border-bottom-right-radius: 15px;
-        border-bottom-left-radius: 15px;
-        padding: 15px;
-        height: auto;
+    .data-item__label {
+        min-width: 230px;
     }
 
-    .item-infor--wrapper {
-        border-bottom: 2px solid black;
-        padding: 10px;
+    .data-item__content {
+        flex: 1;
     }
 
-    .modal-header {
-        border-bottom: 2px solid rgb(154 205 50);
-    }
-
-    .modal-title {
-        font-size: 1.5rem;
-        padding: 10px;
-    }
-
-    .voucher-wrapper {
-        z-index: 6;
-        border-radius: 10px;
-        background-color: white;
-        border-radius: 10px;
-        border: 2px solid #333;
-        box-shadow: 1px 1px 6px 7px rgba(0, 13, 0, 0.4);
-        width: 80%;
-        height: 80%;
-        top: 10%;
-        left: 10%;
-        text-align: center;
-        position: fixed;
-        /* Stay in place */
-        padding: 50px;
-        overflow-y: scroll;
-        display: none;
-    }
-
-        .voucher-wrapper::-webkit-scrollbar {
-            display: none;
-        }
-
-    .voucher-item {
-        border: 2px solid black;
-        padding: 10px;
+    .img-item {
+        width: 300px;
+        height: 200px;
         border-radius: 15px;
-        background-color: white;
+        margin-bottom: 10px;
     }
 
-    .payment-list {
-        width: 50%;
-        height: auto;
+    .item-wrapper {
+        justify-content: space-around;
+    }
+
+    .item-label {
+        max-width: 50px;
+    }
+
+    .item-name {
+        flex: 1;
+        max-width: 150px;
+        text-align: right;
+    }
+
+    .payment-methods-wrapper {
+        padding: 15px 15px;
         border: 2px solid black;
-        padding: 20px;
+        width: 300px;
         position: relative;
+        margin-bottom: 15px;
     }
 
-        .payment-list::before {
-            content: "Payment Method";
+        .payment-methods-wrapper::after {
+            content: "Payment methods";
             position: absolute;
-            background-color: #fff;
-            bottom: 80px;
+            background-color: white;
+            top: -10px;
+            padding: 0 10px;
         }
 
-    .payment-item__method {
+    .payment {
         width: 50px;
-        height: 50px;
-        padding: 2px;
         cursor: pointer;
     }
 
-    .form-input {
-        padding: 3px;
+    .choose {
+        border: 2px solid blue;
+        border-radius: 10px;
     }
 
-    .form-input {
-        border: none;
-        border-bottom: 1px solid black;
-        padding: 5px 10px;
-        outline: none;
+    .detail-item-wrapper {
+        margin-bottom: 15px;
+        display: flex;
     }
 
-    .btn-voucher {
-        border-radius: 5px;
-        padding: 5px;
+    .detail-label {
+        min-width: 150px;
     }
 
-    [placeholder]:focus::-webkit-input-placeholder {
-        transition: text-indent 0.4s 0.4s ease;
-        text-indent: -100%;
-        opacity: 1;
+    .detail-input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .address-modal {
+        z-index: 6;
+        background-color: rgba(208, 207, 207,0.4);
+        height: 100%;
     }
 </style>
-    <div class="container">
-        <div class="row mt-5 d-flex align-items-center flex-wrap">
-            <div class="w-25 item-wrapper">
-                <div class="row">
-                <img src="@Html.DisplayFor(model => model.paymentCart.Product.ImageUrls)" alt="" class="d-block img-rounded rounded-3">
-                </div>
-                <div class="item-infor ">
-                    <div class="item-infor--wrapper m-2 d-flex">
-                    <span class="item-label fw-bold" style="min-width:100px;">Name :</span>
-                    <span class="item-name" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">@Html.DisplayFor(model => model.paymentCart.Product.ProductName)</span>
-                    </div>
-                    <div class="item-infor--wrapper m-2 d-flex">
-                        <span class="item-label fw-bold" style="min-width:100px">Price :</span>
-                        @{
-                            var paymentPrice = Model.paymentCart.Product.SellPrice * Model.paymentCart.Quantity ;
-                        }
-                    <span class="item-name">(đ) @Html.DisplayFor(model => paymentPrice )</span>
-                    </div>
-                    <div class="item-infor--wrapper m-2 d-flex">
-                        <span class="item-label fw-bold" style="min-width:100px">Category :</span>
-                        <span class="item-name"> @Html.DisplayFor(model => (model.paymentCart.Product.Category.CategoryName))</span>
-                    </div>
-                    <div class="item-infor--wrapper m-2 d-flex">
-                        <span class="item-label fw-bold" style="min-width:100px">Quantity :</span>
-                    <span class="item-name">@Html.DisplayFor(model => model.paymentCart.Quantity)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="w-75" style="border:2px solid black;">
-                <form method="post" style="margin:10px;">
-                    <h3 class="form-title text-center">Order</h3>
-                   
-                    <div class="form-infor--wrapper d-flex mb-4">
-                        <label for="owner_name" style="min-width:150px;">Delivery address: </label>
-                        <input type="text" asp-for="@Model.Order.DeliverDetais" placeholder="Your address .... " class="flex-grow-1 form-input" style="max-width:400px;">
-                    </div>
-                    <div class="form-infor--wrapper d-flex mb-4">
-                        <label for="owner_name" style="min-width:150px;">Delivery method: </label>
-                        <input type="text" placeholder="Grab ... " class="flex-grow-1 form-input" style="max-width:400px;" asp-for="@Model.Order.DeliverMethod">
-                    </div>
-                    <div class="form-infor--wrapper d-flex  mb-4">
-                        <label for="owner_name" style="min-width:150px;">Your name: </label>
-                        @if(Model.userLoggedin == null){
-                            <input type="text" name="owner_name" placeholder="Your name ...." class="flex-grow-1 form-input" style="max-width:400px;">
-                        }else{
-                            <input type="text" name="owner_name" value="@Model.userLoggedin.Fullname" disabled class="flex-grow-1 form-input" style="max-width:400px;">
-                        }
-                    </div>
-                    <div class="form-infor--wrapper">
-                        <button type="button" class="btn-voucher mb-4 ">Apply voucher</button>
-                        @if(Model.voucher == null){
-                            <span style="margin-left:30px; ">No voucher have applied</span>
-                        }else{
-                            <span style="margin-left:30px; "> Voucher @Html.DisplayFor(model => model.voucher.VoucherName) has applied to your invoice</span>
-                        }
-                        <div class="row  h-100 position-relative vouchers">
-                            <div class="voucher-wrapper">
-                                <div class="modal-header">
-                                    <h5 class=" voucher-title modal-title" id="exampleModalLabel">Apply your voucher</h5>
-                                    <span aria-hidden="true" style="font-size:1.5rem; cursor:pointer; background-color:rgb(164, 165, 165); padding:10px;" class="btn-close"></span>
-                                </div>
-                                <div class="voucher-list d-flex justify-content-between flex-wrap mt-5">
-                                    @if(Model.Voucher == null){
-                                        <h5>You haven't any voucher'</h5>
-                                    }else{
-                                    @foreach (var item in Model.Voucher)
-                                    {
-                                        <div class="voucher-item col-5 d-flex justify-content-around align-items-center ">
-                                            <img src="https://product.hstatic.net/1000008082/product/gift-voucher-200k_839a834d702545529312398fd61f76d7_grande.png"
-                                         class="img-rounded rounded-3 voucher-item__image" alt="voucher" style="width:100px" />
-                                            <div class="voucher-item__info w-200">
-                                                <p class="voucher-item__info-title text-left">@Html.DisplayFor(model => model.voucher.VoucherName)</p>
-                                                <p class="voucher-item__info-title text-left">Discount @Html.DisplayFor(model => model.voucher.Value)%</p>
-                                            </div>
-                                            <form method="post">
-                                                <input type="hidden" name="voucherId" value="@item.VoucherId" />
-                                                <button type="submit" class="btn btn-primary">Apply</button>
-                                            </form>
-                                        </div>
-                                    }
-                                    }
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="payment-wrapper w-100 d-flex justify-content-center mb-4">
-                        <div class="payment-list d-flex justify-content-around ">
-                            <img src="data:image/png;base64,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"
-                                 alt="" class="payment-item__method chosen-payment">
-                            <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay-Square.png"
-                                 alt="" class="payment-item__method">
-                            <img src="https://i.pinimg.com/564x/73/39/7a/73397a1716e4907a07c954f21fdcb9d1.jpg"
-                                 alt="" class="payment-item__method">
-                        </div>
-                    </div>
-                <textarea name="note_for_seller" id="" cols="60" rows="5" placeholder="Note for seller ...." style="padding:10px;"asp-for="@Model.Order.Note"></textarea>
-                    </br>
-                    <div class="form-infor--wrapper d-flex  mb-4 justify-content-between mt-3">
-                        <button  class="btn btn-primary ">
-                            <a href="../Pages/Products/Index" style="color:white;text-decoration:none;">Back to shopping</a>
-                        </button>
-                    <button type="submit" class="btn btn-primary " asp-page-handler="PurchaseItem">Continue purcharse</button>
-                    </div>
-                </form>
-            <div class="modal fade" id="ignismyModal" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
 
-                        <div class="modal-body">
-                            <div class="thank-you-pop">
-                                <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
-                                <h1>Thank You!</h1>
-                                <p>Your submission is received and we will contact you soon</p>
-                                <h3 class="cupon-pop">Your Id: <span>12345</span></h3>
+    <div class="container">
+        <div class="row mt-5 d-flex  align-items-center"
+             style="background-color: rgb(231, 231, 231); width:100%; height:100px; border-radius: 15px; padding:5px;">
+            <div class="col-2 text-center">
+                <div class="title-wrapper">
+                    <span class="address-title">Delivery address</span>
+                </div>
+                <div class="user-wrapper">
+                    <p class="user-title" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><strong>@Model.userLoggedin.UserName</strong></p>
+                    <p class="phonenumber-title"><strong>0335349368</strong></p>
+                </div>
+            </div>
+            <div class="col-8">
+                <p>32 Le Duan, Ben Nghe, Quan 1, Ho Chi Minh</p>
+            </div>
+            <div class="col-2">
+                <span class="change-address " style="color:rgb(54, 179, 9);font-size:1.3rem;cursor: pointer;" data-toggle="modal" data-target=".bd-example-modal-lg">Change address</span>
+            </div>
+        </div>
+
+        <div class="row mt-5 d-flex justify-content-center flex-wrap"
+             style="border:2px solid rgb(136, 220, 19); padding:10px 0 10px 0;border-radius: 15px;">
+            <div class="col-4 text-center"
+                 style="border-top-left-radius:15px;border-bottom-left-radius:15px; border-right: 2px dashed black;">
+                <img src="@Html.DisplayFor(model => model.paymentCart.Product.ImageUrls)"
+                     class="img-responsive img-item" />
+                <div class="item-info__wrapper">
+                    <div class="item-wrapper">
+                        <p class="item-label fw-bold">Name </p>
+                        <p class="item-name" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">@Html.DisplayFor(model => model.paymentCart.Product.ProductName)</p>
+                    </div>
+                    <div class="item-wrapper ">
+                        <p class="item-label fw-bold">Quantity </p>
+                        <p class="item-name">@Html.DisplayFor(model => model.paymentCart.Quantity)</p>
+                    </div>
+                    @{
+                        var totalPrice = Model.paymentCart.Product.SellPrice * Model.paymentCart.Quantity;
+                    }
+                    <div class="item-wrapper ">
+                        <p class="item-label fw-bold">Price </p>
+                        <p class="item-name">đ @Html.DisplayFor(model => totalPrice)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 text-center">
+                <div class="detail-wrapper">
+                    <div class="detail-item-wrapper">
+                        <label class="detail-label fw-bold">Delivery detail</label>
+                    <input type="text" name="" id="" class="detail-input delivery_detail" placeholder="Give us your annoucement ..." />
+                    </div>
+                    <div class="detail-item-wrapper">
+                        <label class="detail-label fw-bold">Payment detail</label>
+                    <input type="text" name="" id="" class="detail-input payment_detail" placeholder="Give us your annoucement ..." />
+                    </div>
+                </div>
+                <div class="payment-methods-wrapper d-flex justify-content-around " style="margin-left: 150px;   ">
+                    <div class="payment-method-item">
+                        <img src="https://homepage.momocdn.net/img/logo-momo.png" alt="" class="momo-payment payment">
+                    </div>
+                    <div class="payment-method-item">
+                        <img src="https://cdn.tgdd.vn/2020/04/GameApp/image-180x180.png" alt=""
+                             class="zalo-payment payment">
+                    </div>
+                    <div class="payment-method-item">
+                        <img src="https://previews.123rf.com/images/iconisa/iconisa1710/iconisa171006475/88777494-direct-payments-concept-icon.jpg"
+                             alt="" class="momo-payment payment choose">
+                    </div>
+                </div>
+                <div class="modal fade" id="ignismyModal" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <div class="thank-you-pop">
+                                    <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+                                    <h1>Thank You!</h1>
+                                    <p>Your submission is received and we will contact you soon</p>
+                                    <h3 class="cupon-pop">Your Id: <span>12345</span></h3>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 " style="margin-left: 150px; ">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text fw-bold"
+                               style="background-color: rgb(136, 220, 19); padding:10px 10px;"
+                               for="delivery_method">Options</label>
+                    </div>
+                    <select class="delivery_methods text-center" id="delivery_method" style="width:200px;">
+                        <option selected class="method" value="Grab">Grab</option>
+                        <option value="Self-deliver">Self-deliver</option>
+                        <option value="Take by yourself">Take by yourself</option>
+                    </select>
+                </div>
+                <div class="order-detail">
+                    <textarea class="rounded-3 note" rows="3" cols="80"
+                              placeholder="Give seller some annoucement ...."></textarea>
+                </div>
             </div>
+        </div>
+        <div class="row mt-5 " style="background-color: rgb(231, 231, 231); width:100%; height:280px; ">
+            <div class="section-title-wrapper d-flex justify-content-between align-items-center"
+                 style="width:100%;height:50px ;border-bottom: 2px solid black;padding:10px 0 10px 30px;">
+                <span class="section" style="font-size:18px;">Payment methods</span>
+                <div class="payment-method-wrapper d-flex justify-content-between align-items-center">
+                    <span class="payment-method-detail " style="padding:0 100px 0 0;">Payment directly</span>
+                    <span class="change-method p-4"
+                          style="color:rgb(54, 179, 9);font-size:1rem;cursor: pointer;">Change</span>
+                </div>
+            </div>
+            <div class="form-group-wrapper d-flex justify-content-end p-3">
+                <ul class="list-data" style="list-style:none;">
+                    <li class="data-item ">
+                        <p class="data-item__label"> Total price</p>
+                        <p class="data-item__content"> đ @Html.DisplayFor(model => totalPrice)</p>
+                    </li>
+                    <li class="data-item">
+                        <p class="data-item__label"> Transport fee</p>
+                        <p class="data-item__content"> đ 20000</p>
+                    </li>
+                    @{
+                        var totalPayment = totalPrice + 20000;
+                    }
+                    <li class="data-item">
+                        <p class="data-item__label"> Total payment</p>
+                        <p class="data-item__content" style="color:rgb(54, 179, 9)"> đ @Html.DisplayFor(model => totalPayment)</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="section-title-wrapper d-flex justify-content-end align-items-center"
+                 style="width:100%;height:50px ;border-top: 2px solid black;padding:10px 50px 10px 30px;">
+                <form method="post">
+                    <input type="hidden" asp-for="@Model.Order.DeliverMethod" class="form-delivery_method" />
+                    <input type="hidden" asp-for="@Model.Order.DeliverDetais" class="form-delivery_detail" />
+                    <input type="hidden" asp-for="@Model.Order.PaymentDetais" class="form-payment_detail"  />
+                    <input type="hidden" asp-for="@Model.Order.Note" class="form-note" />
+                    <button type="submit" class="btn btn-success" asp-page-handler="PurchaseItem">Purchase</button>
+                </form>
             </div>
         </div>
     </div>
-    <script src="~/js/Payment.js"></script>
+
+    </div>
+
+<script src="~/js/Payment.js"></script>

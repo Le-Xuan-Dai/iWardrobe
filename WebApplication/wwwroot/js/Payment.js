@@ -1,34 +1,34 @@
-﻿const listOfItem = document.querySelectorAll('.item');
-const btnChooseVoucher = document.querySelector('.btn-voucher');
+﻿const momoPayment = document.querySelector(".momo-payment");
+const zaloPayment = document.querySelector(".zalo-payment");
+const delivery_detail = document.querySelector(".delivery_detail");
+const delivery_method = document.querySelector(".delivery_methods")
+const payment_detail = document.querySelector(".payment_detail");
+const note = document.querySelector(".note");
 
-listOfItem.forEach((item) => {
-    var currentAmount = item.querySelector('.amount').innerHTML;
-    var increaseBtn = item.querySelector('.increase-btn');
-    var decreaseBtn = item.querySelector('.decrease-btn');
-    const price = item.querySelector('.original-price').innerHTML;
-    var currentPrice = item.querySelector('.price').innerHTML;
+const formDeliveryDetail = document.querySelector(".form-delivery_detail");
+const formPaymentDetail = document.querySelector(".form-payment_detail");
+const formDeliveryMethod = document.querySelector(".form-delivery_method");
+const formNote = document.querySelector(".form-note");
 
-    increaseBtn.addEventListener('click', () => {
-        currentAmount++;
-        item.querySelector('.amount').innerHTML = currentAmount;
-        item.querySelector('.price').innerHTML = price * currentAmount;
-        item.querySelector('.quantity').value = currentAmount;
-    })
-
-    decreaseBtn.addEventListener('click', () => {
-        if (currentAmount <= 1) {
-            return;
-        } else {
-            currentAmount--;
-            item.querySelector('.amount').innerHTML = currentAmount;
-            item.querySelector('.price').innerHTML = price * currentAmount;
-            item.querySelector('.quantity').value = currentAmount;
-        }
-    })
+momoPayment.addEventListener('click', () => {
+    alert("This functionality will launch soon.");
 })
-btnChooseVoucher.addEventListener('click', () => {
-    document.querySelector('.voucher-wrapper').style.display = 'block';
+zaloPayment.addEventListener('click', () => {
+    alert("This functionality will launch soon.");
 })
-document.querySelector('.btn-close').addEventListener('click', () => {
-    document.querySelector('.voucher-wrapper').style.display = 'none';
+
+delivery_detail.addEventListener('change', (e) => {
+    formDeliveryDetail.value = e.target.value;
+})
+payment_detail.addEventListener('change', (e) => {
+    formPaymentDetail.value = e.target.value;
+})
+note.addEventListener('change', (e) => {
+    formNote.value = e.target.value;
+    console.log(formNote.value);
+})
+delivery_method.value = "Grab"
+delivery_method.addEventListener('change', (e) => {
+    formDeliveryMethod.value = e.target.value;
+    console.log(formNote.value);
 })

@@ -64,14 +64,17 @@ namespace WebApplication.Pages.Cart_Payment
                 {
                     order.DeliverMethod = Order.DeliverMethod;
                     order.DeliverDetais = Order.DeliverDetais;
+                    order.PaymentDetais = Order.PaymentDetais;
+                    order.Note = Order.Note;
                 }
                 else
                 {
                     order.DeliverMethod = "Self-transport";
                     order.DeliverDetais = "Nothing";
+                    order.PaymentDetais = "Nothing";
+
                 }
                 order.PaymentMethod = DIRECT_PAYMENT;
-                order.PaymentDetais = "Nothing";
                 order.OrderStatus = DEEFAULT_STATUS;
 
                 await _orderServices.Create(order);
