@@ -1,4 +1,5 @@
 using BusinessObjects;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -22,17 +23,19 @@ namespace WebApplication.Pages.Cart_Payment
         private readonly UserServices _userServices;
         private readonly ProductServices _productServices;
         private readonly OrderServices _orderServices;
-        public PaymentModel (CartDetailServices cartDetailServices , UserServices userServices, ProductServices productServices, OrderServices orderServices)
+        private readonly UserManager<User> _userManager; 
+        public PaymentModel (CartDetailServices cartDetailServices, UserManager<User> userManager, UserServices userServices, ProductServices productServices, OrderServices orderServices)
         {
             _cartDetailServices = cartDetailServices;
             _userServices = userServices;
             _productServices = productServices;
             _orderServices = orderServices;
+            _userManager = userManager;
         }
         [BindProperty]
         public Order Order { get; set; }
         public CartDetail paymentCart { get; set; }
-
+        public User userLoggedin { get; set; }
         public List<Voucher> Voucher { get; set; }
 
         public Product productPayment { get; set; }
@@ -41,12 +44,10 @@ namespace WebApplication.Pages.Cart_Payment
         public async Task<IActionResult> OnGet()
         {
             var paymentCartId = TempData["paymentCartId"] as int?;
-            paymentCart = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == paymentCartId).FirstOrDefaultAsync();
-            var currentUser = await _userServices.GetAll().Where(u => u.Id == paymentCart.UserId).FirstOrDefaultAsync();
-            
+            userLoggedin = await _userManager.GetUserAsync(this.User);
+            paymentCart = await _cartDetailServices.GetAll().Include(p => p.Product).FirstOrDefaultAsync(c => c.CartDetailId == paymentCartId);
             TempData["paymentCart"] = paymentCart.CartDetailId;
             
-
             return Page();
         }
 
@@ -59,14 +60,25 @@ namespace WebApplication.Pages.Cart_Payment
                 Order order = new Order();
                 order.UserId = paymentCart.UserId;
                 order.ProductId = paymentCart.ProductId;
-                order.DeliverMethod = "Self-transport";
-                order.DeliverDetais = "Nothing";
+                if(Order != null)
+                {
+                    order.DeliverMethod = Order.DeliverMethod;
+                    order.DeliverDetais = Order.DeliverDetais;
+                    order.PaymentDetais = Order.PaymentDetais;
+                    order.Note = Order.Note;
+                }
+                else
+                {
+                    order.DeliverMethod = "Self-transport";
+                    order.DeliverDetais = "Nothing";
+                    order.PaymentDetais = "Nothing";
+
+                }
                 order.PaymentMethod = DIRECT_PAYMENT;
-                order.PaymentDetais = "Nothing";
                 order.OrderStatus = DEEFAULT_STATUS;
 
                 await _orderServices.Create(order);
-
+                await _cartDetailServices.Delete(paymentCart);
                 return RedirectToPage("./Index");
             }
             return Page();

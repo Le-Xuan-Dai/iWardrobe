@@ -1,30 +1,14 @@
 ﻿const listOfItems = document.querySelectorAll(".item");
 const config = { childList: true, subtree: true };
 var price = document.querySelector('.price');
-
+var btnPayment = document.querySelector('.btnPayment');
 listOfItems.forEach((item) => {
-    const increaseBtn = item.querySelector(".increase-btn");
-    const decreaseBtn = item.querySelector(".decrease-btn");
     const pricePerItem = item.querySelector(".original-price").innerHTML;
     var currentAmount = item.querySelector(".amount").innerHTML;
     var checkboxIsChecked = item.querySelector(".buy-checking");
     var cartIdhidden = item.querySelector(".cartIdhidden").innerHTML;
 
-
-    increaseBtn.addEventListener("click", () => {
-        currentAmount++;
-
-        item.querySelector(".amount").innerHTML = currentAmount;
-        item.querySelector(".price").innerHTML = pricePerItem * currentAmount;
-
-    });
-
-    decreaseBtn.addEventListener("click", () => {
-        if (currentAmount <= 1) return;
-        currentAmount--;
-        item.querySelector(".amount").innerHTML = currentAmount;
-
-    });
+   
     checkboxIsChecked.addEventListener("change", (e) => {
         hideOtherCheckbox(checkboxIsChecked, cartIdhidden, pricePerItem * currentAmount, document.querySelector('.cartId'), price);
     })
@@ -38,7 +22,8 @@ function hideOtherCheckbox(currentCheckbox, cartIdhidden, totalPrice, cartId, pr
 
     listOfCheckbox.forEach(checkbox => {
         if (currentCheckbox.checked) {
-
+            btnPayment.style.backgroundColor = "rgb(154 205 50)";
+            btnPayment.disabled = false;
             cartId.value = cartIdhidden;
             priceHtml.value = totalPrice;
             console.log(cartId.value);
@@ -48,7 +33,8 @@ function hideOtherCheckbox(currentCheckbox, cartIdhidden, totalPrice, cartId, pr
         } else {
             cartId.value = 0;
             console.log(cartId.value);
-
+            btnPayment.style.backgroundColor = "rgba( 169, 169, 169, 1 )";
+            btnPayment.disabled = true;
             checkbox.style.visibility = 'visible';
         }
     })

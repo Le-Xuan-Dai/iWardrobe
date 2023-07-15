@@ -48,7 +48,7 @@ namespace WebApplication.Pages.Products
         public async Task<IActionResult> OnGet()
         {
             var userClaim = await _userManager.GetUserAsync(this.User);
-            CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == userClaim.Id).ToListAsync();
+            CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
             User user = _userServices.FirstOrDefault(u => u.Id == userClaim.Id);
             listCartProduct = GetListProductInCart(CartDetail);
             RandomProduct = await _productServices.GetAll().ToListAsync();
@@ -97,7 +97,7 @@ namespace WebApplication.Pages.Products
                 if (cartDetail.Quantity == 0)
                 {
                     await _cartDetailServices.Delete(cartDetail);
-                    CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == userClaim.Id).ToListAsync();
+                    CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
                     listCartProduct = GetListProductInCart(CartDetail);
                     RandomProduct = await _productServices.GetAll().ToListAsync();
                     return Page();
@@ -106,7 +106,7 @@ namespace WebApplication.Pages.Products
             }
 
             await _cartDetailServices.Update(cartDetail);
-            CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == userClaim.Id).ToListAsync();
+            CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
             listCartProduct = GetListProductInCart(CartDetail);
             RandomProduct = await _productServices.GetAll().ToListAsync();
             return Page();
