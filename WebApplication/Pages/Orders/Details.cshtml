@@ -1,0 +1,163 @@
+﻿@page "/shop/orders/details"
+@model WebApplication.Pages.Shop.Orders.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid mb-4">
+    <a asp-page="./Index"
+       class="btnPagination btn btn-outline-secondary btn-sm"
+       style="border: none;">
+        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+        &nbsp;Back to list
+    </a>
+</div>
+<div class="row px-5">
+    <div class="col">
+        <img src=@Model.Order.Product.ImageUrls[0]
+             class="img-thumbnail" alt="...">
+    </div>
+    <div class="col px-5">
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Product Name</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.Product.ProductName</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Product ID</p>
+            <p style="color: #A1A1A1; font-style: italic;">#@Model.Order.Product.ProductId</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Type of Order</p>
+            <p style="color: #A1A1A1; font-style: italic;">Buy</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Quantity</p>
+            <p style="color: #A1A1A1; font-style: italic;">1</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Size</p>
+            <p style="color: #A1A1A1; font-style: italic;">L</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Color</p>
+            <p style="color: #A1A1A1; font-style: italic;">Mix color</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Weight</p>
+            <p style="color: #A1A1A1; font-style: italic;">50(g)</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Price</p>
+            <p style="color: #A1A1A1; font-style: italic;">(đ)@Model.Order.Product.SellPrice</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Note</p>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.Note</p>
+        </div>
+    </div>
+    <div class="col px-5">
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Customer</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.User.Fullname</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Email</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.User.Email</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Phone Number</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.User.PhoneNumber</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Address</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.User.Address</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Deliver Method</p>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.DeliverMethod</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Deliver Details</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.DeliverDetais</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Payment Method</p>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.PaymentMethod</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span style="font-weight: bold;">Payment Details</span>
+            <p style="color: #A1A1A1; font-style: italic;">@Model.Order.PaymentDetais</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p style="font-weight: bold;">Status</p>
+            @{
+                if (Model.Order.OrderStatus.Equals("PENDING"))
+                {
+                    <p class="badge text-bg-info">Pending</p>
+                }
+                if (Model.Order.OrderStatus.Equals("PROCESSING"))
+                {
+                    <p class="badge text-bg-success">Processing</p>
+                }
+                if (Model.Order.OrderStatus.Equals("SHIPPED"))
+                {
+                    <p class="badge text-bg-primary">Shipped</p>
+                }
+                if (Model.Order.OrderStatus.Equals("DELIVERED"))
+                {
+                    <p class="badge text-bg-dark">Delivered</p>
+                }
+                if (Model.Order.OrderStatus.Equals("CANCELLED"))
+                {
+                    <p class="badge text-bg-danger">Cancelled</p>
+                }
+            }
+        </div>
+        <div class="text-center">
+            <button style="background-color:#C0E862; width: 300px;"
+                    type="button"
+                    class="btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#updateOrderStatus">
+                Update Status
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="updateOrderStatus" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post" class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Order Status</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Please select the status of order and ensure to choose the appropriate option based on the current state of your order.</p>
+                <input type="hidden" name="id" value="@Model.Order.OrderId" />
+                <select class="form-select" name="orderStatus">
+                    @{
+                        List<string> options = new List<string>() { "PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED" };
+                        foreach (var option in options)
+                        {
+                            string label = option.Substring(0, 1).ToUpper() + option.Substring(1);
+                            bool selected = option.Equals(Model.Order.OrderStatus);
+                            <option selected="@selected" value="@option">@label</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="modal-footer d-flex">
+                <button style="background-color:#C0E862;" type="submit" class="btn"
+                        data-bs-dismiss="modal">
+                    <i class="fa fa-paper-plane-o"
+                       aria-hidden="true"></i>&nbsp;Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

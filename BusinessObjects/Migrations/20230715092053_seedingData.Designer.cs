@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(IWardrobeContext))]
-    [Migration("20230708164155_seedingData")]
+    [Migration("20230715092053_seedingData")]
     partial class seedingData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

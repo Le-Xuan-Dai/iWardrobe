@@ -38,12 +38,14 @@ namespace WebApplication
             {
                 string connectString = Configuration.GetConnectionString("IWardrobeConnection");
                 options.UseSqlServer(connectString);
+                options.AddInterceptors(new SoftDeleteInterceptor());
             });
 
             // Đăng kí services
             services.AddScoped<ProductServices>();
             services.AddScoped<UserServices>();
             services.AddScoped<CategoryServices>();
+            services.AddScoped<OrderServices>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IWardrobeContext>()

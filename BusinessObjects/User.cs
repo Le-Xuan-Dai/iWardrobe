@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, ISoftDelete
     {
         [StringLength(50)]
         public string Fullname { get; set; }
@@ -40,6 +40,6 @@ namespace BusinessObjects
 
         public virtual List<Favorite>? Favorites { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; }
     }
 }
