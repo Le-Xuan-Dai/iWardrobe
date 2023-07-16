@@ -63,10 +63,10 @@ namespace WebApplication.Pages.Products
                         {
                             pro.Quantity++;
                             await _cartDetailServices.Update(pro);
-                            //Reload data from database 
+                        //Reload data from database 
 
-                            return RedirectToPage("./Index");
-                        }
+                        return RedirectToPage("./Cart");
+                    }
                     }
                     cartDetail.UserId = user.Id;
                     cartDetail.Quantity = 1;
@@ -74,7 +74,7 @@ namespace WebApplication.Pages.Products
             }
             catch (Exception e)
             {
-                return Redirect("https://localhost:5001/login");
+                return RedirectToPage("/Index");
             }
             return RedirectToPage("./Cart");
         }

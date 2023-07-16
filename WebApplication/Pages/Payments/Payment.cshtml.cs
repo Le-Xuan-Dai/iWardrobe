@@ -48,7 +48,7 @@ namespace WebApplication.Pages.Payments
             }
             catch (Exception e)
             {
-                return RedirectToPage("./Index");
+                return NotFound();
             }
 
             return Page();

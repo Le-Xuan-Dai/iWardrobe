@@ -103,7 +103,15 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            user.Fullname = Input.Fullname;
+            user.PhoneNumber = Input.PhoneNumber;
+            user.BrandName = Input.BrandName;
+            user.Address = Input.Address;
+            user.IdentificationCode = Input.IdentificationCode;
+
+            await _userServices.Update(user);
+
+         /*   var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
@@ -112,7 +120,7 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
-            }
+            }*/
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
