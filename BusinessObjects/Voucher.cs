@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class Voucher
+    public class Voucher : ISoftDelete
     {
         [Key]
         public int VoucherId { get; set; }

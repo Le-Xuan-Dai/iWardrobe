@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class Order
+    public class Order : ISoftDelete
     {
         [Key]
         public int OrderId { get; set; }

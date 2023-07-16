@@ -26,7 +26,7 @@ namespace BusinessObjects
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server =(local); database = IWardrobeDB;uid=sa;pwd=123456;");
+            //optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,20 +60,22 @@ namespace BusinessObjects
             }
 
             modelBuilder.Entity<CartDetail>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<Category>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<Commnent>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<Order>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<Product>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<User>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<Voucher>().Property(b => b.IsDeleted).HasDefaultValue(false);
-
             modelBuilder.Entity<Favorite>().Property(b => b.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<CartDetail>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Category>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Commnent>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Order>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Product>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<User>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Voucher>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Favorite>().HasQueryFilter(x => x.IsDeleted == false);
         }
     }
 }

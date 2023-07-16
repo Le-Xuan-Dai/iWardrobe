@@ -7,10 +7,10 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="d-flex justify-content-center align-items-center text-center">
-        <button class="rounded-circle d-flex align-items-center justify-content-center btn btn-outline-light"
+        <a asp-page="/Products/Cart" class="rounded-circle d-flex align-items-center justify-content-center btn btn-outline-light"
                 style="width: 32px; height: 32px; border: none; right: 1.5rem; top: 1.5rem;">
             <i class="fa-solid fa-cart-shopping"></i>
-        </button>
+        </a>
         <button class="rounded-circle d-flex align-items-center justify-content-center btn btn-outline-light"
                 style="width: 32px; height: 32px; border: none; right: 1.5rem; top: 1.5rem;">
             <i class="fa-solid fa-bell"></i>

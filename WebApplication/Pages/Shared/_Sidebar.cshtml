@@ -8,7 +8,8 @@
     </div>
 
     <div class="menu-items">
-        <ul class="nav-links p-0">
+        <ul class="nav-links mb-0 p-0">
+            <p class="text-center fw-bolder fs-5 m-0">Customer</p>
             <li>
                 <a asp-area="" asp-page="/Home">
                     <i class="fa-solid fa-house"></i>
@@ -16,27 +17,51 @@
                 </a>
             </li>
             <li>
+                <a asp-area="" asp-page="/Home">
+                    <i class="fa-solid fa-store"></i>
+                    <span class="link-name">Favorites</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-page="/Orders/MyOrder">
+                    <i class="fa-solid fa-store"></i>
+                    <span class="link-name">My Orders</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav-links mb-0 p-0">
+            <p class="text-center fw-bolder fs-5 m-0">Supplier</p>
+            <li>
                 <a asp-area="" asp-page="/Products/Index">
                     <i class="fa-solid fa-store"></i>
-                    <span class="link-name">Your store</span>
+                    <span class="link-name">My Wardrobe</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-page="/Orders/Index">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span class="link-name">Orders</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav-links mb-0 p-0">
+            <p class="text-center fw-bolder fs-5 m-0">Admin</p>
+            <li>
+                <a asp-area="Admin" asp-page="/Roles/Index">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span class="link-name">Roles</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-page="/Users/Index">
+                    <i class="fa-solid fa-shapes"></i>
+                    <span class="link-name">Users</span>
                 </a>
             </li>
             <li>
                 <a asp-area="" asp-page="/Categories/Index">
                     <i class="fa-solid fa-shapes"></i>
                     <span class="link-name">Categories</span>
-                </a>
-            </li>
-            <li>
-                <a asp-area="Admin" asp-page="/Roles/Index">
-                    <i class="fa-solid fa-shapes"></i>
-                    <span class="link-name">Role Management</span>
-                </a>
-            </li>
-            <li>
-                <a asp-area="Admin" asp-page="/Users/Index">
-                    <i class="fa-solid fa-shapes"></i>
-                    <span class="link-name">User Management</span>
                 </a>
             </li>
         </ul>

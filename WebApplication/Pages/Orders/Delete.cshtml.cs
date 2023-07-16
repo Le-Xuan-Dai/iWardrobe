@@ -8,21 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
-using Services;
 
-namespace WebApplication.Pages.Categories
+namespace WebApplication.Pages.Shop.Orders
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Supplier")]
     public class DeleteModel : PageModel
     {
-        private readonly CategoryServices _categoryServices;
-        public DeleteModel(CategoryServices categoryServices)
+        private readonly BusinessObjects.IWardrobeContext _context;
+
+        public DeleteModel(BusinessObjects.IWardrobeContext context)
         {
-            _categoryServices = categoryServices;
+            _context = context;
         }
 
         [BindProperty]
-        public Category Category { get; set; }
+        public Order Order { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,9 +31,11 @@ namespace WebApplication.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _categoryServices.GetAll().Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
+            Order = await _context.Orders
+                .Include(o => o.Product)
+                .Include(o => o.User).FirstOrDefaultAsync(m => m.OrderId == id);
 
-            if (Category == null)
+            if (Order == null)
             {
                 return NotFound();
             }
@@ -47,10 +49,12 @@ namespace WebApplication.Pages.Categories
                 return NotFound();
             }
 
+            Order = await _context.Orders.FindAsync(id);
 
-            if (Category != null)
+            if (Order != null)
             {
-                await _categoryServices.DeleteById(id);
+                _context.Orders.Remove(Order);
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

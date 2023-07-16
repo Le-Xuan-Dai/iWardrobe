@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/admin/categories"
 @model WebApplication.Pages.Categories.IndexModel
 
 @{
@@ -38,7 +38,7 @@
                         @Html.DisplayFor(modelItem => item.CategoryName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.User.Id)
+                        @Html.DisplayFor(modelItem => item.User.Fullname)
                     </td>
                     <td>
                         <div class="h-100 d-flex align-items-center justify-content-center">
