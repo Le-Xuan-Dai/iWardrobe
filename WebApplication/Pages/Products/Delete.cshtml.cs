@@ -42,7 +42,7 @@ namespace WebApplication.Pages.Products
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync([FromForm]int? id)
         {
             if (id == null)
             {

@@ -1,0 +1,252 @@
+﻿@page "/Payment"
+@model PaymentModel
+@{
+    ViewData["Title"] = "Payment";
+}
+<style>
+    .data-item,
+    .item-wrapper {
+        display: flex;
+        font-size: 1.2rem;
+    }
+
+    .data-item__label {
+        min-width: 230px;
+    }
+
+    .data-item__content {
+        flex: 1;
+    }
+
+    .img-item {
+        width: 300px;
+        border-radius: 15px;
+        margin-bottom: 10px;
+    }
+
+    .item-wrapper {
+        justify-content: space-around;
+    }
+
+    .item-label {
+        max-width: 50px;
+    }
+
+    .item-name {
+        flex: 1;
+        max-width: 150px;
+        text-align: right;
+    }
+
+    .payment-methods-wrapper {
+        padding: 15px 15px;
+        border: 2px solid black;
+        width: 300px;
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+        .payment-methods-wrapper::after {
+            content: "Payment methods";
+            position: absolute;
+            background-color: white;
+            top: -10px;
+            padding: 0 10px;
+        }
+
+    .payment {
+        width: 50px;
+        cursor: pointer;
+    }
+
+    .choose {
+        border: 2px solid blue;
+        border-radius: 10px;
+    }
+
+    .detail-item-wrapper {
+        margin-bottom: 15px;
+        display: flex;
+    }
+
+    .detail-label {
+        min-width: 150px;
+    }
+
+    .detail-input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .address-modal {
+        z-index: 6;
+        background-color: rgba(208, 207, 207,0.4);
+        height: 100%;
+    }
+</style>
+
+<div class="container">
+    <div class="mt-5 rounded-2" style="width:100%; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+        <div class="p-3" style="background-color: #152534; color: #FFF;">
+            <h5 class="m-0"><i class="fa-solid fa-location-dot"></i>&nbsp;Delivery Information</h5>
+        </div>
+        <div class="d-flex align-items-center justify-content-around" style="padding:16px 32px;">
+            <div class="flex-fill" style="padding-left: 24px;">
+                <div class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Fullname</span>
+                    <p style="color: #A1A1A1; font-style: italic;">@Model.userLoggedin.Fullname</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Adress</span>
+                    <p style="color: #A1A1A1; font-style: italic;">@Model.userLoggedin.Address</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Phone</span>
+                    <p style="color: #A1A1A1; font-style: italic;">@Model.userLoggedin.PhoneNumber</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Email</span>
+                    <p style="color: #A1A1A1; font-style: italic; margin: 0;">@Model.userLoggedin.Email</p>
+                </div>
+            </div>
+            <div class="text-center" style="width: 320px;">
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg">Change address</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container row mt-5 m-0 p-0">
+        <div class="col-8" style="padding-left: unset;">
+            <div style=" box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                <div class="p-3" style="background-color: #152534; color: #FFF;">
+                    <h5 class="m-0"><i class="fa-solid fa-truck"></i>&nbsp; Delivery & Payment Method</h5>
+                </div>
+                <div class="px-4 py-2">
+                    <div class="mt-3 detail-item-wrapper">
+                        <label class="detail-label fw-bold">Delivery details</label>
+                        <textarea style="resize:none;" type="text" name="" id="" class="rounded-3 note p-2" rows="3" cols="80"
+                                  placeholder="Delivery details..."></textarea>
+                    </div>
+                    <div class="input-group mb-3 " style="margin-left: 150px; ">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text fw-bold"
+                                   style="background-color: rgb(136, 220, 19); padding:10px 10px;"
+                                   for="delivery_method">Options</label>
+                        </div>
+                        <select class="delivery_methods text-center" id="delivery_method" style="width:200px;">
+                            <option selected class="method" value="Grab">Grab</option>
+                            <option value="Self-deliver">Self-deliver</option>
+                            <option value="Take by yourself">Take by yourself</option>
+                        </select>
+                    </div>
+                    <div class="detail-item-wrapper">
+                        <label class="detail-label fw-bold">Payment details</label>
+                        <textarea style="resize:none;" type="text" name="" id="" class="rounded-3 note p-2" rows="3" cols="80"
+                                  placeholder="Payment details..."></textarea>
+                    </div>
+                    <div class="payment-methods-wrapper d-flex justify-content-around " style="margin-left: 150px;   ">
+                        <div class="payment-method-item">
+                            <img src="https://homepage.momocdn.net/img/logo-momo.png" alt="" class="momo-payment payment">
+                        </div>
+                        <div class="payment-method-item">
+                            <img src="https://cdn.tgdd.vn/2020/04/GameApp/image-180x180.png" alt=""
+                                 class="zalo-payment payment">
+                        </div>
+                        <div class="payment-method-item">
+                            <img src="https://previews.123rf.com/images/iconisa/iconisa1710/iconisa171006475/88777494-direct-payments-concept-icon.jpg"
+                                 alt="" class="momo-payment payment choose">
+                        </div>
+                    </div>
+                    <div class="detail-item-wrapper">
+                        <label class="detail-label fw-bold">Note</label>
+                        <textarea style="resize:none;" class="rounded-3 note p-2" rows="3" cols="80"
+                                  placeholder="Note..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="ignismyModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="thank-you-pop">
+                                <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+                                <h1>Thank You!</h1>
+                                <p>Your submission is received and we will contact you soon</p>
+                                <h3 class="cupon-pop">Your Id: <span>12345</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-4 p-4 text-center"
+             style=" box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; padding-right: unset;">
+            <img src="@Html.DisplayFor(model => model.paymentCart.Product.ImageUrls[0])"
+                 class="img-responsive img-item" style="margin-bottom: 16px;" />
+            <div class="item-info__wrapper">
+                <div class="d-flex justify-content-between px-4">
+                    <span style="font-weight: bold;">Name</span>
+                    <p style="color: #A1A1A1; font-style: italic; padding-left: 8px;">@Html.DisplayFor(model => model.paymentCart.Product.ProductName)</p>
+                </div>
+                <div class="d-flex justify-content-between px-4">
+                    <span style="font-weight: bold;">Quantity</span>
+                    <p style="color: #A1A1A1; font-style: italic; padding-left: 8px;">@Html.DisplayFor(model => model.paymentCart.Quantity)</p>
+                </div>
+                <div class="d-flex justify-content-between px-4">
+                    <span style="font-weight: bold;">Size</span>
+                    <p style="color: #A1A1A1; font-style: italic; padding-left: 8px;">L</p>
+                </div>
+                @{
+                    var totalPrice = Model.paymentCart.Product.SellPrice * Model.paymentCart.Quantity;
+                }
+                <div class="d-flex justify-content-between px-4">
+                    <span style="font-weight: bold;">Price</span>
+                    <p style="color: #A1A1A1; font-style: italic; padding-left: 8px;">(đ) @Html.DisplayFor(model => totalPrice)</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container row mt-5 m-0 p-0"
+         style="background-color: rgb(231, 231, 231); width:100%; ">
+        <div class="form-group-wrapper d-flex justify-content-end p-3">
+            <ul class="list-data m-0 p-0" style="list-style:none; width: 320px;">
+                <li class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Total price</span>
+                    <p style="color: #A1A1A1; font-style: italic;">(đ) @Html.DisplayFor(model => totalPrice)</p>
+                </li>
+                <li class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Transport fee</span>
+                    <p style="color: #A1A1A1; font-style: italic;">(đ) 20000</p>
+                </li>
+                @{
+                    var totalPayment = totalPrice + 20000;
+                }
+                <li class="d-flex justify-content-between">
+                    <span style="font-weight: bold;">Total payment</span>
+                    <p style="color: #A1A1A1; font-style: italic; margin: 0; color:rgb(54, 179, 9)">(đ) @Html.DisplayFor(model => totalPayment)</p>
+                </li>
+            </ul>
+        </div>
+        <div class="section-title-wrapper d-flex justify-content-end align-items-center p-3"
+             style="width:100%;border-top: 2px solid black;">
+            <form method="post">
+                <input type="hidden" asp-for="@Model.Order.DeliverMethod" class="form-delivery_method" />
+                <input type="hidden" asp-for="@Model.Order.DeliverDetais" class="form-delivery_detail" />
+                <input type="hidden" asp-for="@Model.Order.PaymentDetais" class="form-payment_detail" />
+                <input type="hidden" asp-for="@Model.Order.Note" class="form-note" />
+                <button type="submit" class="btn btn-success" asp-page-handler="PurchaseItem">
+                    <i class="fa-regular fa-money-bill-1"></i>&nbsp;Purchase
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Payment.js"></script>

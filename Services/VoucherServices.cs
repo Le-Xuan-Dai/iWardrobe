@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,12 @@ namespace Services
 {
     public class VoucherServices : RepositoryBase<Voucher>
     {
-        public VoucherServices(IWardrobeContext dBContext) : base(dBContext)
-        {
-        }
+            private readonly IWardrobeContext _dbContext;
+            private readonly DbSet<Voucher> _dbSet;
+            public VoucherServices(IWardrobeContext dBContext) : base(dBContext)
+            {
+                _dbContext = dBContext;
+                _dbSet = _dbContext.Set<Voucher>(); 
+            }
     }
 }

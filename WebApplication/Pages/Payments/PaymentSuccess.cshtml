@@ -1,0 +1,18 @@
+﻿@page "/payment-success"
+@model WebApplication.Pages.Payment.PaymentSuccessModel
+@{
+}
+
+<div class="container text-center">
+    <img style="height: 60vh;" src="~/img/payment_success.png" alt="payment success" />
+    <div class="text-center">
+        <h5 class="fw-bold">Your Payments is Successful</h5>
+        <p>Thank for your payment. Ab automated payment receipt will be sent to your registered email.</p>
+        <a asp-page="/Home"
+           class="btnPagination btn btn-outline-secondary"
+           style="border: none;">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            &nbsp;Back to Home
+        </a>
+    </div>
+</div>
