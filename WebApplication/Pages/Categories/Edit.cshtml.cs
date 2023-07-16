@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
 using Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebApplication.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly CategoryServices _categoryServices;

@@ -7,25 +7,25 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
+using Services;
 
 namespace WebApplication.Pages.Categories
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
-        private readonly BusinessObjects.IWardrobeContext _context;
+        private readonly CategoryServices _categoryServices;
 
-        public IndexModel(BusinessObjects.IWardrobeContext context)
+        public IndexModel(CategoryServices categoryServices)
         {
-            _context = context;
+            _categoryServices = categoryServices;
         }
 
         public IList<Category> Category { get;set; }
 
         public async Task OnGetAsync()
         {
-            Category = await _context.Categories
-                .Include(c => c.User).ToListAsync();
+            Category = await _categoryServices.GetAll().Include(c => c.User).ToListAsync();
         }
     }
 }

@@ -17,5 +17,6 @@ namespace Services
            _dbContext = dBContext;
            _dbSet = _dbContext.Set<Product>();
         }
+
     }
 }

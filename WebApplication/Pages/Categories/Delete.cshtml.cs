@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Services;
 
 namespace WebApplication.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
-        private readonly BusinessObjects.IWardrobeContext _context;
-
-        public DeleteModel(BusinessObjects.IWardrobeContext context)
+        private readonly CategoryServices _categoryServices;
+        public DeleteModel(CategoryServices categoryServices)
         {
-            _context = context;
+            _categoryServices = categoryServices;
         }
 
         [BindProperty]
@@ -28,8 +31,7 @@ namespace WebApplication.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Categories
-                .Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
+            Category = await _categoryServices.GetAll().Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
 
             if (Category == null)
             {
@@ -45,12 +47,10 @@ namespace WebApplication.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Categories.FindAsync(id);
 
             if (Category != null)
             {
-                _context.Categories.Remove(Category);
-                await _context.SaveChangesAsync();
+                await _categoryServices.DeleteById(id);
             }
 
             return RedirectToPage("./Index");

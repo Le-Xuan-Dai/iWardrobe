@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class User: IdentityUser
+    public class User : IdentityUser, ISoftDelete
     {
         [StringLength(50)]
         public string Fullname { get; set; }
@@ -17,27 +17,29 @@ namespace BusinessObjects
         [StringLength(50)]
         public string BrandName { get; set; }
 
-        public string Password { get; set; }
-
         public string Address { get; set; }
-        
-        [ForeignKey("Role")]
-        public int RoleId { get; set; }
-        
+
+        public string Avatar { get; set; }
+
+        [StringLength(12, MinimumLength = 12)]
+        public string IdentificationCode { get; set; }
+
+        public string[] IdentificationCardImgs { get; set; }
+
         public virtual List<Product>? Products { get; set; }
-        
+
         public virtual List<Order>? Orders { get; set; }
-        
+
         public virtual List<CartDetail>? CartDetails { get; set; }
 
         public virtual List<Voucher>? Vouchers { get; set; }
-        
+
         public virtual List<Category>? Categories { get; set; }
-        
+
         public virtual List<Commnent>? Comments { get; set; }
-        
+
         public virtual List<Favorite>? Favorites { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; }
     }
 }

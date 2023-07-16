@@ -1,4 +1,5 @@
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Pages.Products
 {
+    [Authorize]
     public class CartModel : PageModel
     {
         private readonly CartDetailServices _cartDetailServices;
@@ -47,6 +49,7 @@ namespace WebApplication.Pages.Products
         public int paymentCart { get; set; }
         public async Task<IActionResult> OnGet()
         {
+            // String currentUserId = _userManager.GetUserId(User);
             var userClaim = await _userManager.GetUserAsync(this.User);
             CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
             User user = _userServices.FirstOrDefault(u => u.Id == userClaim.Id);
@@ -64,8 +67,8 @@ namespace WebApplication.Pages.Products
                     Voucher.Add(voucher);
                 }
             }
-              
-            
+
+
             return Page();
         }
 
@@ -131,7 +134,7 @@ namespace WebApplication.Pages.Products
                  return RedirectToPage("./Index");
              }*/
             TempData["paymentCartId"] = paymentCart;
-            return RedirectToPage("./Payment");
+            return RedirectToPage("/Payments/Payment");
         }
 
         public async void loadDataToPage()

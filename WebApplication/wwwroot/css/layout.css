@@ -23,7 +23,7 @@ html {
     width: 0px;
 }
 
-nav {
+.my_navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -35,10 +35,10 @@ nav {
     transition: all 0.5s ease;
 }
 
-    /* Sidebar css */
-    nav.close {
-        width: 73px;
-    }
+
+.my_navbar.close {
+    width: 73px;
+}
 
 .logo-name {
     display: flex;
@@ -67,17 +67,16 @@ nav {
     transition: all 0.5s ease;
 }
 
-nav.close .logo_name {
+.my_navbar.close .logo_name {
     opacity: 0;
     pointer-events: none;
 }
 
-nav .menu-items {
+.my_navbar .menu-items {
     margin-top: 20px;
     height: calc(100% - 120px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .menu-items li {
@@ -124,7 +123,7 @@ nav .menu-items {
         color: #152534 !important;
     }
 
-nav.close li a .link-name {
+.my_navbar.close li a .link-name {
     opacity: 0;
     pointer-events: none;
 }
@@ -150,10 +149,10 @@ nav.close li a .link-name {
     padding: 10px 14px;
     transition: all 0.5s ease;
     padding-top: 60px;
-    padding-bottom: 60px;
+    padding-bottom: 200px;
 }
 
-nav.close ~ .main {
+.my_navbar.close ~ .main {
     left: 0px;
     width: calc(100% - 0px);
 }
@@ -172,68 +171,57 @@ nav.close ~ .main {
     z-index: 10;
 }
 
-nav.close ~ .main .header {
+.my_navbar.close ~ .main .header {
     left: 0px;
     width: calc(100% - 0px);
 }
 
-.main .header .sidebar-toggle {
-    font-size: 24px;
-    color: #000;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    left: 16px;
-    transform: translateY(-50%);
-}
-
-
 
 @media (max-width: 1000px) {
-    nav {
+    .my_navbar {
         width: 73px;
     }
 
-        nav.close {
+        .my_navbar.close {
             width: 250px;
         }
 
-        nav .logo_name {
+        .my_navbar .logo_name {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav.close .logo_name {
+        .my_navbar.close .logo_name {
             opacity: 1;
             pointer-events: auto;
         }
 
-        nav li a .link-name {
+        .my_navbar li a .link-name {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav.close li a .link-name {
+        .my_navbar.close li a .link-name {
             opacity: 1;
             pointer-events: auto;
         }
 
-        nav ~ .main {
+        .my_navbar ~ .main {
             left: 73px;
             width: calc(100% - 73px);
         }
 
-        nav.close ~ .main {
+        .my_navbar.close ~ .main {
             left: 250px;
             width: calc(100% - 250px);
         }
 
-        nav ~ .main .header {
+        .my_navbar ~ .main .header {
             left: 73px;
             width: calc(100% - 73px);
         }
 
-        nav.close ~ .main .header {
+        .my_navbar.close ~ .main .header {
             left: 250px;
             width: calc(100% - 250px);
         }
@@ -241,70 +229,58 @@ nav.close ~ .main .header {
 
 
 @media (max-width: 400px) {
-    nav {
+    .my_navbar {
         width: 0px;
     }
 
-        nav.close {
+        .my_navbar.close {
             width: 73px;
         }
 
-        nav .logo-image {
+        .my_navbar .logo-image {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav .logo_name {
+        .my_navbar .logo_name {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav.close .logo_name {
+        .my_navbar.close .logo_name {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav li a .link-name {
+        .my_navbar li a .link-name {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav.close li a .link-name {
+        .my_navbar.close li a .link-name {
             opacity: 0;
             pointer-events: none;
         }
 
-        nav ~ .main {
+        .my_navbar ~ .main {
             left: 0;
             width: 100%;
         }
 
-        nav.close ~ .main {
+        .my_navbar.close ~ .main {
             left: 73px;
             width: calc(100% - 73px);
         }
 
-        nav ~ .main .header {
+        .my_navbar ~ .main .header {
             left: 0px;
             width: 100%;
         }
 
-        nav.close ~ .main .header {
+        .my_navbar.close ~ .main .header {
             left: 0;
             width: 100%;
         }
 }
 
-/* Footer CSS */
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    white-space: nowrap;
-    height: 60px;
-}

@@ -1,0 +1,130 @@
+﻿@page "/shop/orders"
+@model WebApplication.Pages.Shop.Orders.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .iconAction {
+        width: 2rem;
+        height: 2rem;
+    }
+</style>
+
+
+<div class="container">
+    <h1>Orders</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="background-color: #C0E862;">
+                    Product ID
+                </th>
+                <th style="background-color: #C0E862;">
+                    Product Image
+                </th>
+                <th style="background-color: #C0E862;">
+                    Product Name
+                </th>
+                <th style="background-color: #C0E862;">
+                    Customer
+                </th>
+                <th style="background-color: #C0E862;">
+                    @Html.DisplayNameFor(model => model.Order[0].Note)
+                </th>
+                <th style="background-color: #C0E862;">
+                    Status
+                </th>
+                <th style="background-color: #C0E862;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductId)
+                    </td>
+                    <td>
+                        <img src=@item.Product.ImageUrls[0]
+                             class="d-block" style="width: 100px; min-height: 100px;" alt="...">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Fullname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @{
+                            if (item.OrderStatus.Equals("PENDING"))
+                            {
+                                <span class="badge text-bg-info">Pending</span>
+                            }
+                            if (item.OrderStatus.Equals("PROCESSING"))
+                            {
+                                <span class="badge text-bg-success">Processing</span>
+                            }
+                            if (item.OrderStatus.Equals("SHIPPED"))
+                            {
+                                <span class="badge text-bg-primary">Shipped</span>
+                            }
+                            if (item.OrderStatus.Equals("DELIVERED"))
+                            {
+                                <span class="badge text-bg-dark">Delivered</span>
+                            }
+                            if (item.OrderStatus.Equals("CANCELLED"))
+                            {
+                                <span class="badge text-bg-danger">Cancelled</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <div class="h-100 d-flex align-items-center justify-content-center">
+                            <a class="btn btn-sm btn-success rounded-circle mx-1 iconAction" asp-page="./Edit" asp-route-id="@item.OrderId">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn-sm btn-warning rounded-circle mx-1 iconAction" asp-page="./Details" asp-route-id="@item.OrderId">
+                                <i class="fa fa-info " aria-hidden="true"></i>
+                            </a>
+                            <button class="btn btn-sm btn-danger rounded-circle mx-1 iconAction"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal+@item.OrderId">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                            <div class="modal fade" id="exampleModal+@item.OrderId" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete order</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>To ensure the accuracy of this action and prevent accidental deletions, we kindly ask you to confirm your intent to delete this order.</p>
+                                        </div>
+                                        <form method="post" asp-page="./Delete" class="modal-footer d-flex">
+                                            <input type="hidden" name="id" value="@item.OrderId" />
+                                            <button style="background-color:#C0E862;" type="submit" class="btn w-100"
+                                                    data-bs-dismiss="modal">
+                                                Confirm
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* <a asp-page="./Edit" asp-route-id="@item.OrderId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

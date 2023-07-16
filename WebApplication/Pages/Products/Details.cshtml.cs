@@ -34,7 +34,7 @@ namespace WebApplication.Pages.Products
         public Product Product { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            var user = _userManager.GetUserAsync(this.User);
+            //var user = _userManager.GetUserAsync(this.User);
             if (id == null)
             {
                 return NotFound();

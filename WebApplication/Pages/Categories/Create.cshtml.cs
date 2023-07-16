@@ -6,21 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
-        private readonly BusinessObjects.IWardrobeContext _context;
+        private readonly CategoryServices _categoryServices;
+        private readonly UserServices _userServices;
 
-        public CreateModel(BusinessObjects.IWardrobeContext context)
+        public CreateModel(CategoryServices categoryServices, UserServices userServices)
         {
-            _context = context;
+            _categoryServices = categoryServices;
+            _userServices = userServices;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+        ViewData["UserId"] = new SelectList(await _userServices.GetAll().ToListAsync(), "Id", "Fullname");
             return Page();
         }
 
@@ -35,8 +42,7 @@ namespace WebApplication.Pages.Categories
                 return Page();
             }
 
-            _context.Categories.Add(Category);
-            await _context.SaveChangesAsync();
+            await _categoryServices.Create(Category);
 
             return RedirectToPage("./Index");
         }

@@ -6,16 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Services;
 
 namespace WebApplication.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
-        private readonly BusinessObjects.IWardrobeContext _context;
+        private readonly CategoryServices _categoryServices;
 
-        public DetailsModel(BusinessObjects.IWardrobeContext context)
+        public DetailsModel(CategoryServices categoryServices)
         {
-            _context = context;
+            _categoryServices = categoryServices;
         }
 
         public Category Category { get; set; }
@@ -27,8 +31,7 @@ namespace WebApplication.Pages.Categories
                 return NotFound();
             }
 
-            Category = await _context.Categories
-                .Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
+            Category = await _categoryServices.GetAll().Include(c => c.User).FirstOrDefaultAsync(m => m.CategoryId == id);
 
             if (Category == null)
             {

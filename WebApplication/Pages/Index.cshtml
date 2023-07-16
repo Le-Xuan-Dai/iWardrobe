@@ -1,101 +1,387 @@
-﻿@page
-@model IndexModel
+﻿@page "/{type?}"
+@model WebApplication.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    Layout = "_AuthLayout";
 }
 
-<style>
-    .btnPagination {
-        color: #152534;
-    }
+@{
+    string signUpClass = Model.IsSignUp ? "right-panel-active" : "";
+}
 
-        .btnPagination:hover {
-            color: #152534;
-            background-color: #C0E862;
-        }
-
-    .cardTitle {
-        line-height: 1.5rem;
-        height: 3rem;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
-</style>
-
-<div class="container">
-    <form asp-page="./Index" method="get">
-        <div class="form-actions no-color row">
-            <div class="mx-auto mb-4 col-12 col-md-8 col-xl-6">
-                <div class="input-group border rounded-3">
-                    <input class="form-control searchInput" style="border: none;" type="search" placeholder="Seach product..." name="SearchString" value="@Model.CurrentFilter">
-                    <span class="input-group-append" style="margin-left: unset;">
-                        <button class="btn" style="background-color:#C0E862;" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
+<div class="auth__container @signUpClass" id="container">
+    <div class="form-container sign-up-container">
+        <h1 style="font-weight: bold; color: #C0E862;">Create Account</h1>
+        <form id="external-account" asp-area="Identity" asp-page="/Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <ul class="social-menu my-4">
+                <li>
+                    <button type="submit" name="provider" value="Facebook" title="Log in using your facebook account">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </button>
+                </li>
+                <li>
+                    <button type="submit" name="provider" value="Google" title="Log in using your google account">
+                        <i class="fa-brands fa-google"></i>
+                    </button>
+                </li>
+                <li><button><i class="fa fa-phone" aria-hidden="true"></i></button></li>
+            </ul>
+        </form>
+        <span>or use your email for registration</span>
+        <form method="post" asp-route-returnUrl="@Model.ReturnUrl" asp-page-handler="SignUp" class="w-75 text-center">
+            <div class="form-floating w-100 mb-3 mt-1">
+                <input asp-for="SignUpUser.Fullname" class="form-control" required>
+                <label for="floatingPassword">Your name</label>
             </div>
-        </div>
-    </form>
+            <div class="form-floating w-100 mb-3">
+                <input asp-for="SignUpUser.Email" class="form-control" required>
+                <label for="floatingPassword">Your email</label>
+            </div>
+            <div class="form-floating w-100 mb-3">
+                <input asp-for="SignUpUser.Password" class="form-control" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating w-100">
+                <input asp-for="SignUpUser.ConfirmPassword" class="form-control" required>
+                <label for="floatingPassword">Confirm password</label>
+            </div>
+            <button type="submit" asp-page-handler="SignUp" asp-page="Index"
+                    style="font-size: 1rem; font-weight: bold; padding: 12px 45px; background-color: #C0E862; color: white;"
+                    class="btn btn-lg mt-4">
+                Sign Up
+            </button>
+            <span style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);" class="text-danger">@Model.ErrorSignUp</span>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <h1 style="font-weight: bold;  color: #C0E862;">Sign in</h1>
+        <form id="external-account" asp-area="Identity" asp-page="./Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <ul class="social-menu my-4">
+                <li>
+                    <button type="submit" name="provider" value="Facebook" title="Log in using your facebook account">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </button>
+                </li>
+                <li>
+                    <button type="submit" name="provider" value="Google" title="Log in using your google account">
+                        <i class="fa-brands fa-google"></i>
+                    </button>
+                </li>
+                <li><button><i class="fa fa-phone" aria-hidden="true"></i></button></li>
+            </ul>
+        </form>
+        <span class="text-center">or use your account</span>
+        <form asp-route-returnUrl="@Model.ReturnUrl" asp-page-handler="SignIn" method="post" class="w-75 text-center">
+            <div class="form-floating w-100 mb-3 mt-1">
+                <input asp-for="SignInUser.EmailOrPhoneNumber" class="form-control" required>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating w-100">
+                <input asp-for="SignInUser.Password" type="password" class="form-control" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="d-flex align-items-center justify-content-between w-100 mt-2">
+                <div>
+                    <input type="checkbox" asp-for="SignInUser.RememberMe" />
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Keep me signed in
+                    </label>
+                </div>
+                <a asp-area="Identity" asp-page="/Account/ForgotPassword" class="text-decoration-none" style="color: #C0E862;">Forgot your password?</a>
+            </div>
+            <button type="submit"
+                    style="font-size: 1rem; font-weight: bold; padding: 12px 45px; background-color: #C0E862; color: white;"
+                    class="btn btn-lg mt-4">
+                Sign In
+            </button>
+            <span style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);" class="text-danger">@Model.ErrorSignIn</span>
+        </form>
+    </div>
+    <div class="overlay-container" id="overlayCon">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <div class="overlay__content">
+                    <img src="~/img/logo-horizontal.png" height="50px" />
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="btn btn-lg mb-2" style="color: #C0E862; font-size: 1rem; font-weight: bold;">
+                        SIGN
+                        IN
+                    </button>
+                </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gy-4 d-flex justify-content-center justify-content-lg-start">
-        @foreach (var item in Model.Products)
-        {
-            <div class="col d-flex align-items-center justify-content-center">
-                <div class="card rounded-4 p-3 position-relative" style="width: 20rem;">
-                    <img class="rounded-4 card-img-top" style="min-width: 17.875rem; min-height: 17.875rem;"
-                         src=@item.ImageUrls[0]
-                         alt="..." loading="lazy">
-                    <div class="card-body">
-                        <p class="card-subtitle" style="color: #A1A1A1;">lxdfasion</p>
-                        <h5 class="card-title cardTitle">@item.ProductName</h5>
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <span><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Buy </span>
-                                <p style="font-weight: bold; color: #C0E862;">(đ)@item.SellPrice</p>
-                            </div>
-                            <div style="text-align: end;">
-                                <span><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;Rent </span>
-                                <p style="font-weight: bold; color: #C0E862;">(đ)@item.RentPrice</p>
-                            </div>
-                        </div>
-                        <a asp-page="/Products/Details" asp-route-id="@item.ProductId"
-                           style="background-color:#C0E862;"
-                           type="button"
-                           class="btn w-100">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                            &nbsp;View Details
-                        </a>
-                    </div>
-                    <button class="rounded-circle d-flex align-items-center justify-content-center btn btn-outline-danger position-absolute"
-                            style="width: 32px; height: 32px; border: none; right: 1.5rem; top: 1.5rem;">
-                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <div class="overlay__content">
+                    <img src="~/img/logo-horizontal.png" height="50px" />
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="btn btn-lg mb-2" style="color: #C0E862; font-size: 1rem; font-weight: bold;">
+                        SIGN
+                        UP
                     </button>
                 </div>
             </div>
-        }
-
-    </div>
-    @{
-        var prevDisabled = !Model.Products.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.Products.HasNextPage ? "disabled" : "";
-    }
-    <div class="d-flex align-items-center justify-content-center mt-4">
-        <a asp-page="./Index"
-           asp-route-pageIndex="@(Model.Products.PageIndex - 1)"
-           class="btnPagination btn btn-outline-secondary btn-sm @prevDisabled"
-           style="width: 100px;border: none;">
-            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-            &nbsp;Previous
-        </a>
-        <a asp-page="./Index"
-           asp-route-pageIndex="@(Model.Products.PageIndex + 1)"
-           class="btnPagination btn btn-outline-secondary btn-sm @nextDisabled"
-           style="width: 100px;border: none;">
-            Next&nbsp;
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-        </a>
+        </div>
+        <button id="overlayBtn"></button>
     </div>
 </div>
+
+
+@*@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@
+
+<script>
+    const container = document.getElementById('container');
+    const overlayCon = document.getElementById('overlayCon');
+    const overlayBtn = document.getElementById('overlayBtn');
+    overlayBtn.addEventListener('click', () => {
+        container.classList.toggle('right-panel-active');
+
+        overlayBtn.classList.remove('btnScaled');
+        window.requestAnimationFrame(() => {
+            overlayBtn.classList.add('btnScaled');
+        })
+    });
+</script>
+
+<style>
+    .auth__container {
+        position: relative;
+        width: 1040px;
+        height: 610px;
+        background-color: #FFF;
+        box-shadow: rgba(21, 37, 52, 0.3) 0px 10px 50px;
+        border-radius: 13px;
+        overflow: hidden;
+    }
+
+    .form-container {
+        position: absolute;
+        width: 60%;
+        height: 100%;
+        padding: 0px 40px;
+        transition: all 0.6s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sign-up-container {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .sign-in-container {
+        z-index: 2;
+    }
+
+    .social-menu {
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+        .social-menu li {
+            list-style: none;
+            margin: 0 10px;
+        }
+
+            .social-menu li .fa-brands {
+                color: #152534;
+                font-size: 18px;
+                line-height: 40px;
+                transition: .5s;
+                cursor: pointer;
+            }
+
+            .social-menu li .fa {
+                color: #152534;
+                font-size: 18px;
+                line-height: 40px;
+                transition: .5s;
+            }
+
+            .social-menu li .fa-brands:hover {
+                color: #FFF;
+            }
+
+            .social-menu li .fa:hover {
+                color: #FFF;
+            }
+
+            .social-menu li button {
+                position: relative;
+                display: block;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: white;
+                text-align: center;
+                transition: 0.5s;
+                transform: translate(0, 0px);
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+                border: none;
+            }
+
+                .social-menu li button:hover {
+                    color: #FFF;
+                    transform: rotate(0deg) skew(0deg) translate(0, -10px);
+                    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+                }
+
+            .social-menu li:nth-child(1) button:hover {
+                background-color: #3b5999;
+            }
+
+            .social-menu li:nth-child(2) button:hover {
+                background-color: #DB4437;
+            }
+
+            .social-menu li:nth-child(3) button:hover {
+                background-color: #0F9D58;
+            }
+
+    .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 60%;
+        width: 40%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 9;
+    }
+
+    #overlayBtn {
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        top: 360px;
+        transform: translateX(-50%);
+        width: 144.27px;
+        height: 50px;
+        border: 1px solid rgb(192, 232, 98);
+        background: transparent;
+        border-radius: 0.5rem;
+    }
+
+    .overlay {
+        position: relative;
+        color: #FFF;
+        left: -150%;
+        height: 100%;
+        width: 250%;
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-panel {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0px 40px;
+        text-align: center;
+        width: 416px;
+        height: 610px;
+        transition: 0.6s ease-in-out;
+        background-image: url("/img/background_image_auth.png");
+        background-color: #cccccc;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .overlay__content {
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 360px;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .overlay-left {
+        right: 60%;
+        transform: translateX(-12%);
+    }
+
+    .overlay-right {
+        right: 0;
+        transform: translateX(0%);
+    }
+
+    .overlay-panel button {
+        border: none;
+        background-color: transparent;
+    }
+
+    .right-panel-active .overlay-container {
+        transform: translateX(-150%);
+    }
+
+    .right-panel-active .overlay {
+        transform: translateX(50%);
+    }
+
+    .right-panel-active .overlay-left {
+        transform: translateX(25%);
+    }
+
+    .right-panel-active .overlay-right {
+        transform: translateX(35%);
+    }
+
+    .right-panel-active .sign-in-container {
+        transform: translateX(20%);
+        opacity: 0;
+    }
+
+    .right-panel-active .sign-up-container {
+        transform: translateX(66.7%);
+        opacity: 1;
+        z-index: 5;
+        animation: show 0.6s;
+    }
+
+    @@keyframes show {
+
+        0%,
+        50% {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        50.1%,
+        100% {
+            opacity: 1;
+            z-index: 5;
+        }
+    }
+
+    .btnScaled {
+        animation: scaleBtn 0.6s;
+    }
+
+    @@keyframes scaleBtn {
+        0% {
+            width: 143.67px;
+        }
+
+        50% {
+            width: 250px;
+        }
+
+        0% {
+            width: 143.67px;
+        }
+    }
+</style>
+@*<a class="nav-link text-dark" asp-area="" asp-page="/Home">Home</a>*@

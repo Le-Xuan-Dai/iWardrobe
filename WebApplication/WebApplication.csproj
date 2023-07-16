@@ -5,10 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Cart_Payment\**" />
     <Compile Remove="Pages\Product\**" />
+    <Compile Remove="Pages\Vouchers\**" />
+    <Content Remove="Pages\Cart_Payment\**" />
     <Content Remove="Pages\Product\**" />
+    <Content Remove="Pages\Vouchers\**" />
+    <EmbeddedResource Remove="Pages\Cart_Payment\**" />
     <EmbeddedResource Remove="Pages\Product\**" />
+    <EmbeddedResource Remove="Pages\Vouchers\**" />
+    <None Remove="Pages\Cart_Payment\**" />
     <None Remove="Pages\Product\**" />
+    <None Remove="Pages\Vouchers\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,10 +52,6 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.17" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="MimeKit" Version="4.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Cart_Payment\" />
   </ItemGroup>
 
 </Project>

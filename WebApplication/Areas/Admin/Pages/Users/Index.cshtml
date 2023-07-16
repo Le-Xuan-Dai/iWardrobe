@@ -1,0 +1,71 @@
+﻿@page "/admin/users"
+@model WebApplication.Areas.Admin.Pages.Users.IndexModel
+@{
+}
+
+<style>
+    .iconAction {
+        width: 2rem;
+        height: 2rem;
+    }
+</style>
+<div class="container">
+    <partial name="_StatusMessage" model="@Model.StatusMessage" />
+
+    <table class="table table-striped">
+        <tr>
+            <th style="background-color: #C0E862;">Avatar</th>
+            <th style="background-color: #C0E862;">UserName</th>
+            <th style="background-color: #C0E862;">Fullname</th>
+            <th style="background-color: #C0E862;">Brand name</th>
+            <th style="background-color: #C0E862;">Roles</th>
+            <th style="background-color: #C0E862;">Actions</th>
+        </tr>
+        @foreach (var user in @Model.users)
+        {
+            <tr>
+                <td><img src="@user.Avatar" height="50px" /></td>
+                <td>@user.UserName</td>
+                <td>@user.Fullname</td>
+                <td>@user.BrandName</td>
+                <td>@user.listroles</td>
+                <td>
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <a class="btn btn-sm btn-success rounded-circle mx-1 iconAction">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-sm btn-warning rounded-circle mx-1 iconAction">
+                            <i class="fa fa-info " aria-hidden="true"></i>
+                        </a>
+                        <button class="btn btn-sm btn-danger rounded-circle mx-1 iconAction"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+        }
+    </table>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+    @{
+
+        Func<int?, string> generateUrl = (int? _pagenumber) =>
+        {
+            return Url.Page("./User", new { pageNumber = _pagenumber });
+        };
+
+        var datapaging = new
+        {
+            currentPage = Model.pageNumber,
+            countPages = Model.totalPages,
+            generateUrl = generateUrl
+        };
+
+    }
+    @*<partial name="_Paging" model="@datapaging" />*@
+
+</div>

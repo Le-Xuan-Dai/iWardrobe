@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects;
 using Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace WebApplication.Pages.Products
 {
+    [Authorize(Roles = "Supplier")]
     public class CreateModel : PageModel
     {
         private readonly ProductServices _productServices;

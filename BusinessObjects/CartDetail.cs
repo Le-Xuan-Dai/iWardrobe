@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public class CartDetail
+    public class CartDetail : ISoftDelete
     {
         [Key]
         public int CartDetailId { get; set; }
@@ -25,7 +25,6 @@ namespace BusinessObjects
         public virtual User? User { get; set; }
 
         public virtual Product? Product { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; }
     }
 }
