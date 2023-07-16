@@ -1,4 +1,5 @@
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Pages.Payments
 {
+    [Authorize]
     public class PaymentModel : PageModel
     {
         public const string DIRECT_PAYMENT = "Pay Directly";

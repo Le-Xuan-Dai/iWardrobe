@@ -1,4 +1,5 @@
 using BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Pages.Products
 {
+    [Authorize]
     public class CartModel : PageModel
     {
         private readonly CartDetailServices _cartDetailServices;
