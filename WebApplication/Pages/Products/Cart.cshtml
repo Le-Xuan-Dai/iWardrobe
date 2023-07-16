@@ -138,11 +138,11 @@
                       <ul class="d-flex justify-content-around recommend-list flex-wrap" style="list-style:none; width:100%;">
                           @for(int i = Model.RandomProduct.Count()-4; i < Model.RandomProduct.Count;i++){
                                <li class="recommend-item" style="position: relative;">
-                                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/T-shirt.jpg/1200px-T-shirt.jpg"
+                                       <img src="@Html.DisplayFor(model => Model.RandomProduct[i].ImageUrls)"
                                        class="d-block img-rounded rounded-3" style="width:250px; min-height: 100px;" alt="..."/>
                                        <div class="detail-wrapper">
                                           <button class="btn  detail-btn" style="width:50%;">
-                                              <a asp-page="./Details" asp-route-id="@Model.RandomProduct[i].ProductId">View detail</a>
+                                                        <a asp-page="/Products/Details" asp-route-id="@Model.RandomProduct[i].ProductId">View detail</a>
                                           </button>
                                        </div>
                                 </li>
