@@ -17,6 +17,7 @@ namespace BusinessObjects
         public int ProductId { get; set; }
 
         [ForeignKey("User")]
+        [StringLength(50)]
         public string UserId { get; set; }
 
         [Required]
