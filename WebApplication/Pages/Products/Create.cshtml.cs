@@ -11,18 +11,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.AspNetCore.Identity;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Products
 {
     [Authorize(Roles = "Supplier")]
     public class CreateModel : PageModel
     {
-        private readonly ProductServices _productServices;
-        private readonly CategoryServices _categoryServices;
-        private readonly UserServices _userServices;
+        private readonly IProductServices _productServices;
+        private readonly ICategoryServices _categoryServices;
+        private readonly IUserServices _userServices;
         protected readonly UserManager<User> _userManager;
 
-        public CreateModel(ProductServices productServices, CategoryServices categoryServices, UserServices userServices, UserManager<User> userManager)
+        public CreateModel(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, UserManager<User> userManager)
         {
             _productServices = productServices;
             _categoryServices = categoryServices;

@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace WebApplication.Pages.Orders
 {
     public class MyOrderDetailsModel : OrderPageModel
     {
-        public MyOrderDetailsModel(OrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
+        public MyOrderDetailsModel(IOrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
         {
         }
 

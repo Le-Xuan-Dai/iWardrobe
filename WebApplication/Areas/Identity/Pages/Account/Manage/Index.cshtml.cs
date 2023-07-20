@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using Services.Interfaces;
 
 namespace WebApplication.Areas.Identity.Pages.Account.Manage
 {
@@ -17,11 +18,11 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly UserServices _userServices;
+        private readonly IUserServices _userServices;
 
         public IndexModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager, UserServices userServices)
+            SignInManager<User> signInManager, IUserServices userServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;

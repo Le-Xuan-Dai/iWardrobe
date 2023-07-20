@@ -36,7 +36,7 @@ namespace BusinessObjects
 
         public virtual List<Category>? Categories { get; set; }
 
-        public virtual List<Commnent>? Comments { get; set; }
+        public virtual List<Comment>? Comments { get; set; }
 
         public virtual List<Favorite>? Favorites { get; set; }
 

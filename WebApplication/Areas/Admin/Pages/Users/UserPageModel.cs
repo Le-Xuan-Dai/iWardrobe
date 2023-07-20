@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services;
+using Services.Interfaces;
 using System.Data;
 
 namespace WebApplication.Areas.Admin.Pages.Users
@@ -13,9 +14,9 @@ namespace WebApplication.Areas.Admin.Pages.Users
         protected const int USER_PER_PAGE = 10;
         protected readonly RoleManager<IdentityRole> _roleManager;
         protected readonly UserManager<User> _userManager;
-        protected readonly UserServices _userServices;
+        protected readonly IUserServices _userServices;
 
-        public UserPageModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, UserServices userServices)
+        public UserPageModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IUserServices userServices)
         {
             _roleManager = roleManager;
             _userManager = userManager;

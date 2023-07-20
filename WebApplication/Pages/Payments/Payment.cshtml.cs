@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Services;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,11 @@ namespace WebApplication.Pages.Payments
         public const string DEEFAULT_STATUS = "PENDING";
 
 
-        private readonly CartDetailServices _cartDetailServices;
-        private readonly OrderServices _orderServices;
+        private readonly ICartDetailServices _cartDetailServices;
+        private readonly IOrderServices _orderServices;
         private readonly UserManager<User> _userManager;
-        public PaymentModel(CartDetailServices cartDetailServices, UserManager<User> userManager, OrderServices orderServices)
+
+        public PaymentModel(ICartDetailServices cartDetailServices, IOrderServices orderServices, UserManager<User> userManager)
         {
             _cartDetailServices = cartDetailServices;
             _orderServices = orderServices;

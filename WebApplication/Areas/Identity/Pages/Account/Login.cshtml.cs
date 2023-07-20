@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Services;
+using Services.Interfaces;
 
 namespace WebApplication.Areas.Identity.Pages.Account
 {
@@ -22,11 +23,11 @@ namespace WebApplication.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly UserServices _userService;
+        private readonly IUserServices _userService;
 
         public LoginModel(SignInManager<User> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<User> userManager, UserServices userService)
+            UserManager<User> userManager, IUserServices userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;

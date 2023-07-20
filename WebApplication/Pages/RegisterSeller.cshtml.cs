@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using Services.Interfaces;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -15,9 +16,9 @@ namespace WebApplication.Pages
     public class RegisterSellerModel : PageModel
     {
         protected readonly UserManager<User> _userManager;
-        protected readonly UserServices _userServices;
+        protected readonly IUserServices _userServices;
         private readonly SignInManager<User> _signInManager;
-        public RegisterSellerModel(UserManager<User> userManager, UserServices userServices, SignInManager<User> signInManager)
+        public RegisterSellerModel(UserManager<User> userManager, IUserServices userServices, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _userServices = userServices;

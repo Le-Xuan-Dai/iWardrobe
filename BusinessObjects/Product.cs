@@ -40,7 +40,7 @@ namespace BusinessObjects
         
         public virtual User? User { get; set; }
         
-        public virtual List<Commnent>? Commnents { get; set; }
+        public virtual List<Comment>? Commnents { get; set; }
         
         public virtual List<Favorite>? Favorites { get; set; }
 

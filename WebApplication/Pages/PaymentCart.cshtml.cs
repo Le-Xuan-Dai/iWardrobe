@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,16 @@ namespace WebApplication.Pages
 {
     public class PaymentCartModel : PageModel
     {
-        private readonly CartDetailServices cartDetailServices;
-        private readonly UserServices userServices;
+        private readonly ICartDetailServices _cartDetailServices;
+        private readonly IUserServices _userServices;
 
-       public Product Product { get; set; }
+        public PaymentCartModel(ICartDetailServices cartDetailServices, IUserServices userServices)
+        {
+            _cartDetailServices = cartDetailServices;
+            _userServices = userServices;
+        }
+
+        public Product Product { get; set; }
         public List<CartDetail> CartDetail { get; set; }
 
         public List<Voucher> Voucher { get; set; }
@@ -27,8 +34,8 @@ namespace WebApplication.Pages
             }
             else
             {
-                CartDetail = await cartDetailServices.GetAll().Where(c => c.UserId == id).ToListAsync();
-                User user = userServices.FirstOrDefault(u => u.UserName == username);
+                CartDetail = await _cartDetailServices.GetAll().Where(c => c.UserId == id).ToListAsync();
+                User user = _userServices.FirstOrDefault(u => u.UserName == username);
 
                 foreach (var voucher in user.Vouchers)
                 {

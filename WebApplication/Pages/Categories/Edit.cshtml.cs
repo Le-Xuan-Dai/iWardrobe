@@ -10,16 +10,17 @@ using BusinessObjects;
 using Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Categories
 {
     [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
-        private readonly CategoryServices _categoryServices;
-        private readonly UserServices _userServices;
+        private readonly ICategoryServices _categoryServices;
+        private readonly IUserServices _userServices;
 
-        public EditModel(CategoryServices categoryServices, UserServices userServices)
+        public EditModel(ICategoryServices categoryServices, IUserServices userServices)
         {
             _categoryServices = categoryServices;
             _userServices = userServices;

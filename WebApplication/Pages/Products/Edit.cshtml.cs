@@ -11,23 +11,24 @@ using Microsoft.Extensions.Logging;
 using Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Products
 {
     [Authorize(Roles = "Supplier")]
     public class EditModel : PageModel
     {
-        private readonly ProductServices _productServices;
-        private readonly CategoryServices _categoryServices;
-        private readonly UserServices _userServices;
+        private readonly IProductServices _productServices;
+        private readonly ICategoryServices _categoryServices;
+        private readonly IUserServices _userServices;
         private readonly ILogger<IndexModel> _logger;
 
-        public EditModel(ProductServices productServices, CategoryServices categoryServices, ILogger<IndexModel> logger, UserServices userServices)
+        public EditModel(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, ILogger<IndexModel> logger)
         {
-            _logger = logger;
             _productServices = productServices;
             _categoryServices = categoryServices;
             _userServices = userServices;
+            _logger = logger;
         }
 
         [BindProperty]

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace WebApplication.Pages.Products
     [Authorize]
     public class CartModel : PageModel
     {
-        private readonly CartDetailServices _cartDetailServices;
-        private readonly UserServices _userServices;
+        private readonly ICartDetailServices _cartDetailServices;
+        private readonly IUserServices _userServices;
         private readonly UserManager<User> _userManager ;
-        private readonly ProductServices _productServices;
-        private readonly OrderServices _orderServices;
-        public CartModel(CartDetailServices cartDetailServices, UserServices userServices, UserManager<User> userManager, ProductServices productServices, OrderServices orderServices)
+        private readonly IProductServices _productServices;
+        private readonly IOrderServices _orderServices;
+
+        public CartModel(ICartDetailServices cartDetailServices, IUserServices userServices, UserManager<User> userManager, IProductServices productServices, IOrderServices orderServices)
         {
             _cartDetailServices = cartDetailServices;
             _userServices = userServices;

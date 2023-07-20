@@ -9,24 +9,23 @@ using BusinessObjects;
 using Services;
 using Microsoft.AspNetCore.Identity;
 using System.Net.NetworkInformation;
-
-
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Products
 {
     public class DetailsModel : PageModel
     {
-        private readonly ProductServices _productServices;
-        private readonly CartDetailServices _cartDetailServices;
+        private readonly IProductServices _productServices;
+        private readonly ICartDetailServices _cartDetailServices;
         private readonly UserManager<User> _userManager;
 
-        
-        public DetailsModel(ProductServices productServices, CartDetailServices cartDetailServices, UserManager<User> userManager)
+        public DetailsModel(IProductServices productServices, ICartDetailServices cartDetailServices, UserManager<User> userManager)
         {
             _productServices = productServices;
             _cartDetailServices = cartDetailServices;
             _userManager = userManager;
         }
+
         public List<CartDetail> listUserCart { get; set; }
 
         [BindProperty]

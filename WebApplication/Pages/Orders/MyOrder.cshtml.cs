@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Services;
+using Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace WebApplication.Pages.Orders
 {
     public class MyOrderModel : OrderPageModel
     {
-        public MyOrderModel(OrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
+        public MyOrderModel(IOrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
         {
         }
 

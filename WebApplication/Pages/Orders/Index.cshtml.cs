@@ -10,13 +10,14 @@ using Services;
 using Microsoft.AspNetCore.Identity;
 using WebApplication.Pages.Orders;
 using Microsoft.AspNetCore.Authorization;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Shop.Orders
 {
     [Authorize(Roles = "Supplier")]
     public class IndexModel : OrderPageModel
     {
-        public IndexModel(OrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
+        public IndexModel(IOrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
         {
         }
 

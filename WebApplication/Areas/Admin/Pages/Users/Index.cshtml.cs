@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Services.Interfaces;
 
 namespace WebApplication.Areas.Admin.Pages.Users
 {
     public class IndexModel : UserPageModel
     {
-        public IndexModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, UserServices userServices) : base(roleManager, userManager, userServices)
+        public IndexModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IUserServices userServices) : base(roleManager, userManager, userServices)
         {
         }
 
@@ -23,6 +24,7 @@ namespace WebApplication.Areas.Admin.Pages.Users
         }
 
         public List<UserInList> users;
+
         public int totalPages { set; get; }
 
         [TempData] // Sử dụng Session

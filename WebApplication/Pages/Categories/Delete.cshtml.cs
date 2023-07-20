@@ -9,14 +9,15 @@ using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Services;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Categories
 {
     [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
-        private readonly CategoryServices _categoryServices;
-        public DeleteModel(CategoryServices categoryServices)
+        private readonly ICategoryServices _categoryServices;
+        public DeleteModel(ICategoryServices categoryServices)
         {
             _categoryServices = categoryServices;
         }
