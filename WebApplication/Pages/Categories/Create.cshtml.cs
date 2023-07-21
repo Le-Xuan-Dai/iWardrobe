@@ -10,16 +10,17 @@ using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Services;
 using Microsoft.EntityFrameworkCore;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Categories
 {
     [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
-        private readonly CategoryServices _categoryServices;
-        private readonly UserServices _userServices;
+        private readonly ICategoryServices _categoryServices;
+        private readonly IUserServices _userServices;
 
-        public CreateModel(CategoryServices categoryServices, UserServices userServices)
+        public CreateModel(ICategoryServices categoryServices, IUserServices userServices)
         {
             _categoryServices = categoryServices;
             _userServices = userServices;

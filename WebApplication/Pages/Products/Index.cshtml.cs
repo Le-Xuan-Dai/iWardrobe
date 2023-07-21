@@ -11,17 +11,18 @@ using Services;
 using WebApplication.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Products
 {
     [Authorize(Roles = "Supplier")]
     public class IndexModel : PageModel
     {
-        private readonly ProductServices _productServices;
+        private readonly IProductServices _productServices;
         private readonly IConfiguration Configuration;
         protected readonly UserManager<User> _userManager;
 
-        public IndexModel(ProductServices productServices, IConfiguration configuration, UserManager<User> userManager)
+        public IndexModel(IProductServices productServices, IConfiguration configuration, UserManager<User> userManager)
         {
             _productServices = productServices;
             Configuration = configuration;

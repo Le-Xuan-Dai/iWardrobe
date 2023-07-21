@@ -7,13 +7,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Repositories
 {
-    public class RepositoryBase<T> where T : class
+    public class BaseRepository<T> where T : class
     {
         private readonly IWardrobeContext _dbContext;
         private readonly DbSet<T> _dbSet;
-        public RepositoryBase(IWardrobeContext dBContext)
+        public BaseRepository(IWardrobeContext dBContext)
         {
             _dbContext = dBContext;
             _dbSet = _dbContext.Set<T>();

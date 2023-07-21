@@ -17,7 +17,7 @@ namespace BusinessObjects
 
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Commnent> Comments { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
@@ -26,7 +26,7 @@ namespace BusinessObjects
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
+            //optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,7 +61,7 @@ namespace BusinessObjects
 
             modelBuilder.Entity<CartDetail>().Property(b => b.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Category>().Property(b => b.IsDeleted).HasDefaultValue(false);
-            modelBuilder.Entity<Commnent>().Property(b => b.IsDeleted).HasDefaultValue(false);
+            modelBuilder.Entity<Comment>().Property(b => b.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Order>().Property(b => b.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Product>().Property(b => b.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<User>().Property(b => b.IsDeleted).HasDefaultValue(false);
@@ -70,7 +70,7 @@ namespace BusinessObjects
 
             modelBuilder.Entity<CartDetail>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<Category>().HasQueryFilter(x => x.IsDeleted == false);
-            modelBuilder.Entity<Commnent>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Comment>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<Order>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<Product>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<User>().HasQueryFilter(x => x.IsDeleted == false);

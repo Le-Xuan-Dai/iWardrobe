@@ -7,22 +7,33 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
 using Services;
+using Microsoft.AspNetCore.Identity;
+using System.Net.NetworkInformation;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Products
 {
     public class DetailsModel : PageModel
     {
-        private readonly ProductServices _productServices;
+        private readonly IProductServices _productServices;
+        private readonly ICartDetailServices _cartDetailServices;
+        private readonly UserManager<User> _userManager;
 
-        public DetailsModel(ProductServices productServices)
+        public DetailsModel(IProductServices productServices, ICartDetailServices cartDetailServices, UserManager<User> userManager)
         {
             _productServices = productServices;
+            _cartDetailServices = cartDetailServices;
+            _userManager = userManager;
         }
 
-        public Product Product { get; set; }
+        public List<CartDetail> listUserCart { get; set; }
 
+        [BindProperty]
+        public CartDetail cartDetail { get; set; }
+        public Product Product { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            //var user = _userManager.GetUserAsync(this.User);
             if (id == null)
             {
                 return NotFound();
@@ -34,7 +45,37 @@ namespace WebApplication.Pages.Products
             {
                 return NotFound();
             }
+
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAddToCartAsync()
+        {
+            var user = await _userManager.GetUserAsync(this.User);
+            try
+            {
+                listUserCart = await _cartDetailServices.GetAll().Where(c => c.UserId == user.Id).ToListAsync();
+                    if (listUserCart != null)
+                    {
+                        var pro = listUserCart.Where(u => u.ProductId == cartDetail.ProductId).FirstOrDefault();
+                        if (pro != null)
+                        {
+                            pro.Quantity++;
+                            await _cartDetailServices.Update(pro);
+                        //Reload data from database 
+
+                        return RedirectToPage("./Cart");
+                    }
+                    }
+                    cartDetail.UserId = user.Id;
+                    cartDetail.Quantity = 1;
+                    await _cartDetailServices.Create(cartDetail);
+            }
+            catch (Exception e)
+            {
+                return RedirectToPage("/Index");
+            }
+            return RedirectToPage("./Cart");
         }
     }
 }

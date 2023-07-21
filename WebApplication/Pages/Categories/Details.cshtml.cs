@@ -9,15 +9,16 @@ using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Services;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Categories
 {
     [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
-        private readonly CategoryServices _categoryServices;
+        private readonly ICategoryServices _categoryServices;
 
-        public DetailsModel(CategoryServices categoryServices)
+        public DetailsModel(ICategoryServices categoryServices)
         {
             _categoryServices = categoryServices;
         }

@@ -8,7 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Org.BouncyCastle.Pqc.Crypto.Lms;
+using Repositories;
 using Services;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +37,7 @@ namespace WebApplication
             {
                 routeOptions.LowercaseQueryStrings = true;
             });
+           /* services.AddDbContext<IWardrobeContext>(ServiceLifetime.Transient);*/
             services.AddDbContext<IWardrobeContext>(options =>
             {
                 string connectString = Configuration.GetConnectionString("IWardrobeConnection");
@@ -42,10 +46,11 @@ namespace WebApplication
             });
 
             // Đăng kí services
-            services.AddScoped<ProductServices>();
-            services.AddScoped<UserServices>();
-            services.AddScoped<CategoryServices>();
-            services.AddScoped<OrderServices>();
+            services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<ICategoryServices, CategoryServices>();
+            services.AddScoped<ICartDetailServices, CartDetailServices>();
+            services.AddScoped<IOrderServices, OrderServices>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IWardrobeContext>()

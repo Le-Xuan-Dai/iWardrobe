@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Services;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,10 @@ namespace WebApplication.Pages
 {
     public class HomeModel : PageModel
     {
-        private readonly ProductServices _productServices;
+        private readonly IProductServices _productServices;
         private readonly IConfiguration Configuration;
 
-        public HomeModel(ProductServices productServices, IConfiguration configuration)
+        public HomeModel(IProductServices productServices, IConfiguration configuration)
         {
             _productServices = productServices;
             Configuration = configuration;

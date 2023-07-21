@@ -10,16 +10,17 @@ using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using Services.Interfaces;
 
 namespace WebApplication.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly UserServices _userServices;
+        private readonly IUserServices _userServices;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
 
-        public IndexModel(UserServices userServices, SignInManager<User> signInManager, UserManager<User> userManager)
+        public IndexModel(IUserServices userServices, SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _userServices = userServices;
             _signInManager = signInManager;

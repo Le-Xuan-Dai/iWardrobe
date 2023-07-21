@@ -13,13 +13,14 @@ using WebApplication.Pages.Orders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Shop.Orders
 {
     [Authorize(Roles = "Supplier")]
     public class DetailsModel : OrderPageModel
     {
-        public DetailsModel(OrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
+        public DetailsModel(IOrderServices orderServices, UserManager<User> userManager) : base(orderServices, userManager)
         {
         }
 

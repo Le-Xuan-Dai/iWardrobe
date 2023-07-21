@@ -159,7 +159,10 @@
             <div class="text-center w-100">
                 <span><b>or</b></span>
             </div>
-            <button type="button" class="btn btn-outline-dark w-100">Add to Cart</button>
+            <form method="post" asp-action="./Cart">
+                <input type="hidden" asp-for="@Model.cartDetail.ProductId" value="@Model.Product.ProductId"/>
+                <button type="submit" class="btn btn-outline-dark w-100" asp-page-handler="AddToCart" >Add to Cart</button>
+            </form>
 
         </div>
     </div>

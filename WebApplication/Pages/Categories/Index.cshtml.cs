@@ -8,15 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using Services;
+using Services.Interfaces;
 
 namespace WebApplication.Pages.Categories
 {
     [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
-        private readonly CategoryServices _categoryServices;
+        private readonly ICategoryServices _categoryServices;
 
-        public IndexModel(CategoryServices categoryServices)
+        public IndexModel(ICategoryServices categoryServices)
         {
             _categoryServices = categoryServices;
         }
