@@ -17,6 +17,7 @@ namespace BusinessObjects
         [StringLength(50)]
         public string BrandName { get; set; }
 
+        [StringLength(100)]
         public string Address { get; set; }
 
         public string Avatar { get; set; }

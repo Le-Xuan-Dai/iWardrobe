@@ -14,7 +14,7 @@ namespace BusinessObjects
         public int CategoryId { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(20)]
         public string CategoryName { get; set; }
 
         [ForeignKey("User")]

@@ -19,14 +19,17 @@ namespace BusinessObjects
         [ForeignKey("Product")]
         public int ProductId { get; set; }
 
+        [StringLength(20)]
         public string DeliverMethod { get; set; }
 
         public string? DeliverDetais { get; set; }
 
+        [StringLength(20)]
         public string PaymentMethod { get; set; }
 
         public string? PaymentDetais { get; set; }
 
+        [StringLength(20)]
         public string OrderStatus { get; set; }
 
         public string? Note { get; set; }

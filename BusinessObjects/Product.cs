@@ -21,7 +21,7 @@ namespace BusinessObjects
         public string UserId { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(50)]
         public string ProductName { get; set; }
 
         public string Description { get; set; }
