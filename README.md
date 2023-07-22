@@ -33,4 +33,7 @@
 - Facebook:
   - mail: iwardrobefasion@gmail.com
   - pass: exe123456
+## Link documentations
+ - Software Requirements Specification (SRS ) : https://docs.google.com/document/d/17YK8yWZdzPX3plhuRhdjk4wDUo_cBSKN/edit?fbclid=IwAR1kfA3R6KvTUfIC1mt2FoZi2hrCVKLgs8MXzNsJA4U679Qc1cG_w0uaMt0&pli=1
+ - Task Management Tool : https://lxd0307.atlassian.net/jira/software/projects/IW/boards/5/backlog
   
