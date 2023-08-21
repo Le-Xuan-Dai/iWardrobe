@@ -4,170 +4,128 @@
     ViewData["Title"] = "Cart";
 }
 <style>
-    .item-wrapper {
-        height: 600px;
+    .table-wrapper {
+        height: 300px;
         overflow-y: scroll;
     }
 
-        .item-wrapper::-webkit-scrollbar {
-            display: none;
+        .table-wrapper::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #F5F5F5;
+            border-radius: 10px;
         }
 
-    .btn-adjustment {
-        margin: 0 10px 0 10px;
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-
-        .btn-adjustment:hover {
-            background-color: #DDDDDD;
+        .table-wrapper::-webkit-scrollbar {
+            width: 10px;
+            background-color: #F5F5F5;
         }
 
-    .recommend-item {
-        cursor: pointer;
-    }
-
-    .detail-btn {
-        position: absolute;
-        bottom: 50%;
-        left: 25%;
-        background-color: rgb(154 205 50);
-        font-weight: bold;
-    }
-
-        .detail-btn:hover {
-            background-color: rgb(154 205 50);
+        .table-wrapper::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #FFF;
+            background-image: -webkit-gradient(linear, 40% 0%, 75% 84%, from(#4D9C41), to(#19911D), color-stop(.6, #54DE5D))
         }
-
-    .detail-wrapper {
-        z-index: 4;
-        background-color: rgba(190,190,190,0.6);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        transition: all 0.2s linear;
-        display: none;
-    }
-
-    .recommend-item:hover .detail-wrapper {
-        display: block;
-    }
 </style>
 
-<section class="h-100 h-custom" style="background-color: #eee;">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body p-4">
-
-                        <div class="row">
-
-                            <div class="col-lg-12">
-                                <a href="./Index" class="text-body">
-                                    <h5 class="mb-3">
-                                        <i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping
-                                    </h5>
-                                </a>
-
-                                <hr>
-
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                        <p class="mb-1">Shopping cart</p>
-                                        <p class="mb-0">You have items @Model.CartDetail.Count() in your cart</p>
-                                    </div>
-                                </div>
-                                <div class="item-wrapper">
-                                    @if (Model.CartDetail == null || Model.CartDetail.Count == 0)
-                                    {
-                                        <h2 class="text-black-50 text-center">Your cart is emmpty</h2>
-                                    }
-                                    else
-                                    {
-                                        @foreach (var cart in Model.CartDetail)
-                                        {
-
-                                            <div class="card mb-3 item">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="d-flex flex-row align-items-center">
-                                                            <div>
-                                                                <img src="@Html.DisplayFor(model => cart.Product.ImageUrls)"
-                                                                     class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
-                                                            </div>
-                                                            <div class="ms-3">
-                                                                <h5>@Html.DisplayFor(model => cart.Product.ProductName)</h5>
-                                                                <p class="small mb-0"></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-row align-items-center justify-content-between ">
-                                                            <div style="width: 100px; margin-right:100px;" class="d-flex justify-content-between align-items-center">
-                                                                <form method="post">
-                                                                    <input type="hidden" asp-for="@Model.cartDetailId" value="@cart.CartDetailId" />
-                                                                    <input type="hidden" asp-for="@Model.quantityUpdateAction" value="Decrease" class="quantity" />
-                                                                    <button class="decrease-btn btn btn-adjustment" asp-page-handler="UpdateQuantity">-</button>
-                                                                </form>
-                                                                <h5 class="fw-normal mb-0 amount">@Html.DisplayFor(model => cart.Quantity)</h5>
-                                                                <form method="post">
-                                                                    <input type="hidden" asp-for="@Model.cartDetailId" value="@cart.CartDetailId" />
-                                                                    <input type="hidden" asp-for="@Model.quantityUpdateAction" value="Increase" class="quantity" />
-                                                                    <button class="increase-btn btn btn-adjustment" asp-page-handler="UpdateQuantity">+</button>
-                                                                </form>
-                                                            </div>
-                                                            <div style="width: 100px;">
-                                                                <span class="original-price" style="display:none;">@Html.DisplayFor(model => cart.Product.SellPrice)</span>
-                                                                @{
-                                                                    var totalPrice = cart.Quantity * cart.Product.SellPrice;
-                                                                }
-                                                                <h5 class="mb-0 price" style="margin-right:10px;"> @Html.DisplayFor(model => totalPrice)</h5>
-                                                            </div>
-                                                            <!--  <a asp-page-handler="RemoveItem" asp-page="./Cart" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>-->
-                                                            <span style="display:none" class="cartIdhidden">@Html.DisplayFor(model => cart.CartDetailId)</span>
-                                                            <form action="">
-                                                                <input type="checkbox" name="" id="" class="buy-checking">
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <form method="post" asp-action="Payment">
-                                        <input type="hidden" class="cartId" asp-for="@Model.paymentCart">
-                                        <button type="submit" disabled class="btn btnPayment" style="width:200px;background-color:rgba( 169, 169, 169, 1 );font-weight:bold;" asp-page-handler="Payment">Payment</button>
-                                    </form>
-                                </div>
-                                <div class="d-flex justify-content-center mt-4 mb-5 " style="font-size:1.7rem; font-weight:bold;">
-                                    <span class="text-center">May you like them ....</span>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <ul class="d-flex justify-content-around recommend-list flex-wrap" style="list-style:none; width:100%;">
-                                        @for (int i = Model.RandomProduct.Count() - 4; i < Model.RandomProduct.Count; i++)
-                                        {
-                                            <li class="recommend-item" style="position: relative;">
-                                                <img src="@Html.DisplayFor(model => Model.RandomProduct[i].ImageUrls)"
-                                                     class="d-block img-rounded rounded-3" style="width:250px; min-height: 100px;" alt="..." />
-                                                <div class="detail-wrapper">
-                                                    <button class="btn  detail-btn" style="width:50%;">
-                                                        <a asp-page="/Products/Details" asp-route-id="@Model.RandomProduct[i].ProductId">View detail</a>
-                                                    </button>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                                <div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body>
+    <div class="container h-100 w-100 mt-4">
+        <div class="row p-3" style="border-bottom: 2px solid #c1c1c1;">
+            <div class="col-12 d-flex align-items-center ">
+                <div class="col-6 navigate_wrapper text-left">
+                    <i class="fas fa-backward ms-4" style="font-size:15px;"></i>
+                    <a href="#" class="naviagate_link fw-bold ms-2">Continue shopping</a>
+                </div>
+                <div class="col-6 navigate_wrapper text-center ">
+                    <p class="fw-bold fs-4">IWardrobe Cart</p>
                 </div>
             </div>
         </div>
-</section>
-<script src="~/js/Cart.js"></script>
+        <div class="row mt-3">
+            <div class="table-wrapper col-12">
+                <table class="table position-relative">
+                    <thead class="position-sticky z-3">
+                        <tr class="mb-5">
+                            <th scope="col" class="fs-5 text-center">@Html.DisplayNameFor(model => model.CartDetail[0].Product.ProductName)</th>
+                            <th scope="col" class="fs-5 text-center">@Html.DisplayNameFor(model => model.CartDetail[0].Product.ImageUrls)</th>
+                            <th scope="col" class="fs-5 text-center">@Html.DisplayNameFor(model => model.CartDetail[0].Quantity)</th>
+                            <th scope="col" class="fs-5 text-center">Product's price'</th>
+                            <th scope="col" class="fs-5 text-center">Pick to pay</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body h-50 ">
+                        @if (Model.CartDetail == null || Model.CartDetail.Count == 0)
+                        {
+                            <h2 class="text-black-50 text-center">Your cart is emmpty</h2>
+                        }else{
+                            @foreach(var cart in Model.CartDetail){
+                                <tr class="table-row mt-4 ">
+                                    <td class="fs-5 text-center align-middle res">@Html.DisplayFor(model => cart.Product.ProductName)</td>
+                                    <td class="product-image text-center align-middle">
+                                        <img src=@cart.Product.ImageUrls[0]
+                                     alt="" class="rounded-3 img-fluid w-25">
+                                    </td>
+                                    <td class="fs-5 text-center align-middle">
+                                        <div class="quantity-wrapper d-flex justify-content-between align-items-center m-auto">
+                                            <form method="post" class="">
+                                                <input type="hidden" asp-for="@Model.cartDetailId" value="@cart.CartDetailId" />
+                                                <input type="hidden" asp-for="@Model.quantityUpdateAction" value="Decrease" class="quantity" />
+                                                <button class="decrease-btn btn btn-adjustment fs-1" asp-page-handler="UpdateQuantity">-</button>
+                                            </form>
+                                            <h5 class="fw-normal mb-0 amount">@Html.DisplayFor(model => cart.Quantity)</h5>
+                                            <form method="post">
+                                                <input type="hidden" asp-for="@Model.cartDetailId" value="@cart.CartDetailId" />
+                                                <input type="hidden" asp-for="@Model.quantityUpdateAction" value="Increase" class="quantity" />
+                                                <button class="increase-btn btn btn-adjustment  fs-2" asp-page-handler="UpdateQuantity">+</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td class="fs-5 text-center align-middle">@Html.DisplayFor(model => cart.Product.SellPrice)</td>
+                                    
+                                    <td class="fs-5 text-center align-middle">
+                                        <input type="checkbox" name="" id="" class="w-100 product-pick">
+                                        <span style="display:none" class="cartIdhidden">@Html.DisplayFor(model => cart.CartDetailId)</span>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-wrapper ">
+                <form method="post" asp-action="Payment" class="w-100 d-flex justify-content-center">
+                    <input type="hidden" class="cartId" asp-for="@Model.paymentCart">
+                    <button type="submit" disabled class="btn  w-25 align-self-center m-5 fw-bold btn-purchase" asp-page-handler="Payment">
+                        <i class="fas fa-shopping-cart "></i>
+                        <span class="btn-content">Purchase</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="recommend-wrapper col-12 d-flex m-auto  p-3 flex-wrap ">
+                 @if(Model.RandomProduct != null){
+                    @for (int i = Model.RandomProduct.Count() - 4; i < Model.RandomProduct.Count; i++)
+                    {
+                        <div class="product-wrapper text-center m-auto  h-50 col-lg-3 col-sm-6 col-md-4 col-xs-12 p-1">
+                            <div class="image--wrapper">
+                                <img src="@Html.DisplayFor(model => Model.RandomProduct[i].ImageUrls)"
+                             alt="" class="rounded-top-4 w-75">
+                            </div>
+                            <div class="product-infor w-75 m-auto text-center rounded-bottom-4"
+                         style="background-color: #dddedb; padding-bottom: 10px;">
+                                <span class="product__name fs-4 d-block " style="white-space: nowrap;  text-overflow: ellipsis;overflow: hidden;"> @Html.DisplayFor(model => Model.RandomProduct[i].ProductName)</span>
+                                <button class="btn btn-success w-50 d-block fw-bold" style="margin:auto" type="button">
+                                    <a asp-page="/Products/Details" asp-route-id="@Model.RandomProduct[i].ProductId" style=" text-decoration:none; color:#fff">View detail</a>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                 }
+                 
+            </div>
+        </div>
+    </div>
+</body>
 <script src="~/js/Payment.js"></script>
+<script src="~/js/Cart.js"></script>
