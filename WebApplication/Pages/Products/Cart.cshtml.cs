@@ -47,6 +47,9 @@ namespace WebApplication.Pages.Products
 
         [BindProperty]
         public int paymentCart { get; set; }
+
+        public string ErrorMessage { get; private set; }
+
         public async Task<IActionResult> OnGet()
         {
             // String currentUserId = _userManager.GetUserId(User);
@@ -92,7 +95,20 @@ namespace WebApplication.Pages.Products
             CartDetail cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartDetailId).FirstOrDefaultAsync();
             if (quantityUpdateAction.Equals("Increase"))
             {
-                cartDetail.Quantity++;
+               
+                if (cartDetail.Quantity == 1)
+                {
+                    ErrorMessage = "Cannot buy or rent with this amount";
+                    await _cartDetailServices.Update(cartDetail);
+                    CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
+                    listCartProduct = GetListProductInCart(CartDetail);
+                    RandomProduct = await _productServices.GetAll().ToListAsync();
+                    return Page();
+                }
+                else
+                {
+                    cartDetail.Quantity++;
+                }
             }
             else
             {

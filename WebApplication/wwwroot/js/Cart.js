@@ -1,6 +1,7 @@
 ﻿const listOfItems = document.querySelectorAll(".table-row");
 const btnPurchase = document.querySelector('.btn-purchase');
 var cartId = document.querySelector('.cartId');
+const errorMessage = document.querySelector('.error-message');
 
 listOfItems.forEach((item) => {
     var checkboxIsChecked = item.querySelector(".product-pick");
@@ -10,6 +11,9 @@ listOfItems.forEach((item) => {
     })
 });
 
+setTimeout(() => {
+    errorMessage.style.display = "none";
+},2000)
 
 function hideOtherCheckbox(currentCheckbox, cartItemId) {
     const listOfCheckbox = document.querySelectorAll('.product-pick');
