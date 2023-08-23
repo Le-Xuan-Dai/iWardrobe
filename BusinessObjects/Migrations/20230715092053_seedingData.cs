@@ -153,11 +153,7 @@ namespace BusinessObjects.Migrations
               values: new object[,]
               {
                     {"600206da-3607-4b5a-af5b-a793c69e1be2",1,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ,"PENDING" ,"Nothing" },
-                    {"600206da-3607-4b5a-af5b-a793c69e1be2",2,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"PROCESSING" ,"Nothing" },
-                     {"600206da-3607-4b5a-af5b-a793c69e1be2",3,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ,"SHIPPED" ,"Nothing" },
-                    {"600206da-3607-4b5a-af5b-a793c69e1be2",4,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"DELIVERED" ,"Nothing" },
-                     {"600206da-3607-4b5a-af5b-a793c69e1be2",5,"Grab","Nothing" , "Grab will collect on my behalf " , "Card payment" ,"CANCELLED" ,"Nothing" },
-                    {"600206da-3607-4b5a-af5b-a793c69e1be2",6,"Self-deliver","Nothing" , "Pay Directly" , "Card payment" ,"PROCESSING" ,"Nothing" },
+         
               }
               );
 
