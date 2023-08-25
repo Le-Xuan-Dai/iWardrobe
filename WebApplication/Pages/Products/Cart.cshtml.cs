@@ -87,48 +87,35 @@ namespace WebApplication.Pages.Products
             return listProduct;
         }
         
-        public async Task<IActionResult> OnPostUpdateQuantityAsync() 
+        public async Task<IActionResult> OnPostUpdateQuantityAsync()
         {
+            var action = Request.Form["action"];
+            var cartId = Int64.Parse(Request.Form["cartId"]);
             var userClaim = await _userManager.GetUserAsync(this.User);
             User user = _userServices.FirstOrDefault(u => u.Id == userClaim.Id);
+            var cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartId).FirstOrDefaultAsync();
+            
 
-            CartDetail cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartDetailId).FirstOrDefaultAsync();
-            if (quantityUpdateAction.Equals("Increase"))
+            if (action.Equals("increase"))
             {
-               
-                if (cartDetail.Quantity == 1)
-                {
-                    ErrorMessage = "Cannot buy or rent with this amount";
-                    await _cartDetailServices.Update(cartDetail);
-                    CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
-                    listCartProduct = GetListProductInCart(CartDetail);
-                    RandomProduct = await _productServices.GetAll().ToListAsync();
-                    return Page();
-                }
-                else
-                {
                     cartDetail.Quantity++;
-                }
             }
             else
             {
-                cartDetail.Quantity--;
-                if (cartDetail.Quantity == 0)
+                if(cartDetail == null || cartDetail.Quantity == 0)
                 {
                     await _cartDetailServices.Delete(cartDetail);
                     CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
                     listCartProduct = GetListProductInCart(CartDetail);
                     RandomProduct = await _productServices.GetAll().ToListAsync();
                     return Page();
-
                 }
+                cartDetail.Quantity--;
             }
 
             await _cartDetailServices.Update(cartDetail);
-            CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
-            listCartProduct = GetListProductInCart(CartDetail);
-            RandomProduct = await _productServices.GetAll().ToListAsync();
-            return Page();
+            int quantity = cartDetail.Quantity;
+            return new JsonResult(new { quantity });
         }
 
         public async Task<IActionResult> OnPostPaymentAsync()

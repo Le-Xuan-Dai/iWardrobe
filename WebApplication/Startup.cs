@@ -42,7 +42,6 @@ namespace WebApplication
                 options.UseSqlServer(connectString);
                 options.AddInterceptors(new SoftDeleteInterceptor());
             });
-
             // Đăng kí services
             services.AddScoped<ProductServices>();
             services.AddScoped<UserServices>();

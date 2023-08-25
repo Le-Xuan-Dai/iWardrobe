@@ -35,3 +35,4 @@ function hideOtherCheckbox(currentCheckbox, cartItemId) {
     })
 }
 
+
