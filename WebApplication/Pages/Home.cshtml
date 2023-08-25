@@ -40,31 +40,31 @@
         </div>
     </form>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 gy-4 d-flex justify-content-center justify-content-lg-start">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 gy-4 d-flex justify-content-center justify-content-lg-start">
         @foreach (var item in Model.Products)
         {
             <div class="col d-flex align-items-center justify-content-center">
-                <div class="card rounded-4 p-3 position-relative" style="width: 20rem;">
-                    <img class="rounded-4 card-img-top" style="min-width: 17.875rem; min-height: 17.875rem;"
+                <div class="card rounded-4 p-3 position-relative" style="width: 16rem;">
+                    <img class="rounded-4 card-img-top" style="min-width: 14rem; min-height: 14rem;"
                          src=@item.ImageUrls[0]
                          alt="..." loading="lazy">
-                    <div class="card-body">
-                        <p class="card-subtitle" style="color: #A1A1A1;">lxdfasion</p>
-                        <h5 class="card-title cardTitle">@item.ProductName</h5>
+                    <div class="card-body pt-3 p-0">
+                        <p class="fs-6 card-subtitle" style="color: #A1A1A1;">lxdfasion</p>
+                        <p class="fs-5 fw-bold card-title cardTitle">@item.ProductName</p>
                         <div class="d-flex justify-content-between">
                             <div>
-                                <span><i class="fa fa-money" aria-hidden="true"></i>&nbsp;Buy </span>
-                                <p style="font-weight: bold; color: #C0E862;">(đ)@item.SellPrice</p>
+                                <span style="font-size: 14px;"><i class="fa-solid fa-dollar-sign"></i>&nbsp;Buy </span>
+                                <p class="fs-6 fw-bold mb-1" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.SellPrice) / 1000) (đ)</p>
                             </div>
                             <div style="text-align: end;">
-                                <span><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;Rent </span>
-                                <p style="font-weight: bold; color: #C0E862;">(đ)@item.RentPrice</p>
+                                <span style="font-size: 14px"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;Rent </span>
+                                <p class="fs-6 fw-bold mb-1" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.RentPrice) / 1000) (đ)</p>
                             </div>
                         </div>
                         <a asp-page="/Products/Details" asp-route-id="@item.ProductId"
                            style="background-color:#C0E862;"
                            type="button"
-                           class="btn w-100">
+                           class="btn btn-sm w-100">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                             &nbsp;View Details
                         </a>
