@@ -1,42 +1,38 @@
-﻿const listOfItems = document.querySelectorAll(".item");
-const config = { childList: true, subtree: true };
-var price = document.querySelector('.price');
-var btnPayment = document.querySelector('.btnPayment');
+﻿const listOfItems = document.querySelectorAll(".table-row");
+const btnPurchase = document.querySelector('.btn-purchase');
+var cartId = document.querySelector('.cartId');
+const errorMessage = document.querySelector('.error-message');
+
 listOfItems.forEach((item) => {
-    const pricePerItem = item.querySelector(".original-price").innerHTML;
-    var currentAmount = item.querySelector(".amount").innerHTML;
-    var checkboxIsChecked = item.querySelector(".buy-checking");
-    var cartIdhidden = item.querySelector(".cartIdhidden").innerHTML;
-
-   
+    var checkboxIsChecked = item.querySelector(".product-pick");
+    var cartItemId = item.querySelector('.cartIdhidden').innerHTML;
     checkboxIsChecked.addEventListener("change", (e) => {
-        hideOtherCheckbox(checkboxIsChecked, cartIdhidden, pricePerItem * currentAmount, document.querySelector('.cartId'), price);
+        hideOtherCheckbox(checkboxIsChecked, cartItemId);
     })
-
 });
 
+setTimeout(() => {
+    errorMessage.style.display = "none";
+}, 2000)
 
-function hideOtherCheckbox(currentCheckbox, cartIdhidden, totalPrice, cartId, priceHtml) {
-    const listOfCheckbox = document.querySelectorAll('.buy-checking');
-    var cartId = document.querySelector('.cartId');
+function hideOtherCheckbox(currentCheckbox, cartItemId) {
+    const listOfCheckbox = document.querySelectorAll('.product-pick');
 
     listOfCheckbox.forEach(checkbox => {
         if (currentCheckbox.checked) {
-            btnPayment.style.backgroundColor = "rgb(154 205 50)";
-            btnPayment.disabled = false;
-            cartId.value = cartIdhidden;
-            priceHtml.value = totalPrice;
-            console.log(cartId.value);
             if (checkbox !== currentCheckbox) {
+                cartId.value = cartItemId;
                 checkbox.style.visibility = 'hidden';
+                btnPurchase.style.backgroundColor = "rgb(154 205 50)";
+                btnPurchase.disabled = false;
             }
         } else {
             cartId.value = 0;
-            console.log(cartId.value);
-            btnPayment.style.backgroundColor = "rgba( 169, 169, 169, 1 )";
-            btnPayment.disabled = true;
+            btnPurchase.style.backgroundColor = "rgba( 169, 169, 169, 1 )";
+            btnPurchase.disabled = true;
             checkbox.style.visibility = 'visible';
         }
     })
 }
+
 
