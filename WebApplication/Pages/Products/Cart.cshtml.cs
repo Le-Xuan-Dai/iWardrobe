@@ -19,10 +19,9 @@ namespace WebApplication.Pages.Products
     {
         private readonly ICartDetailServices _cartDetailServices;
         private readonly IUserServices _userServices;
-        private readonly UserManager<User> _userManager ;
+        private readonly UserManager<User> _userManager;
         private readonly IProductServices _productServices;
         private readonly IOrderServices _orderServices;
-
         public CartModel(ICartDetailServices cartDetailServices, IUserServices userServices, UserManager<User> userManager, IProductServices productServices, IOrderServices orderServices)
         {
             _cartDetailServices = cartDetailServices;
@@ -49,6 +48,9 @@ namespace WebApplication.Pages.Products
 
         [BindProperty]
         public int paymentCart { get; set; }
+
+        public string ErrorMessage { get; private set; }
+
         public async Task<IActionResult> OnGet()
         {
             // String currentUserId = _userManager.GetUserId(User);
@@ -74,7 +76,7 @@ namespace WebApplication.Pages.Products
             return Page();
         }
 
-        
+
 
         public List<Product> GetListProductInCart(List<CartDetail> listCart)
         {
@@ -85,36 +87,36 @@ namespace WebApplication.Pages.Products
             }
             return listProduct;
         }
-        
-        public async Task<IActionResult> OnPostUpdateQuantityAsync() 
+
+        public async Task<IActionResult> OnPostUpdateQuantityAsync()
         {
+            var action = Request.Form["action"];
+            var cartId = Int64.Parse(Request.Form["cartId"]);
             var userClaim = await _userManager.GetUserAsync(this.User);
             User user = _userServices.FirstOrDefault(u => u.Id == userClaim.Id);
+            var cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartId).FirstOrDefaultAsync();
 
-            CartDetail cartDetail = await _cartDetailServices.GetAll().Where(c => c.CartDetailId == cartDetailId).FirstOrDefaultAsync();
-            if (quantityUpdateAction.Equals("Increase"))
+
+            if (action.Equals("increase"))
             {
                 cartDetail.Quantity++;
             }
             else
             {
-                cartDetail.Quantity--;
-                if (cartDetail.Quantity == 0)
+                if (cartDetail == null || cartDetail.Quantity == 0)
                 {
                     await _cartDetailServices.Delete(cartDetail);
                     CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
                     listCartProduct = GetListProductInCart(CartDetail);
                     RandomProduct = await _productServices.GetAll().ToListAsync();
                     return Page();
-
                 }
+                cartDetail.Quantity--;
             }
 
             await _cartDetailServices.Update(cartDetail);
-            CartDetail = await _cartDetailServices.GetAll().Include(c => c.Product).Where(c => c.UserId == userClaim.Id).ToListAsync();
-            listCartProduct = GetListProductInCart(CartDetail);
-            RandomProduct = await _productServices.GetAll().ToListAsync();
-            return Page();
+            int quantity = cartDetail.Quantity;
+            return new JsonResult(new { quantity });
         }
 
         public async Task<IActionResult> OnPostPaymentAsync()
