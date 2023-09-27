@@ -46,14 +46,6 @@
         margin-bottom: 15px;
     }
 
-        .payment-methods-wrapper::after {
-            content: "Payment methods";
-            position: absolute;
-            background-color: white;
-            top: -10px;
-            padding: 0 10px;
-        }
-
     .payment {
         width: 50px;
         cursor: pointer;
@@ -146,19 +138,23 @@
                         <textarea style="resize:none;" type="text" name="" id="" class="rounded-3 note p-2" rows="3" cols="80"
                                   placeholder="Payment details..."></textarea>
                     </div>
-                    <div class="m-auto  payment-methods-wrapper d-flex justify-content-around w-75" style="margin-left: 150px;   ">
-                        <div class="payment-method-item">
-                            <img src="https://homepage.momocdn.net/img/logo-momo.png" alt="" class="momo-payment payment">
-                        </div>
-                        <div class="payment-method-item">
-                            <img src="https://cdn.tgdd.vn/2020/04/GameApp/image-180x180.png" alt=""
-                                 class="zalo-payment payment">
-                        </div>
-                        <div class="payment-method-item">
-                            <img src="https://previews.123rf.com/images/iconisa/iconisa1710/iconisa171006475/88777494-direct-payments-concept-icon.jpg"
-                                 alt="" class="momo-payment payment choose rou">
+                    <div class="detail-item-wrapper">
+                        <label class="detail-label fw-bold">Payment method</label> 
+                        <div class="py-2 rounded-3 payment-methods-wrapper d-flex justify-content-around w-100 align-items-center" style="height: 100px">
+                            <div class="payment-method-item">
+                                <img src="https://homepage.momocdn.net/img/logo-momo.png" alt="" class="momo-payment payment">
+                            </div>
+                            <div class="payment-method-item">
+                                <img src="https://cdn.tgdd.vn/2020/04/GameApp/image-180x180.png" alt=""
+                                     class="zalo-payment payment">
+                            </div>
+                            <div class="payment-method-item">
+                                <img src="https://previews.123rf.com/images/iconisa/iconisa1710/iconisa171006475/88777494-direct-payments-concept-icon.jpg"
+                                     alt="" class="momo-payment payment choose rou">
+                            </div>
                         </div>
                     </div>
+                
                     <div class="detail-item-wrapper mt-2 ">
                         <label class="detail-label fw-bold">Note</label>
                         <textarea style="resize:none;" class="rounded-3 note p-2" rows="3" cols="80"
@@ -242,7 +238,7 @@
             </button>
             <div class="modal fade" id="modalPayment" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">QR code for Payment</h1>
