@@ -354,7 +354,12 @@ namespace BusinessObjects.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
+            migrationBuilder.Sql(@"CREATE TRIGGER UpdateQuantityOfProduct ON Orders AFTER INSERT AS
+                                    BEGIN
+	                                    UPDATE Products SET IsDeleted = 1 
+					                    WHERE Products.ProductId = (SELECT ProductId FROM inserted) ;
+                                    END ;"
+                                );
             migrationBuilder.CreateIndex(
                 name: "IX_CartDetails_ProductId",
                 table: "CartDetails",
