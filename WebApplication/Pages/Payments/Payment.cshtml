@@ -46,14 +46,6 @@
         margin-bottom: 15px;
     }
 
-        .payment-methods-wrapper::after {
-            content: "Payment methods";
-            position: absolute;
-            background-color: white;
-            top: -10px;
-            padding: 0 10px;
-        }
-
     .payment {
         width: 50px;
         cursor: pointer;
@@ -146,19 +138,23 @@
                         <textarea style="resize:none;" type="text" name="" id="" class="rounded-3 note p-2" rows="3" cols="80"
                                   placeholder="Payment details..."></textarea>
                     </div>
-                    <div class="m-auto  payment-methods-wrapper d-flex justify-content-around w-75" style="margin-left: 150px;   ">
-                        <div class="payment-method-item">
-                            <img src="https://homepage.momocdn.net/img/logo-momo.png" alt="" class="momo-payment payment">
-                        </div>
-                        <div class="payment-method-item">
-                            <img src="https://cdn.tgdd.vn/2020/04/GameApp/image-180x180.png" alt=""
-                                 class="zalo-payment payment">
-                        </div>
-                        <div class="payment-method-item">
-                            <img src="https://previews.123rf.com/images/iconisa/iconisa1710/iconisa171006475/88777494-direct-payments-concept-icon.jpg"
-                                 alt="" class="momo-payment payment choose rou">
+                    <div class="detail-item-wrapper">
+                        <label class="detail-label fw-bold">Payment method</label> 
+                        <div class="py-2 rounded-3 payment-methods-wrapper d-flex justify-content-around w-100 align-items-center" style="height: 100px">
+                            <div class="payment-method-item">
+                                <img src="https://homepage.momocdn.net/img/logo-momo.png" alt="" class="momo-payment payment">
+                            </div>
+                            <div class="payment-method-item">
+                                <img src="https://cdn.tgdd.vn/2020/04/GameApp/image-180x180.png" alt=""
+                                     class="zalo-payment payment">
+                            </div>
+                            <div class="payment-method-item">
+                                <img src="https://previews.123rf.com/images/iconisa/iconisa1710/iconisa171006475/88777494-direct-payments-concept-icon.jpg"
+                                     alt="" class="momo-payment payment choose rou">
+                            </div>
                         </div>
                     </div>
+                
                     <div class="detail-item-wrapper mt-2 ">
                         <label class="detail-label fw-bold">Note</label>
                         <textarea style="resize:none;" class="rounded-3 note p-2" rows="3" cols="80"
@@ -236,17 +232,47 @@
         </div>
         <div class="section-title-wrapper d-flex justify-content-end align-items-center p-3"
              style="width:100%;border-top: 2px solid black;">
-            <form method="post">
-                <input type="hidden" asp-for="@Model.Order.DeliverMethod" class="form-delivery_method" />
-                <input type="hidden" asp-for="@Model.Order.DeliverDetais" class="form-delivery_detail" />
-                <input type="hidden" asp-for="@Model.Order.PaymentDetais" class="form-payment_detail" />
-                <input type="hidden" asp-for="@Model.Order.Note" class="form-note" />
-                <button type="submit" class="btn btn-success" asp-page-handler="PurchaseItem">
-                    <i class="fa-regular fa-money-bill-1"></i>&nbsp;Purchase
-                </button>
-            </form>
+            <button class="btn btn-success"
+                    data-bs-toggle="modal" data-bs-target="#modalPayment">
+                <i class="fa-regular fa-money-bill-1"></i>&nbsp;Payment
+            </button>
+            <div class="modal fade" id="modalPayment" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">QR code for Payment</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            @{
+                                var amount = "amount=" + Math.Round(totalPayment).ToString();
+                                var info = "&addInfo=Pay%20for%20your%20order";
+                                var accountName = "&accountName=The%20iWardrobe%20e-commerce%20platform";
+                                var qrCode = "https://img.vietqr.io/image/970405-5615205039708-compact2.jpg?" + amount + info + accountName;
+                            }
+                            <img style="width: 480px" src=@qrCode alt="QR payment" />
+                        </div>
+                        <div class="modal-footer">
+                            <form class="w-100" method="post">
+                                <input type="hidden" asp-for="@Model.Order.DeliverMethod" class="form-delivery_method" />
+                                <input type="hidden" asp-for="@Model.Order.DeliverDetais" class="form-delivery_detail" />
+                                <input type="hidden" asp-for="@Model.Order.PaymentDetais" class="form-payment_detail" />
+                                <input type="hidden" asp-for="@Model.Order.Note" class="form-note" />
+                                <div class="w-100 d-flex justify-content-between">
+                                    <button type="button" style="flex: 1" class="btn btn-light mx-1" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="fa-solid fa-xmark"></i>&nbsp;Cancel
+                                    </button>
+                                    <button style="flex: 2 " type="submit" class="btn btn-success mx-1" asp-page-handler="PurchaseItem">
+                                        <i class="fa-solid fa-check"></i>&nbsp;I have successfully paid
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="~/js/Payment.js"></script>
+    <script src="~/js/Payment.js"></script>

@@ -82,11 +82,11 @@
         <div class="d-flex justify-content-between w-100">
             <p>
                 <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
-                Buy: <span style="font-size: x-large; font-weight: bold; color: #C0E862;">(đ)@Model.Product.SellPrice</span>
+                Buy: <span style="font-size: x-large; font-weight: bold; color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(Model.Product.SellPrice) / 1000) (đ)</span>
             </p>
             <p>
                 <i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;
-                Rent: <span style="font-size: x-large; font-weight: bold; color: #C0E862;">(đ)@Model.Product.RentPrice</span>
+                Rent: <span style="font-size: x-large; font-weight: bold; color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(Model.Product.RentPrice) / 1000) (đ)</span>
             </p>
         </div>
         <button style="background-color:#C0E862;" type="button" class="btn w-100" data-bs-toggle="modal"

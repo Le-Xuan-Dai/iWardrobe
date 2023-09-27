@@ -7,88 +7,246 @@
         width: 2rem;
         height: 2rem;
     }
+
+    .card {
+        flex-direction: row;
+        max-width: 60em;
+        border: 0;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+        .card img {
+            max-width: 100px;
+            margin: auto;
+            padding: 0.5em;
+            border-radius: 0.7em;
+        }
+
+    .card-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .text-section {
+        max-width: 60%;
+    }
+
+    .cta-section {
+        max-width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+        .cta-section .btn {
+            padding: 0.2em 0.5em;
+            font-size: 1em;
+            color: #696969;
+        }
+
+    .card-text {
+        letter-spacing: 0.1em;
+    }
+
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        background-color: #C0E862;
+        color: black !important;
+    }
 </style>
 
 
 <div class="container">
-    <h1>Orders</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="background-color: #C0E862;">
-                    Product ID
-                </th>
-                <th style="background-color: #C0E862;">
-                    Product Image
-                </th>
-                <th style="background-color: #C0E862;">
-                    Product Name
-                </th>
-                <th style="background-color: #C0E862;">
-                    Customer
-                </th>
-                <th style="background-color: #C0E862;">
-                    @Html.DisplayNameFor(model => model.Order[0].Note)
-                </th>
-                <th style="background-color: #C0E862;">
-                    Status
-                </th>
-                <th style="background-color: #C0E862;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Order)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.ProductId)
-                    </td>
-                    <td>
-                        <img src=@item.Product.ImageUrls[0]
-                             class="d-block" style="width: 100px; min-height: 100px;" alt="...">
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Fullname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Note)
-                    </td>
-                    <td>
-                        @{
-                            if (item.OrderStatus.Equals("PENDING"))
-                            {
-                                <span class="badge text-bg-info">Pending</span>
-                            }
-                            if (item.OrderStatus.Equals("PROCESSING"))
-                            {
-                                <span class="badge text-bg-success">Processing</span>
-                            }
-                            if (item.OrderStatus.Equals("SHIPPED"))
-                            {
-                                <span class="badge text-bg-primary">Shipped</span>
-                            }
-                            if (item.OrderStatus.Equals("DELIVERED"))
-                            {
-                                <span class="badge text-bg-dark">Delivered</span>
-                            }
-                            if (item.OrderStatus.Equals("CANCELLED"))
-                            {
-                                <span class="badge text-bg-danger">Cancelled</span>
-                            }
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active text-black-50" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending-tab-pane" type="button" role="tab" aria-controls="pending-tab-pane" aria-selected="true">Pending</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black-50" id="processing-tab" data-bs-toggle="tab" data-bs-target="#processing-tab-pane" type="button" role="tab" aria-controls="processing-tab-pane" aria-selected="false">Processing</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black-50" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping-tab-pane" type="button" role="tab" aria-controls="shipping-tab-pane" aria-selected="false">Shipping</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black-50" id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivered-tab-pane" type="button" role="tab" aria-controls="delivered-tab-pane" aria-selected="false">Delivered</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black-50" id="cancelled-tab" data-bs-toggle="tab" data-bs-target="#cancelled-tab-pane" type="button" role="tab" aria-controls="cancelled-tab-pane" aria-selected="false">Cancelled</button>
+        </li>
+
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="pending-tab-pane" role="tabpanel" aria-labelledby="pending-tab" tabindex="0">
+            <div class="p-4">
+                <h4>Pending Orders</h4>
+                <p>Manage your recent orders and invoices</p>
+                <ul class="list-group">
+                    @foreach (var item in Model.Order)
+                    {
+                        if (item.OrderStatus.Equals("PENDING"))
+                        {
+                            <li class="list-group-item" style="border: none">
+                                <div class="card">
+                                    <img src=@item.Product.ImageUrls[0] class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="text-section">
+                                            <h5 class="card-title fw-bold">@item.Product.ProductName</h5>
+                                            <p>Friday, 29 May 2015 05:50 AM</p>
+                                            <p class="fw-semibold mb-0">@item.User.Fullname</p>
+                                            <p class="mb-0">@item.User.Address</p>
+                                            <p>@item.User.PhoneNumber - @item.User.Email</p>
+                                        </div>
+                                        <div class="cta-section">
+                                            <a class="btn btn-sm btn-light rounded-circle mx-1 iconAction" asp-page="./MyOrderDetails" asp-route-id="@item.OrderId">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                            <div class="fw-semibold" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.Product.SellPrice) / 1000) (đ)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         }
-                    </td>
-                    <td>
-                        <div class="h-100 d-flex align-items-center justify-content-center">
-                            <a class="btn btn-sm btn-warning rounded-circle mx-1 iconAction" asp-page="./MyOrderDetails" asp-route-id="@item.OrderId">
-                                <i class="fa-solid fa-info"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="processing-tab-pane" role="tabpanel" aria-labelledby="processing-tab" tabindex="0">
+            <div class="p-4">
+                <h4>Processing Orders</h4>
+                <p>Manage your recent orders and invoices</p>
+                <ul class="list-group">
+                    @foreach (var item in Model.Order)
+                    {
+                        if (item.OrderStatus.Equals("PROCESSING"))
+                        {
+                            <li class="list-group-item" style="border: none">
+                                <div class="card">
+                                    <img src=@item.Product.ImageUrls[0] class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="text-section">
+                                            <h5 class="card-title fw-bold">@item.Product.ProductName</h5>
+                                            <p>Friday, 29 May 2015 05:50 AM</p>
+                                            <p class="fw-semibold mb-0">@item.User.Fullname</p>
+                                            <p class="mb-0">@item.User.Address</p>
+                                            <p>@item.User.PhoneNumber - @item.User.Email</p>
+                                        </div>
+                                        <div class="cta-section">
+                                            <a class="btn btn-sm btn-light rounded-circle mx-1 iconAction" asp-page="./MyOrderDetails" asp-route-id="@item.OrderId">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                            <div class="fw-semibold" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.Product.SellPrice) / 1000) (đ)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="shipping-tab-pane" role="tabpanel" aria-labelledby="shipping-tab" tabindex="0">
+            <div class="p-4">
+                <h4>Shipping Orders</h4>
+                <p>Manage your recent orders and invoices</p>
+                <ul class="list-group">
+                    @foreach (var item in Model.Order)
+                    {
+                        if (item.OrderStatus.Equals("SHIPPED"))
+                        {
+                            <li class="list-group-item" style="border: none">
+                                <div class="card">
+                                    <img src=@item.Product.ImageUrls[0] class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="text-section">
+                                            <h5 class="card-title fw-bold">@item.Product.ProductName</h5>
+                                            <p>Friday, 29 May 2015 05:50 AM</p>
+                                            <p class="fw-semibold mb-0">@item.User.Fullname</p>
+                                            <p class="mb-0">@item.User.Address</p>
+                                            <p>@item.User.PhoneNumber - @item.User.Email</p>
+                                        </div>
+                                        <div class="cta-section">
+                                            <a class="btn btn-sm btn-light rounded-circle mx-1 iconAction" asp-page="./MyOrderDetails" asp-route-id="@item.OrderId">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                            <div class="fw-semibold" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.Product.SellPrice) / 1000) (đ)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="delivered-tab-pane" role="tabpanel" aria-labelledby="delivered-tab" tabindex="0">
+            <div class="p-4">
+                <h4>Delivered Orders</h4>
+                <p>Manage your recent orders and invoices</p>
+                <ul class="list-group">
+                    @foreach (var item in Model.Order)
+                    {
+                        if (item.OrderStatus.Equals("DELIVERED"))
+                        {
+                            <li class="list-group-item" style="border: none">
+                                <div class="card">
+                                    <img src=@item.Product.ImageUrls[0] class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="text-section">
+                                            <h5 class="card-title fw-bold">@item.Product.ProductName</h5>
+                                            <p>Friday, 29 May 2015 05:50 AM</p>
+                                            <p class="fw-semibold mb-0">@item.User.Fullname</p>
+                                            <p class="mb-0">@item.User.Address</p>
+                                            <p>@item.User.PhoneNumber - @item.User.Email</p>
+                                        </div>
+                                        <div class="cta-section">
+                                            <a class="btn btn-sm btn-light rounded-circle mx-1 iconAction" asp-page="./MyOrderDetails" asp-route-id="@item.OrderId">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                            <div class="fw-semibold" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.Product.SellPrice) / 1000) (đ)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="cancelled-tab-pane" role="tabpanel" aria-labelledby="cancelled-tab" tabindex="0">
+            <div class="p-4">
+                <h4>Cancelled Orders</h4>
+                <p>Manage your recent orders and invoices</p>
+                <ul class="list-group">
+                    @foreach (var item in Model.Order)
+                    {
+                        if (item.OrderStatus.Equals("CANCELLED"))
+                        {
+                            <li class="list-group-item" style="border: none">
+                                <div class="card">
+                                    <img src=@item.Product.ImageUrls[0] class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="text-section">
+                                            <h5 class="card-title fw-bold">@item.Product.ProductName</h5>
+                                            <p>Friday, 29 May 2015 05:50 AM</p>
+                                            <p class="fw-semibold mb-0">@item.User.Fullname</p>
+                                            <p class="mb-0">@item.User.Address</p>
+                                            <p class="mb-0">@item.User.PhoneNumber - @item.User.Email</p>
+                                        </div>
+                                        <div class="cta-section">
+                                            <a class="btn btn-sm btn-light rounded-circle mx-1 iconAction" asp-page="./MyOrderDetails" asp-route-id="@item.OrderId">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                            <div class="fw-semibold" style="color: #C0E862;">@string.Format("{0:#.000}", Convert.ToDecimal(item.Product.SellPrice) / 1000) (đ)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
