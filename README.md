@@ -18,7 +18,7 @@
 - Configuring Start Project as **"WebApplication"**
 - Running the Web Application (using Ctrl + F5)
 
-## Tài khoản
+## Accounts
 - **Google:**
   - mail: iwardrobefasion@gmail.com
   - pass: exe123456
