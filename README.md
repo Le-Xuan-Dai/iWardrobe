@@ -1,4 +1,6 @@
 # iWardrobe
+## About
+**iWardrobe** is an online platform dedicated to giving second-hand clothing a second life. Buy and resell second-hand garments with ease, giving clothes a new life and finding stylish for your wardrobe.
 ## How to create database?
 -   **Change "sa" password in SQL Server:** (assuming "sa" refers to a SQL Server login account)
 -   **Clone code** (This likely refers to downloading the codebase from a version control system like Git)
